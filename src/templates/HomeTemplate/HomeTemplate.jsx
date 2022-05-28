@@ -1,7 +1,9 @@
+import Footer from "./Layout/Footer/Footer";
+import Header from "./Layout/Header/Header";
 import { Fragment, useEffect } from "react";
 import { Route } from "react-router-dom";
 
-export const UserTemplate = (props) => {
+export const HomeTemplate = (props) => {
   const { Component, ...restProps } = props; // path, exact, Component
 
   // Tự động chuyển hướng về đầu trang khi trở lại trang trước đó
@@ -16,7 +18,9 @@ export const UserTemplate = (props) => {
         //props.location, props.history, props.match
         return (
           <Fragment>
+            <Header {...propsRoute} />
             <Component {...propsRoute} />
+            <Footer {...propsRoute} />
           </Fragment>
         );
       }}

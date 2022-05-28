@@ -2,9 +2,13 @@ import logo from './logo.svg';
 import './App.css';
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
+
 import { UserTemplate } from './templates/UserTemplate/UserTemplate';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
+
+import { HomeTemplate } from './templates/HomeTemplate/HomeTemplate';
+import Home from './pages/Home/Home';
 
 // npx create-react-app friverr
 // npm react-router-dom@5.3.0
@@ -18,6 +22,7 @@ import Register from './pages/Register/Register';
 // npm install --save @ant-design/icons   (để lấy icon)
 // npm install formik --save   (để làm lấy thông tin từ form)
 // npm install slick-carousel --save   (để làm slide trượt)
+// npm i redux-devtools-extension
 
 export const history = createBrowserHistory();
 
@@ -27,10 +32,10 @@ function App() {
     <Router history={history}>
       <Switch>
 
+        <HomeTemplate path="/home" exact Component={Home} />
 
         <UserTemplate path="/register" exact Component={Register} />
         <UserTemplate path="/login" exact Component={Login} />
-
 
       </Switch>
     </Router>
