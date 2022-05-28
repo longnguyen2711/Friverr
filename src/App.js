@@ -1,24 +1,39 @@
 import logo from './logo.svg';
 import './App.css';
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { createBrowserHistory } from "history";
+import { UserTemplate } from './templates/UserTemplate/UserTemplate';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
+
+// npx create-react-app friverr
+// npm react-router-dom@5.3.0
+// npm i react-redux
+// npm i redux
+// npm i redux-thunk
+// npm i lodash
+// npm i axios
+// npm i moment   (để định dạng thời gian)
+// npm i antd   (Để lấy mẫu component)
+// npm install --save @ant-design/icons   (để lấy icon)
+// npm install formik --save   (để làm lấy thông tin từ form)
+// npm install slick-carousel --save   (để làm slide trượt)
+
+export const history = createBrowserHistory();
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={history}>
+      <Switch>
+
+
+        <UserTemplate path="/register" exact Component={Register} />
+        <UserTemplate path="/login" exact Component={Login} />
+
+
+      </Switch>
+    </Router>
   );
 }
 
