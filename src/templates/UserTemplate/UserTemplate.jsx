@@ -1,6 +1,5 @@
 import { Fragment, useEffect } from "react";
 import { Route } from "react-router-dom";
-import Footer from "../../_Component/Footer/Footer";
 
 export const UserTemplate = (props) => {
   const { Component, ...restProps } = props; // path, exact, Component
@@ -17,7 +16,18 @@ export const UserTemplate = (props) => {
         //props.location, props.history, props.match
         return (
           <Fragment>
-            <Component {...propsRoute} />
+            <div
+              className="w-100 d-flex justify-content-center align-items-center py-md-5"
+              style={{
+                backgroundSize: "cover",
+                backgroundPosition: "bottom",
+                backgroundAttachment: "fixed",
+                backgroundRepeat: "no-repeat",
+                backgroundImage: `url(https://wallpaperaccess.com/full/17538.jpg)`,
+              }}
+            >
+              <Component {...propsRoute} />
+            </div>
           </Fragment>
         );
       }}

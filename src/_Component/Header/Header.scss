@@ -1,0 +1,83 @@
+$color-text-header-hover: #35a22c;
+
+#header {
+  .herader__main {
+    .navbar {
+      .navbar-brand {
+        font-size: 35px;
+        color: black;
+        &:hover {
+          color: $color-text-header-hover;
+        }
+        i {
+          font-size: 8px;
+        }
+        .fa-bars i:before {
+          font-size: 40px;
+          color: $color-text-header-hover;
+        }
+      }
+      .navbar-collapse {
+        .navbar-nav {
+          .nav-link {
+            color: black;
+            position: relative;
+            &:hover,
+            &.active {
+              color: $color-text-header-hover !important;
+            }
+          }
+          .nav-link::after {
+            content: "";
+            width: 0;
+            height: 2px;
+            background-color: $color-text-header-hover;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transition: all 0.5s;
+          }
+          .nav-link:hover::after,
+          .nav-link.active::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  .back-to-top{
+    a{
+      color: black;
+      background-color: rgba(53, 162, 44, 0.5);
+      text-align: center;
+      font-size: 20px;
+      border-radius: 5000px;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      position: fixed;
+      right: 25px;
+      bottom: 27px;
+      cursor: pointer !important;
+      &:hover {
+        color: $color-text-header-hover;
+        border: 1px solid $color-text-header-hover;
+        box-shadow: 0 0 15px $color-text-header-hover;
+        background-color: rgba(0, 0, 0, 1);
+        animation: animate-changecolor 1s linear infinite;
+        animation-delay: calc(-0.25s * var(--i));
+        transform-origin: 20px;
+        transition: 0.5s;
+      }
+    }
+  }
+}
+
+@keyframes animate-changecolor {
+  0% {
+    filter: rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}

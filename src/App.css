@@ -1,6 +1,18 @@
 body {
-    max-width: 1500px;
-    width: 100%;
-    margin: auto !important;
-    box-sizing: border-box;
+  max-width: 1500px;
+  width: 100%;
+  margin: auto !important;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+li{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
 }

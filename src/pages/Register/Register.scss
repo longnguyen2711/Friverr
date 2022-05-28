@@ -1,0 +1,15 @@
+#Register {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  form {
+    label {
+      font-size: 15px;
+    }
+    a {
+      color: white;
+      &:hover {
+        color: yellow;
+      }
+    }
+  }
+}
