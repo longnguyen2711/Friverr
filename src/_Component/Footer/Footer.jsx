@@ -23,6 +23,34 @@ export default function Footer() {
             </ul>
           </div>
           <div className='footer-top-item'>
+            <h1>Community</h1>
+            <ul>
+              <li><a href="#" title="Events">Events</a> </li>
+              <li><a href="#" title="Blog">Blog</a> </li>
+              <li><a href="#" title="Forum">Forum</a> </li>
+              <li><a href="#" title="Community Standards">Community Standards</a> </li>
+              <li><a href="#" title="Podcast">Podcast</a> </li>
+              <li><a href="#" title="Affiliates">Affiliates</a> </li>
+              <li><a href="#" title="Invite a Friend">Invite a Friend</a> </li>
+              <li><a href="#" title="Become a Seller">Become a Seller</a> </li>
+              <li><a href="#" title="Fiverr Elevate"><p>Fiverr Elevate</p><span>Exclusive Benfits</span></a> </li>
+            </ul>
+          </div>          
+          <div className='footer-top-item'>
+            <h1>More From Friverr</h1>
+            <ul>
+              <li><a href="#" title="Friverr Business">Friverr Business</a> </li>
+              <li><a href="#" title="Friverr Pro">Friverr Pro</a> </li>
+              <li><a href="#" title="Friverr Studios">Friverr Studios</a> </li>
+              <li><a href="#" title="Friverr Logo Maker">Friverr Logo Maker</a> </li>
+              <li><a href="#" title="Friverr Guides">Friverr Guides</a> </li>
+              <li><a href="#" title="Get Inspired">Get Inspired</a> </li>
+              <li><a href="#" title="ClearVoice"><p>ClearVoice</p><span>Content Marketing</span></a> </li>
+              <li><a href="#" title="AND CO"><p>AND CO</p><span>Invoice Software</span></a> </li>
+              <li><a href="#" title="Learn"><p>Learn</p><span>Online Courses</span></a> </li>
+            </ul>
+          </div>
+          <div className='footer-top-item'>
             <h1>About</h1>
             <ul>
               <li><a href="#" title="Careers">Careers</a> </li>
@@ -43,34 +71,6 @@ export default function Footer() {
               <li><a href="#" title="Buying on Friverr">Buying on Friverr</a> </li>
             </ul>
           </div>
-          <div className='footer-top-item'>
-            <h1>Community</h1>
-            <ul>
-              <li><a href="#" title="Events">Events</a> </li>
-              <li><a href="#" title="Blog">Blog</a> </li>
-              <li><a href="#" title="Forum">Forum</a> </li>
-              <li><a href="#" title="Community Standards">Community Standards</a> </li>
-              <li><a href="#" title="Podcast">Podcast</a> </li>
-              <li><a href="#" title="Affiliates">Affiliates</a> </li>
-              <li><a href="#" title="Invite a Friend">Invite a Friend</a> </li>
-              <li><a href="#" title="Become a Seller">Become a Seller</a> </li>
-              <li><a href="#" title="Fiverr Elevate"><p>Fiverr Elevate</p><span>Exclusive Benfits</span></a> </li>
-            </ul>
-          </div>
-          <div className='footer-top-item'>
-            <h1>More From Friverr</h1>
-            <ul>
-              <li><a href="#" title="Friverr Business">Friverr Business</a> </li>
-              <li><a href="#" title="Friverr Pro">Friverr Pro</a> </li>
-              <li><a href="#" title="Friverr Studios">Friverr Studios</a> </li>
-              <li><a href="#" title="Friverr Logo Maker">Friverr Logo Maker</a> </li>
-              <li><a href="#" title="Friverr Guides">Friverr Guides</a> </li>
-              <li><a href="#" title="Get Inspired">Get Inspired</a> </li>
-              <li><a href="#" title="ClearVoice"><p>ClearVoice</p><span>Content Marketing</span></a> </li>
-              <li><a href="#" title="AND CO"><p>AND CO</p><span>Invoice Software</span></a> </li>
-              <li><a href="#" title="Learn"><p>Learn</p><span>Online Courses</span></a> </li>
-            </ul>
-          </div>
         </div>
 
 
@@ -81,15 +81,15 @@ export default function Footer() {
           </div> 
           <div className='footer-bottom-right'>
             <ul>
-              <li><a href="https://www.twitter.com/" title="Twitter"><i class="fab fa-twitter"></i></a> </li>
-              <li><a href="https://www.facebook.com/" title="Facebook"><i class="fab fa-facebook"></i></a></li>
-              <li><a href="https://www.linkedin.com/" title="LinkedIn"><i class="fab fa-linkedin"></i></a></li>
-              <li><a href="https://www.pinterest.com/" title="Pinterest"><i class="fab fa-pinterest"></i></a></li>
-              <li><a href="https://www.instagram.com/" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+              <li><a href="https://www.twitter.com/" title="Twitter" target='_blank'><i className="fab fa-twitter"></i></a> </li>
+              <li><a href="https://www.facebook.com/" title="Facebook" target='_blank'><i className="fab fa-facebook"></i></a></li>
+              <li><a href="https://www.linkedin.com/" title="LinkedIn" target='_blank'><i className="fab fa-linkedin"></i></a></li>
+              <li><a href="https://www.pinterest.com/" title="Pinterest" target='_blank'><i className="fab fa-pinterest"></i></a></li>
+              <li><a href="https://www.instagram.com/" title="Instagram" target='_blank'><i className="fab fa-instagram"></i></a></li>
             </ul>
-            <a href="#"><i class="fa fa-globe"></i>English</a>
-            <a href="#"><i class="fa fa-dollar-sign"></i>USD</a>
-            <a href="#" className='person'><i class="fa fa-male"></i></a>
+            <a href="#"><i className="fa fa-globe"></i>English</a>
+            <a href="#"><i className="fa fa-dollar-sign"></i>USD</a>
+            <a href="#" className='person'><i className="fa fa-male"></i></a>
           </div>
         </div>
 

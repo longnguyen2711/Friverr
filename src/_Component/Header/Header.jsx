@@ -5,15 +5,15 @@ import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
-    <header id="header" class="header">
-      <main class="herader__main py-2">
-        <div class="container">
-          <nav class="navbar navbar-expand-lg p-0">
-            <NavLink class="navbar-brand font-weight-bold" to="/" title="fiverr">
-              fiverr<i class="fa fa-circle text-success"></i>
+    <header id="header" className="header">
+      <main className="herader__main py-2">
+        <div className="container">
+          <nav className="navbar navbar-expand-lg p-0">
+            <NavLink className="navbar-brand font-weight-bold" to="/" title="fiverr">
+              fiverr<i className="fa fa-circle text-success"></i>
             </NavLink>
             <button
-              class="navbar-toggler"
+              className="navbar-toggler"
               type="button"
               data-toggle="collapse"
               data-target="#navbarNavAltMarkup"
@@ -21,13 +21,13 @@ export default function Header() {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <i class="fa fa-bars text-black border py-2 px-3 rounded"></i>
+              <i className="fa fa-bars text-black border py-2 px-3 rounded"></i>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div class="navbar-nav ml-auto">
-                <NavLink class="nav-link text-black ml-4 font-weight-bold active" to="/" title="Become a Seller">Become a Seller</NavLink>
-                <NavLink class="nav-link text-black ml-4 font-weight-bold " to="/login" title="Sign In">Sign In</NavLink>
-                <NavLink class="nav-link text-black ml-4 font-weight-bold " to="/register" title="Join">Join</NavLink>
+            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div className="navbar-nav ml-auto">
+                <NavLink className="nav-link text-black ml-4 font-weight-bold active" to="/" title="Become a Seller">Become a Seller</NavLink>
+                <NavLink className="nav-link text-black ml-4 font-weight-bold " to="/login" title="Sign In">Sign In</NavLink>
+                <NavLink className="nav-link text-black ml-4 font-weight-bold " to="/register" title="Join">Join</NavLink>
               </div>
             </div>
           </nav>
