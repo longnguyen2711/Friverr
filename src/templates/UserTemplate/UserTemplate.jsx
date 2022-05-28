@@ -1,5 +1,6 @@
 import { Fragment, useEffect } from "react";
 import { Route } from "react-router-dom";
+import Footer from "../../_Component/Footer/Footer";
 
 export const UserTemplate = (props) => {
   const { Component, ...restProps } = props; // path, exact, Component

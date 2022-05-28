@@ -2,13 +2,15 @@ import './App.css';
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
 
+// Hometemplate
+import { HomeTemplate } from './templates/HomeTemplate/HomeTemplate';
+import Home from './pages/Home/Home';
+
 // UserTemplate
 import { UserTemplate } from './templates/UserTemplate/UserTemplate';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
-// Hometemplate
-import { HomeTemplate } from './templates/HomeTemplate/HomeTemplate';
-import Home from './pages/Home/Home';
+
 
 // npx create-react-app friverr
 // npm react-router-dom@5.3.0
@@ -31,7 +33,6 @@ function App() {
   return (
     <Router history={history}>
       <Switch>
-asdsa
         <HomeTemplate path="/home" exact Component={Home} />
 
         <UserTemplate path="/register" exact Component={Register} />
@@ -39,7 +40,7 @@ asdsa
 
         <HomeTemplate path="/" exact Component={Home} />
 
-      </Switch>
+      </Switch> 
     </Router>
   );
 }

@@ -1,7 +1,7 @@
-import Footer from "../../_Component/Footer/Footer";
-import Header from "../../_Component/Header/Header";
 import { Fragment, useEffect } from "react";
 import { Route } from "react-router-dom";
+import Header from "../../_Component/Header/Header";
+import Footer from "../../_Component/Footer/Footer";
 
 export const HomeTemplate = (props) => {
   const { Component, ...restProps } = props; // path, exact, Component
@@ -18,9 +18,9 @@ export const HomeTemplate = (props) => {
         //props.location, props.history, props.match
         return (
           <Fragment>
-            <Header {...propsRoute} />
+            <Header />
             <Component {...propsRoute} />
-            <Footer {...propsRoute} />
+            <Footer />
           </Fragment>
         );
       }}
