@@ -1,5 +1,5 @@
-import Footer from "./Layout/Footer/Footer";
-import Header from "./Layout/Header/Header";
+import Footer from "../../_Component/Footer/Footer";
+import Header from "../../_Component/Header/Header";
 import { Fragment, useEffect } from "react";
 import { Route } from "react-router-dom";
 
