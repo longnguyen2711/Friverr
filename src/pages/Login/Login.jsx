@@ -6,15 +6,16 @@ import { ErrorMessage, useFormik } from "formik";
 import { Input } from "antd";
 import "./Login.scss";
 import * as yup from "yup";
+import { dangNhapAction } from "../../redux/actions/QuanLyNguoiDungAction";
 
 export default function Login(props) {
   const validationSchema = yup.object().shape({
-    taiKhoan: yup
+    email: yup
       .string()
       .required("Account is required")
       .min(6, "Account must be at least 6 characters")
       .max(16, "Account must not exceed 16 characters"),
-    matKhau: yup
+    password: yup
       .string()
       .required("Password is required")
       .min(6, "Password must be at least 6 characters")
@@ -24,15 +25,15 @@ export default function Login(props) {
 
   const formik = useFormik({
     initialValues: {
-      taiKhoan: "",
-      matKhau: "",
+      email: "",
+      password: "",
     },
     validationSchema,
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: (values) => {
-      // const action = dangNhapAction (values);
-      // dispatch(action);
+      const action = dangNhapAction(values);
+      dispatch(action);
     },
   });
 
@@ -59,19 +60,19 @@ export default function Login(props) {
               <div className="form-group">
                 <div>
                   {" "}
-                  <label htmlFor="taiKhoan">Account</label>
+                  <label htmlFor="email">Account</label>
                 </div>
                 <Input
                   type="text"
                   placeholder="Please enter your account"
-                  name="taiKhoan"
-                  id="taiKhoan"
+                  name="email"
+                  id="email"
                   onChange={formik.handleChange}
                   value={formik.values.taiKhoan}
                 />
                 <div className="text-danger mt-2">
-                  {formik.errors.taiKhoan ? (
-                    formik.errors.taiKhoan
+                  {formik.errors.email ? (
+                    formik.errors.email
                   ) : (
                     <div style={{ visibility: "hidden" }}>1</div>
                   )}
@@ -79,7 +80,7 @@ export default function Login(props) {
               </div>
               <div className="form-group">
                 <div className="d-flex justify-content-between mt-3">
-                  <label htmlFor="matKhau">Password</label>
+                  <label htmlFor="password">Password</label>
                   <div>
                     <a href="#" title="Click to retrieve password">
                       Forgot password ?
@@ -89,14 +90,14 @@ export default function Login(props) {
                 <Input.Password
                   type="password"
                   placeholder="Please enter your password"
-                  name="matKhau"
-                  id="matKhau"
+                  name="password"
+                  id="password"
                   onChange={formik.handleChange}
                   value={formik.values.matKhau}
                 />
                 <div className="text-danger mt-2">
-                  {formik.errors.matKhau ? (
-                    formik.errors.matKhau
+                  {formik.errors.password ? (
+                    formik.errors.password
                   ) : (
                     <div style={{ visibility: "hidden" }}>1</div>
                   )}
