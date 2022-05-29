@@ -8,7 +8,7 @@ export class baseService {
       url: `${DOMAIN}/${url}`,
       method: "PUT",
       data: model,
-      headers: { Authorization: "Bearer " + localStorage.getItem(ACCESSTOKEN), TokenByClass: TokenByClass, Token: Token }, //JWT
+      headers: { Authorization: "Bearer " + localStorage.getItem(Token), TokenByClass: TokenByClass, Token: Token }, //JWT
       
     });
   };
@@ -18,7 +18,7 @@ export class baseService {
       url: `${DOMAIN}/${url}`,
       method: "POST",
       data: model,
-      headers: { Authorization: "Bearer " + localStorage.getItem(ACCESSTOKEN), TokenByClass: TokenByClass, Token: Token }, //JWT
+      headers: { Authorization: "Bearer " + localStorage.getItem(Token), TokenByClass: TokenByClass, Token: Token }, //JWT
       
     });
   };
@@ -27,7 +27,7 @@ export class baseService {
     return axios({
       url: `${DOMAIN}/${url}`,
       method: "GET",
-      headers: { Authorization: "Bearer " + localStorage.getItem(ACCESSTOKEN), TokenByClass: TokenByClass, Token: Token }, //token yêu cầu từ backend chứng minh user đã đăng nhập rồi
+      headers: { Authorization: "Bearer " + localStorage.getItem(Token), TokenByClass: TokenByClass, Token: Token }, //token yêu cầu từ backend chứng minh user đã đăng nhập rồi
       
     });
   };
@@ -36,7 +36,7 @@ export class baseService {
     return axios({
       url: `${DOMAIN}/${url}`,
       method: "DELETE",
-      headers: { Authorization: "Bearer " + localStorage.getItem(ACCESSTOKEN), TokenByClass: TokenByClass, Token: Token }, //token yêu cầu từ backend chứng minh user đã đăng nhập rồi
+      headers: { Authorization: "Bearer " + localStorage.getItem(Token), TokenByClass: TokenByClass, Token: Token }, //token yêu cầu từ backend chứng minh user đã đăng nhập rồi
       
     });
   };

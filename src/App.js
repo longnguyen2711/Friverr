@@ -31,6 +31,7 @@ import ServiceManagement from './pages/Admin/ServiceManagement/ServiceManagement
 // npm i redux-devtools-extension
 // npm install node-sass --save 
 // npm i yup -S
+// npm install react-slick --save
 
 export const history = createBrowserHistory();
 

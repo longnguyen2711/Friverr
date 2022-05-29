@@ -7,14 +7,14 @@ import { Input } from "antd";
 import "./Login.scss";
 import * as yup from "yup";
 import { dangNhapAction } from "../../redux/actions/QuanLyNguoiDungAction";
+import { USER_LOGIN } from "../../util/config";
 
 export default function Login(props) {
   const validationSchema = yup.object().shape({
     email: yup
       .string()
       .required("Account is required")
-      .min(6, "Account must be at least 6 characters")
-      .max(16, "Account must not exceed 16 characters"),
+      .email("Must be a valid email"),
     password: yup
       .string()
       .required("Password is required")
@@ -35,7 +35,13 @@ export default function Login(props) {
       const action = dangNhapAction(values);
       dispatch(action);
     },
-  });
+  });  //formik đã xử lý luôn e.preventDefault();
+
+  // Kiểm tra xem nếu đã đăng nhập rồi mà nhập đường dẫn login thì sẽ quay về trang chủ
+  if (localStorage.getItem(USER_LOGIN)) {
+    alert("You are already logged in");
+    return <Redirect to="/" />;
+  }
 
   return (
     <div
@@ -57,13 +63,14 @@ export default function Login(props) {
           <h2 className="text-white my-5">Login</h2>
           <div>
             <div>
+              
               <div className="form-group">
                 <div>
                   {" "}
                   <label htmlFor="email">Account</label>
                 </div>
                 <Input
-                  type="text"
+                  type="email"
                   placeholder="Please enter your account"
                   name="email"
                   id="email"
@@ -78,6 +85,7 @@ export default function Login(props) {
                   )}
                 </div>
               </div>
+
               <div className="form-group">
                 <div className="d-flex justify-content-between mt-3">
                   <label htmlFor="password">Password</label>
@@ -114,9 +122,9 @@ export default function Login(props) {
               </div>
             </div>
             <div className="text-center d-sm-flex justify-content-center">
-              <p className="mr-sm-3">Do not have an account ?</p>
+              <p className="mr-sm-3 h6">Do not have an account ?</p>
               <NavLink
-                className="font-weight-bold"
+                className="font-weight-bold h6"
                 to="/register"
                 title="Click to register an account"
               >

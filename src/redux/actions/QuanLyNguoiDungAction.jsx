@@ -1,30 +1,51 @@
 import { quanLyNguoiDungService } from "../../services/QuanLyNguoiDungService";
-import { DANG_NHAP_ACTION } from "../types";
+import { DANG_KY_ACTION, DANG_NHAP_ACTION } from "../types";
 import { history } from "../../App";
 
-  
 export const dangNhapAction = (thongTinDangNhap) => {
-    return async (dispatch) => {
-      try {
-        const result = await quanLyNguoiDungService.dangNhap(thongTinDangNhap);
-        console.log(result.data.message,"result")
+  return async (dispatch) => {
+    try {
+      const result = await quanLyNguoiDungService.dangNhap(thongTinDangNhap);
 
-        if (result.data.message === "Đăng Nhập Thành Công ! ") {
-          await dispatch({
-            type: DANG_NHAP_ACTION,
-            thongTinDangNhap: result.data.user,
-          });
-  
-          alert("Đăng nhập thành công");
-          history.push('/'); 
-          window.location.reload();      
-        }
-  
-      } catch (error) {
-        alert(
-          "Đăng nhập không thành công, tên đăng nhập hoặc mật khẩu không chính xác"
-        );
-        console.log("error", error.response.data);
+      if (result.status === 200) {
+        await dispatch({
+          type: DANG_NHAP_ACTION,
+          thongTinDangNhap: result.data.user,
+        });
+
+        // Thông báo đăng nhập thành công và quay về trang chủ
+        alert("Logged in successfully");
+        history.push("/");
+        window.location.reload();
       }
-    };
+    } catch (error) {
+      alert("Login failed, username or password is incorrect");
+      console.log("error", error.response.data);
+    }
   };
+};
+
+export const dangKyTaiKhoanAction = (formDataDangKy) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyNguoiDungService.dangKyTaiKhoan(
+        formDataDangKy
+      );
+
+      if (result.status === 201) {
+        dispatch({
+          type: DANG_KY_ACTION,
+          formDataDangKy: result.data,
+        });
+
+        // Thông báo đăng ký thành công và đến trang đăng nhập
+        alert("Successful registration, go to login page");
+        history.push("/login");
+        window.location.reload();
+      }
+    } catch (error) {
+      alert("Registration failed, please check again");
+      console.log("error", error.response.data);
+    }
+  };
+};

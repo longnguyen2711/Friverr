@@ -1,7 +1,10 @@
 import { Fragment, useEffect } from "react";
 import { Route } from "react-router-dom";
+import Slider from "react-slick";
+
 
 export const UserTemplate = (props) => {
+
   const { Component, ...restProps } = props; // path, exact, Component
 
   // Tự động chuyển hướng về đầu trang khi trở lại trang trước đó
@@ -23,7 +26,7 @@ export const UserTemplate = (props) => {
                 backgroundPosition: "bottom",
                 backgroundAttachment: "fixed",
                 backgroundRepeat: "no-repeat",
-                backgroundImage: `url(https://wallpaperaccess.com/full/17538.jpg)`,
+                backgroundImage: `url(https://i.pinimg.com/originals/18/9c/1d/189c1dd25c9498241d0159716aded38e.jpg)`,
               }}
             >
               <Component {...propsRoute} />
@@ -34,3 +37,7 @@ export const UserTemplate = (props) => {
     />
   );
 };
+
+// https://i.pinimg.com/originals/18/9c/1d/189c1dd25c9498241d0159716aded38e.jpg
+// https://img.8wallpapers.com/uploads/2019/11/36316b9288624e1fab40c683.jpg
+// http://cdn.wallpaperhi.com/1920x1080/20120721/trees%20stars%20artwork%20night%20landscapes%20night%20sky%20exclusive%201920x1080%20wallpaper_www.wallpaperhi.com_71.jpg
