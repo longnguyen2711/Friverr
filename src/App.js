@@ -30,6 +30,7 @@ import ServiceManagement from './pages/Admin/ServiceManagement/ServiceManagement
 // npm install slick-carousel --save   (để làm slide trượt)
 // npm i redux-devtools-extension
 // npm install node-sass --save 
+// npm i yup -S
 
 export const history = createBrowserHistory();
 

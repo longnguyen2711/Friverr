@@ -24,7 +24,8 @@
     "redux-thunk": "^2.4.1",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^2.1.4",
-    "yarn": "^1.22.18"
+    "yarn": "^1.22.18",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
