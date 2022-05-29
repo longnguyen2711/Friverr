@@ -16,21 +16,21 @@ export default function Header(props) {
         <Fragment>
           <div className="navbar-nav ml-auto">
             <NavLink
-              className="nav-link text-black ml-4 font-weight-bold"
+              className="nav-link text-black pl-2 ml-4 font-weight-bold"
               to="/home"
               title="Become a Seller"
             >
               Become a Seller
             </NavLink>
             <NavLink
-              className="nav-link text-black ml-4 font-weight-bold "
+              className="nav-link text-black pl-2 ml-4 font-weight-bold "
               to="/login"
               title="Login"
             >
               Login
             </NavLink>
             <NavLink
-              className="nav-link text-black ml-4 font-weight-bold "
+              className="nav-link text-black pl-2 ml-4 font-weight-bold "
               to="/register"
               title="Register"
             >
@@ -44,14 +44,14 @@ export default function Header(props) {
       <Fragment>
         <div className="navbar-nav ml-auto">
           <NavLink
-            className="nav-link text-black ml-4 font-weight-bold"
+            className="nav-link text-black pl-2 ml-4 font-weight-bold"
             to="/home"
             title="Become a Seller"
           >
             Become a Seller
           </NavLink>
           <div
-            className="nav-link text-black ml-4 font-weight-bold"
+            className="nav-link text-black pl-2 ml-4 font-weight-bold"
             style={{ cursor: "pointer" }}
             title="Click to sign out"
             onClick={() => {
@@ -69,7 +69,7 @@ export default function Header(props) {
             Log out
           </div>
           <div
-            className="nav-link text-black ml-4 font-weight-bold"
+            className="nav-link text-black pl-2 ml-4 font-weight-bold"
             style={{ cursor: "pointer" }}
             onClick={() => {
               props.history.push("/admin/usermanagement");
@@ -87,7 +87,7 @@ export default function Header(props) {
     <header id="header" className="header">
       <main className="herader__main py-2">
         <div className="container">
-          <nav className="navbar navbar-expand-lg p-0">
+          <nav className="navbar navbar-expand-md p-0">
             <NavLink
               className="navbar-brand font-weight-bold"
               to="/"
