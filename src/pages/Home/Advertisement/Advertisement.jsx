@@ -2,7 +2,7 @@ import React from "react";
 import "./Advertisement.scss";
 import { CheckCircleOutlined } from "@ant-design/icons";
 
-export default function Advertisement() {
+export default function Advertisement(props) {
   return (
     <section id="advertisement">
       <div className="my-container">
@@ -68,11 +68,19 @@ export default function Advertisement() {
           </div>
 
           <div className="advertisement-right">
-          {/* https://fiverr-res.cloudinary.com/video/upload/t_fiverr_hd/vmvv3czyk2ifedefkau7 */}
+            <iframe
+              width="100%"
+              style={{borderRadius:"5px"}}
+              height="350"
+              src="https://www.youtube.com/embed/bchLMoAS1CU"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>{" "}
           </div>
         </div>
       </div>
     </section>
   );
 }
-    

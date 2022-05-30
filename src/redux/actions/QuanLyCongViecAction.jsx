@@ -1,24 +1,19 @@
-import { history } from "../../App";
+ import { history } from "../../App";
 import { quanLyCongViecService } from "../../services/QuanLyCongViecService";
+import { LAY_CHI_TIET_LOAI_CONG_VIEC_CHINH_ACTION } from "../types";
 
+// API 14
 export const layChiTietLoaiCongViecChinhAction = () => {
   return async (dispatch) => {
     try {
       const result = await quanLyCongViecService.layChiTietLoaiCongViecChinh();
 
-      console.log(result, "result")
-
-    //   if (result.status === 200) {
-    //     await dispatch({
-    //       type: DANG_NHAP_ACTION,
-    //       thongTinDangNhap: result.data.user,
-    //     });
-
-    //     // Thông báo đăng nhập thành công và quay về trang chủ
-    //     alert("Logged in successfully");
-    //     history.push("/");
-    //     window.location.reload();
-    //   }
+      if (result.status === 200) {
+        await dispatch({
+          type: LAY_CHI_TIET_LOAI_CONG_VIEC_CHINH_ACTION,
+          chiTietLoaiCongViecChinh: result.data,
+        });
+      }
 
     } catch (error) {
       console.log("error", error.response.data);

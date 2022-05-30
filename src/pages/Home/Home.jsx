@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Advertisement from "./Advertisement/Advertisement";
 import Carousel from "./Carousel/Carousel";
+import LogoMaker from "./LogoMaker/LogoMaker";
 import Marketplace from "./Marketplace/Marketplace";
 import MultipleSlick from "./MultipleSlick/MultipleSlick";
 
@@ -36,7 +37,11 @@ export default function Home(props) {
       <MultipleSlick />
       <Advertisement />
 
+
+
       <Marketplace/>
+
+      <LogoMaker/>
     </div>
   );
 }
