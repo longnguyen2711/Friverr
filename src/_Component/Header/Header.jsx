@@ -72,7 +72,7 @@ export default function Header(props) {
             className="nav-link text-black pl-2 ml-4 font-weight-bold"
             style={{ cursor: "pointer" }}
             onClick={() => {
-              props.history.push("/admin/usermanagement");
+              history.push("/profile");
             }}
             title="Go to the personal page"
           >

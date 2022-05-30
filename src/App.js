@@ -5,6 +5,10 @@ import { createBrowserHistory } from "history";
 // Hometemplate
 import { HomeTemplate } from './templates/HomeTemplate/HomeTemplate';
 import Home from './pages/Home/Home';
+import JobList from './pages/JobList/JobList';
+import JobTypes from './pages/JobTypes/JobTypes';
+import JobDetail from './pages/JobDetail/JobDetail';
+import Profile from './pages/Profile/Profile';
 // UserTemplate
 import { UserTemplate } from './templates/UserTemplate/UserTemplate';
 import Login from './pages/Login/Login';
@@ -23,15 +27,16 @@ import ServiceManagement from './pages/Admin/ServiceManagement/ServiceManagement
 // npm i redux-thunk
 // npm i lodash
 // npm i axios
-// npm i moment   (để định dạng thời gian)
-// npm i antd   (Để lấy mẫu component)
+// npm i moment                           (để định dạng thời gian)
+// npm i antd                             (Để lấy mẫu component)
 // npm install --save @ant-design/icons   (để lấy icon antd)
-// npm install formik --save   (để làm lấy thông tin từ form)
-// npm install slick-carousel --save   (để làm slide trượt)
+// npm install formik --save              (để làm lấy thông tin từ form)
+// npm install slick-carousel --save      (để làm slide trượt)
+// npm install react-slick --save         (để làm slide trượt)
 // npm i redux-devtools-extension
 // npm install node-sass --save 
 // npm i yup -S
-// npm install react-slick --save
+
 
 export const history = createBrowserHistory();
 
@@ -41,6 +46,10 @@ function App() {
     <Router history={history}>
       <Switch>
         <HomeTemplate path="/home" exact Component={Home} />
+        <HomeTemplate path="/joblist" exact Component={JobList} />
+        <HomeTemplate path="/jobtypes" exact Component={JobTypes} />
+        <HomeTemplate path="/jobdetail" exact Component={JobDetail} />
+        <HomeTemplate path="/profile" exact Component={Profile} />
 
         <UserTemplate path="/register" exact Component={Register} />
         <UserTemplate path="/login" exact Component={Login} />

@@ -1,0 +1,42 @@
+#advertisement {
+  background-color: #f1fdf7;
+  padding-top: 80px;
+  padding-bottom: 48px;
+  .my-container {
+    h1 {
+      margin-bottom: 40px;
+      font-size: 32px;
+      text-align: center;
+      color: #404145;
+    }
+    .advertisement-left {
+      padding-right: 24px;
+      width: 50%;
+      @media screen and (max-width: 900px) {
+        width: 100%;
+      }
+      ul {
+        li {
+          margin-bottom: 20pxpx;
+          h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #404145;
+          }
+          p {
+            font-size: 17px;
+            color: #404145;
+            text-align: justify;
+          }
+        }
+      }
+    }
+    .advertisement-right {
+      width: 50%;
+      @media screen and (max-width: 900px) {
+        width: 100%;
+      }
+    }
+  }
+}
