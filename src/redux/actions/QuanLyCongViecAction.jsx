@@ -7,7 +7,7 @@ export const layChiTietLoaiCongViecChinhAction = () => {
   return async (dispatch) => {
     try {
       const result = await quanLyCongViecService.layChiTietLoaiCongViecChinh();
-
+console.log(result)
       if (result.status === 200) {
         await dispatch({
           type: LAY_CHI_TIET_LOAI_CONG_VIEC_CHINH_ACTION,

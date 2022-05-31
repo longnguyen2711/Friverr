@@ -10,7 +10,7 @@ export default function Loading(props) {
     <Fragment>
       {isLoading ? (
         <div
-          className="fixed top-0 left-0 w-100 h-100 flex justify-content-center align-items-center"
+          className="position-fixed top-0 left-0 w-100 h-100 flex justify-content-center align-items-center"
           style={{ backgroundColor: "rgba(0,0,0,1)" }}
         >
           <img

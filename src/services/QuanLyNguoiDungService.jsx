@@ -5,10 +5,12 @@ export class QuanLyNguoiDungService extends baseService {
     super();
   }
 
-  dangNhap = (thongTinDangNhap) => {//{taiKhoan:'', matKhau:''}
+  // Api  31
+  dangNhap = (thongTinDangNhap) => {
     return this.post(`api/auth/signin`, thongTinDangNhap);
   };
 
+  // Api 32
   dangKyTaiKhoan = (formDataDangKy) => {
     return this.post('api/auth/signup', formDataDangKy);
   };

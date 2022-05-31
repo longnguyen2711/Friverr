@@ -5,9 +5,12 @@ export class QuanLyCongViecService extends baseService {
     super();
   }
 
+  // Api 14: Lấy chi tiết loại công việc chính
   layChiTietLoaiCongViecChinh = () => {
     return this.get(`api/type-jobs`)
   };
+
+  // Api 25: Lấy danh sách công việc theo công việc chính
 
 
 }

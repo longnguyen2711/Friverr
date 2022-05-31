@@ -40,8 +40,6 @@ function Marketplace(props) {
 
   const dispatch = useDispatch();
 
-  console.log(arrImgLoaiCongViec[1]);
-
   useEffect(() => {
     dispatch(layChiTietLoaiCongViecChinhAction());
   }, []);
