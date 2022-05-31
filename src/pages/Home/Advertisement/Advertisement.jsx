@@ -65,19 +65,13 @@ export default function Advertisement(props) {
                 </p>
               </li>
             </ul>
-          </div>
-
+          </div>  
           <div className="advertisement-right">
-            <iframe
-              width="100%"
-              style={{borderRadius:"5px"}}
-              height="350"
-              src="https://www.youtube.com/embed/bchLMoAS1CU"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>{" "}
+            <img
+              src="./public/img/Advertisement/advertisement-img.webp"
+              alt="advertisement-img"
+              style={{ width: "100%" }}
+            />
           </div>
         </div>
       </div>

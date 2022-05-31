@@ -36,6 +36,8 @@
       }
     }
     .advertisement-right {
+      background-color: red;
+      z-index: 10;
       width: 50%;
       @media screen and (max-width: 900px) {
         width: 100%;

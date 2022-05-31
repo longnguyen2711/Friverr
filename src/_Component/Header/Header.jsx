@@ -7,8 +7,15 @@ import { Token, USER_LOGIN } from "../../util/config";
 import { history } from "../../App";
 
 export default function Header(props) {
+  const { chiTietLoaiCongViecChinh } = useSelector(
+    (state) => state.QuanLyCongViecReducer
+  );
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
 
+
+
+
+  
   // Trạng thái đăng nhập, nếu chưa đăng nhập thì hiển thị đăng nhập và đăng ký, nếu đã đăng nhập thì hiển thị đăng xuất
   const renderLogin = () => {
     if (_.isEmpty(userLogin)) {
@@ -16,25 +23,18 @@ export default function Header(props) {
         <Fragment>
           <div className="navbar-nav ml-auto">
             <NavLink
-              className="nav-link text-black pl-2 ml-4 font-weight-bold"
-              to="/home"
-              title="Become a Seller"
-            >
-              Become a Seller
-            </NavLink>
-            <NavLink
-              className="nav-link text-black pl-2 ml-4 font-weight-bold "
+              className="nav-link pl-2 ml-4 font-weight-bold "
               to="/login"
-              title="Login"
+              title="Sign in"
             >
-              Login
+              Sign in
             </NavLink>
             <NavLink
-              className="nav-link text-black pl-2 ml-4 font-weight-bold "
+              className="nav-link nav-link-join ml-4 font-weight-bold"
               to="/register"
-              title="Register"
+              title="Join"
             >
-              Register
+              Join
             </NavLink>
           </div>
         </Fragment>
@@ -43,15 +43,8 @@ export default function Header(props) {
     return (
       <Fragment>
         <div className="navbar-nav ml-auto">
-          <NavLink
-            className="nav-link text-black pl-2 ml-4 font-weight-bold"
-            to="/home"
-            title="Become a Seller"
-          >
-            Become a Seller
-          </NavLink>
           <div
-            className="nav-link text-black pl-2 ml-4 font-weight-bold"
+            className="nav-link pl-2 ml-4 font-weight-bold"
             style={{ cursor: "pointer" }}
             title="Click to sign out"
             onClick={() => {
@@ -66,7 +59,7 @@ export default function Header(props) {
               }
             }}
           >
-            Log out
+            Sign out
           </div>
           <div
             className="nav-link text-black pl-2 ml-4 font-weight-bold"
@@ -85,9 +78,9 @@ export default function Header(props) {
 
   return (
     <header id="header" className="header">
-      <main className="herader__main py-2">
-        <div className="container">
-          <nav className="navbar navbar-expand-md p-0">
+      <main className="herader__main">
+        <nav className="navbar navbar-expand-sm p-0">
+          <div className="container">
             <NavLink
               className="navbar-brand font-weight-bold"
               to="/"
@@ -95,6 +88,18 @@ export default function Header(props) {
             >
               fiverr<i className="fa fa-circle text-success"></i>
             </NavLink>
+
+            <div className="nav-bar-search input-group-sm">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Find services"
+              />
+                <button className="input-group-prepend">
+                  Search
+                </button>
+            </div>
+
             <button
               className="navbar-toggler"
               type="button"
@@ -109,7 +114,24 @@ export default function Header(props) {
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
               {renderLogin()}
             </div>
-          </nav>
+          </div>
+        </nav>
+        <div className="job-type">
+          <div className="my-container">
+            {" "}
+            {chiTietLoaiCongViecChinh.map((item, index) => {
+              return (
+                <NavLink
+                  key={index}
+                  title={item.name}
+                  to="/"
+                  className="navlink-jobtype"
+                >
+                  {item.name}
+                </NavLink>
+              );
+            })}
+          </div>
         </div>
       </main>
       <div className="back-to-top">
