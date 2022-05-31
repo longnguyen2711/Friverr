@@ -1,0 +1,50 @@
+
+#JobList {
+
+    .joblist-header{
+        font-weight: 300;
+        
+        a{
+            color: gray;
+            padding: 0 20px;
+            font-weight: 450;
+        }   
+    }
+    .joblist-suggested{
+        display: flex;
+        padding: 0 20px;
+       
+        align-items: center;
+        text-align: center;
+        background-color: #f1f1f1;
+
+        .joblist-suggested-a{
+            margin: 10px 15px 10px 0;
+            font-weight: 700;
+        }
+        .joblist-suggested-btn{
+
+        }
+    }
+    .joblist-list{
+        .joblist-result{
+
+        }
+        .joblist-list-tasks{
+
+        }
+    }
+    .joblist-list-mutil{
+        .joblist-list-mutil-item{
+            .joblist-list-mutil-img{}
+            .joblist-list-mutil-content{
+                .joblist-list-mutil-content-header{
+
+                }
+                .joblist-list-mutil-content-footer{
+
+                }
+            }
+        }
+    }
+}

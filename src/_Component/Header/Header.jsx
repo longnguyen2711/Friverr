@@ -12,10 +12,6 @@ export default function Header(props) {
   );
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
 
-
-
-
-  
   // Trạng thái đăng nhập, nếu chưa đăng nhập thì hiển thị đăng nhập và đăng ký, nếu đã đăng nhập thì hiển thị đăng xuất
   const renderLogin = () => {
     if (_.isEmpty(userLogin)) {
@@ -44,7 +40,7 @@ export default function Header(props) {
       <Fragment>
         <div className="navbar-nav ml-auto">
           <div
-            className="nav-link pl-2 ml-4 font-weight-bold"
+            className="nav-link pl-2 ml-4 font-weight-bold text-center"
             style={{ cursor: "pointer" }}
             title="Click to sign out"
             onClick={() => {
@@ -62,7 +58,7 @@ export default function Header(props) {
             Sign out
           </div>
           <div
-            className="nav-link text-black pl-2 ml-4 font-weight-bold"
+            className="nav-link text-black pl-2 ml-4 font-weight-bold text-center"
             style={{ cursor: "pointer" }}
             onClick={() => {
               history.push("/profile");
@@ -76,9 +72,15 @@ export default function Header(props) {
     );
   };
 
+  // Sticky header
+  window.addEventListener("scroll", function () {
+    var header = this.document.querySelector("#header");
+    header.classList.toggle("sticky", this.window.scrollY > 0);
+  });
+
   return (
-    <header id="header" className="header">
-      <main className="herader__main">
+    <header id="header" className="header sticky">
+      <main className="header__main">
         <nav className="navbar navbar-expand-sm p-0">
           <div className="container">
             <NavLink
@@ -95,9 +97,7 @@ export default function Header(props) {
                 className="form-control"
                 placeholder="Find services"
               />
-                <button className="input-group-prepend">
-                  Search
-                </button>
+              <button className="input-group-prepend">Search</button>
             </div>
 
             <button

@@ -2,22 +2,28 @@ $color-text-header: rgb(118, 118, 118);
 $color-text-header-2: rgb(181, 180, 180);
 $color-text-header-hover: #28a745;
 
+$color-text-header-on-top: white;
+
 #header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 100;
-  background-color: white;
-  .herader__main {
+  background-color: transparent;
+  transition: 0.4s;
+  .header__main {
     .navbar {
-      border-bottom: 1px solid $color-text-header-2;
+      border-bottom: 1px solid transparent;
       .container {
         padding: 5px 0;
         .navbar-brand {
           margin-right: 40px;
           font-size: 35px;
-          color: black;
+          @media screen and (max-width: 576px) {
+            margin-left: 20px;
+          }
+          color: $color-text-header-on-top;
           &:hover {
             color: $color-text-header-hover;
           }
@@ -31,15 +37,14 @@ $color-text-header-hover: #28a745;
         }
 
         .nav-bar-search {
-          display: flex;
-          justify-content: center;
+          display: none;
+          margin-top: 7px;
           input {
             border-radius: 0;
             border-bottom-left-radius: 3px;
             border-top-left-radius: 3px;
-            &:focus{
+            &:focus {
               box-shadow: none;
-
             }
           }
           button {
@@ -54,7 +59,7 @@ $color-text-header-hover: #28a745;
             font-size: 14px;
             border-bottom-right-radius: 3px;
             border-top-right-radius: 3px;
-            &:hover{
+            &:hover {
               background-color: #37e091;
             }
           }
@@ -63,9 +68,9 @@ $color-text-header-hover: #28a745;
         .navbar-collapse {
           .navbar-nav {
             display: flex;
-            align-items: center;
+            align-items: start;
             .nav-link {
-              color: $color-text-header;
+              color: $color-text-header-on-top;
               position: relative;
               font-size: 16px;
               &:hover,
@@ -88,7 +93,8 @@ $color-text-header-hover: #28a745;
       }
     }
     .job-type {
-      border-bottom: 1px solid $color-text-header-2;
+      display: none;
+      border-bottom: 1px solid transparent;
       .my-container {
         display: flex;
         flex-wrap: wrap;
@@ -99,7 +105,7 @@ $color-text-header-hover: #28a745;
           font-size: 16px;
           font-weight: 400;
           color: $color-text-header;
-          &:hover{
+          &:hover {
             color: $color-text-header-hover;
           }
         }
@@ -129,6 +135,123 @@ $color-text-header-hover: #28a745;
         animation-delay: calc(-0.25s * var(--i));
         transform-origin: 20px;
         transition: 0.5s;
+      }
+    }
+  }
+}
+
+#header.sticky {
+  background-color: white;
+  transition: 0.4s;
+  .header__main {
+    .navbar {
+      border-bottom: 1px solid $color-text-header-2;
+      .container {
+        padding: 5px 0;
+        .navbar-brand {
+          margin-right: 40px;
+          font-size: 35px;
+          color: black;
+          @media screen and (max-width: 576px) {
+            margin-left: 20px;
+          }
+          &:hover {
+            color: $color-text-header-hover;
+          }
+          i {
+            font-size: 8px;
+          }
+          .fa-bars i:before {
+            font-size: 40px;
+            color: $color-text-header-hover;
+          }
+        }
+
+        .nav-bar-search {
+          display: flex;
+          margin-top: 7px;
+          justify-content: center;
+          @media screen and (max-width: 800px) {
+            display: none;
+          }
+          input {
+            border-radius: 0;
+            border-bottom-left-radius: 3px;
+            border-top-left-radius: 3px;
+            &:focus {
+              box-shadow: none;
+            }
+          }
+          button {
+            border: 1px solid #1dbf73;
+            background-color: #1dbf73;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: white;
+            padding: 3px 16px;
+            font-size: 14px;
+            border-bottom-right-radius: 3px;
+            border-top-right-radius: 3px;
+            &:hover {
+              background-color: #37e091;
+            }
+          }
+        }
+
+        .navbar-collapse {
+          .navbar-nav {
+            display: flex;
+            align-items: start;
+            .nav-link {
+              color: $color-text-header;
+              position: relative;
+              font-size: 16px;
+              &:hover,
+              &.active {
+                color: $color-text-header-hover !important;
+              }
+            }
+            .nav-link-join {
+              color: $color-text-header-hover;
+              border: 1px solid $color-text-header-hover;
+              padding: 2px 20px;
+              border-radius: 5px;
+              &:hover {
+                color: white !important;
+                background-color: $color-text-header-hover;
+              }
+            }
+          }
+        }
+      }
+    }
+    .job-type {
+      display: block;
+      border-bottom: 1px solid $color-text-header-2;
+      .my-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        .navlink-jobtype {
+          padding: 10px 5px;
+          font-size: 16px;
+          font-weight: 400;
+          color: $color-text-header;
+          &:hover {
+            color: $color-text-header-hover;
+          }
+          @media screen and (max-width: 1034px) {
+            padding: 5px 10px;
+            font-size: 14px;
+          }
+          @media screen and (max-width: 400px) {
+            padding: 2px 8px;
+            font-size: 12px;
+          }
+        }
       }
     }
   }

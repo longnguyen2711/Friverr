@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from "react-router-dom";
 import './Footer.scss'
 
 export default function Footer() {
@@ -76,7 +77,7 @@ export default function Footer() {
 
         <div className='footer-bottom'>
           <div className='footer-bottom-left'>
-            <a href="#">fiverr<sub>®</sub></a>
+            <NavLink to="/">fiverr<sub>®</sub></NavLink>
             <span>© Fiverr Inrernational Ltd. 2022</span>
           </div> 
           <div className='footer-bottom-right'>
