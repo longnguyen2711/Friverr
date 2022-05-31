@@ -2,7 +2,7 @@
   background-color: #e9f8f1;
   border-radius: 3px;
   padding-top: 60px;
-  padding-bottom: 48px;
+  padding-bottom: 70px;
   .my-container {
     h1 {
       margin-bottom: 40px;
@@ -36,7 +36,6 @@
       }
     }
     .advertisement-right {
-      background-color: red;
       z-index: 10;
       width: 50%;
       @media screen and (max-width: 900px) {

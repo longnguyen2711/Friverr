@@ -68,9 +68,9 @@ export default function Advertisement(props) {
           </div>  
           <div className="advertisement-right">
             <img
-              src="./public/img/Advertisement/advertisement-img.webp"
+              src="./img/Advertisement/advertisement-img.webp"
               alt="advertisement-img"
-              style={{ width: "100%" }}
+              style={{ width: "100%", borderRadius: "5px" }}
             />
           </div>
         </div>

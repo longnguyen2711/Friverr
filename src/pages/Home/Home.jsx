@@ -4,6 +4,7 @@ import Carousel from "./Carousel/Carousel";
 import LogoMaker from "./LogoMaker/LogoMaker";
 import Marketplace from "./Marketplace/Marketplace";
 import MultipleSlick from "./MultipleSlick/MultipleSlick";
+import Solution from "./Solution/Solution";
 
 export default function Home(props) {
   const [screen, setScreen] = useState({
@@ -36,11 +37,8 @@ export default function Home(props) {
       <Carousel />
       <MultipleSlick />
       <Advertisement />
-
-
-
       <Marketplace/>
-
+      <Solution />
       <LogoMaker/>
     </div>
   );

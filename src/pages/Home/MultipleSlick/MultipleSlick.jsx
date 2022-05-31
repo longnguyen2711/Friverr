@@ -120,7 +120,7 @@ function MultipleSlick(props) {
     >
       <h1
         style={{
-          marginBottom: "30px",
+          marginBottom: "40px",
           fontSize: "32px",
           color: "#404145",
           textAlign: "center",

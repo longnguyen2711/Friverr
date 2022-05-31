@@ -19,14 +19,14 @@ export default function Header(props) {
         <Fragment>
           <div className="navbar-nav ml-auto">
             <NavLink
-              className="nav-link pl-2 ml-4 font-weight-bold "
+              className="nav-link text-left pl-2 ml-4 font-weight-bold "
               to="/login"
               title="Sign in"
             >
               Sign in
             </NavLink>
             <NavLink
-              className="nav-link nav-link-join ml-4 font-weight-bold"
+              className="nav-link  nav-link-join ml-4 font-weight-bold"
               to="/register"
               title="Join"
             >
@@ -40,7 +40,7 @@ export default function Header(props) {
       <Fragment>
         <div className="navbar-nav ml-auto">
           <div
-            className="nav-link pl-2 ml-4 font-weight-bold text-center"
+            className="nav-link pl-2 ml-4 font-weight-bold"
             style={{ cursor: "pointer" }}
             title="Click to sign out"
             onClick={() => {
@@ -58,7 +58,7 @@ export default function Header(props) {
             Sign out
           </div>
           <div
-            className="nav-link text-black pl-2 ml-4 font-weight-bold text-center"
+            className="nav-link text-black pl-2 ml-4 font-weight-bold"
             style={{ cursor: "pointer" }}
             onClick={() => {
               history.push("/profile");
@@ -101,7 +101,7 @@ export default function Header(props) {
             </div>
 
             <button
-              className="navbar-toggler"
+              className="navbar-toggler ml-2"
               type="button"
               data-toggle="collapse"
               data-target="#navbarNavAltMarkup"

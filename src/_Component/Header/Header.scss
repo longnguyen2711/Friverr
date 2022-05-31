@@ -17,6 +17,10 @@ $color-text-header-on-top: white;
       border-bottom: 1px solid transparent;
       .container {
         padding: 5px 0;
+        @media screen and (max-width: 576px) {
+          display: flex;
+          flex-direction: row-reverse;
+        }
         .navbar-brand {
           margin-right: 40px;
           font-size: 35px;
@@ -47,6 +51,7 @@ $color-text-header-on-top: white;
               box-shadow: none;
             }
           }
+
           button {
             border: 1px solid #1dbf73;
             background-color: #1dbf73;
@@ -68,7 +73,10 @@ $color-text-header-on-top: white;
         .navbar-collapse {
           .navbar-nav {
             display: flex;
-            align-items: start;
+            align-items: center;
+            @media screen and (max-width: 576px) {
+              align-items: start;
+            }
             .nav-link {
               color: $color-text-header-on-top;
               position: relative;
@@ -79,17 +87,32 @@ $color-text-header-on-top: white;
               }
             }
             .nav-link-join {
-              color: $color-text-header-hover;
-              border: 1px solid $color-text-header-hover;
+              color: white;
+              border: 1px solid white;
               padding: 2px 20px;
               border-radius: 5px;
               &:hover {
                 color: white !important;
                 background-color: $color-text-header-hover;
               }
+              @media screen and (max-width: 576px) {
+                border: 1px solid transparent;
+                color: white;
+                padding: 2px 8px;
+                padding-bottom: 10px;
+                &:hover {
+                  color: $color-text-header-hover !important;
+                  background-color: transparent;
+                }
+              }
             }
           }
         }
+      }
+    }
+    .navbar-toggler {
+      i {
+        color: white;
       }
     }
     .job-type {
@@ -148,6 +171,10 @@ $color-text-header-on-top: white;
       border-bottom: 1px solid $color-text-header-2;
       .container {
         padding: 5px 0;
+        @media screen and (max-width: 576px) {
+          display: flex;
+          flex-direction: row-reverse;
+        }
         .navbar-brand {
           margin-right: 40px;
           font-size: 35px;
@@ -203,7 +230,10 @@ $color-text-header-on-top: white;
         .navbar-collapse {
           .navbar-nav {
             display: flex;
-            align-items: start;
+            align-items: center;
+            @media screen and (max-width: 576px) {
+              align-items: start;
+            }
             .nav-link {
               color: $color-text-header;
               position: relative;
@@ -222,9 +252,24 @@ $color-text-header-on-top: white;
                 color: white !important;
                 background-color: $color-text-header-hover;
               }
+              @media screen and (max-width: 576px) {
+                border: 1px solid transparent;
+                color: $color-text-header;
+                padding: 2px 8px;
+                padding-bottom: 10px;
+                &:hover {
+                  color: $color-text-header-hover !important;
+                  background-color: transparent;
+                }
+              }
             }
           }
         }
+      }
+    }
+    .navbar-toggler {
+      i {
+        color: black;
       }
     }
     .job-type {
