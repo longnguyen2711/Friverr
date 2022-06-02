@@ -11,7 +11,11 @@ export default function JobList(props) {
   // Mảng Api
   const {danhSachCongViec} = useSelector(state => state.QuanLyCongViecReducer )
   
+  const nhap = danhSachCongViec.slice(0,120)
+
   const dispatch = useDispatch();
+
+  console.log(nhap)
 
   useEffect(() => {
     dispatch(layDanhSachCongViecAction());
@@ -528,6 +532,10 @@ export default function JobList(props) {
       },
     },
   ];
+
+  console.log(arrsp2)
+
+
   return (
     <Fragment >
      <div id="JobList" className="container"> 
@@ -560,13 +568,13 @@ export default function JobList(props) {
 
       <div className="container d-flex justify-content-around align-items-center flex-wrap">
         
-          {arrsp2.map((item, index) => {
+          {nhap.map((item, index) => {
             return (
               <Fragment>
                 <div className="card w-25">
-                <img className="card-img-top" src={item.subType.image} />
+                <img className="card-img-top" src={item.subType?.image} />
                 <div className="card-body">
-                  <h4 className="card-title">{item.subType.name}</h4>
+                  <h4 className="card-title">{item.subType?.name}</h4>
                   <p className="card-text">{item.name}</p>
                 </div>
                 </div>

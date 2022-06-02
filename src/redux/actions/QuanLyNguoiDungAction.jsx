@@ -1,7 +1,112 @@
 import { quanLyNguoiDungService } from "../../services/QuanLyNguoiDungService";
-import { DANG_KY_ACTION, DANG_NHAP_ACTION } from "../types";
+import {
+  CAP_NHAT_THONG_TIN_NGUOI_DUNG,
+  DANG_KY_ACTION,
+  DANG_NHAP_ACTION,
+  LAY_DANH_SACH_NGUOI_DUNG,
+  LAY_THONG_TIN_CHI_TIET_NGUOI_DUNG,
+  TAO_NGUOI_DUNG_MOI,
+} from "../types";
 import { history } from "../../App";
 
+// Api 1: Lấy danh sách người dùng
+export const layDanhSachNguoiDungAction = (name = "") => {
+  return async (dispatch) => {
+    try {
+      
+      const result = await quanLyNguoiDungService.layDanhSachNguoiDung(name);
+
+      if (result.status === 200) {
+        dispatch({
+          type: LAY_DANH_SACH_NGUOI_DUNG,
+          danhSachTaiKhoan: result.data,
+        });
+      }
+    } catch (error) {
+      console.log("error", error.response);
+    }
+  };
+};
+
+// Api 2: Tạo người dùng mới
+export const taoNguoiDungMoigAction = () => {
+  return async (dispatch) => {
+    try {
+      
+      const result = await quanLyNguoiDungService.taoNguoiDungMoi();
+
+      console.log(result,"result Tạo người dùng mới")
+
+      if (result.status === 200) {
+        dispatch({
+          type: TAO_NGUOI_DUNG_MOI,
+          danhSachTaiKhoan: result.data,
+        });
+      }
+    } catch (error) {
+      console.log("error", error.response);
+    }
+  };
+};
+
+
+// Api 3: Lấy thông tin chi tiết của 1 người dùng
+export const layThongTinChiTietNguoiDungAction = (idNguoiDung) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyNguoiDungService.layThongTinChiTietNguoiDung(
+        idNguoiDung
+      );
+
+      if (result.status === 200) {
+        dispatch({
+          type: LAY_THONG_TIN_CHI_TIET_NGUOI_DUNG,
+          thongTinChiTietNguoiDung: result.data,
+        });
+      }
+    } catch (error) {
+      console.log("error", error.response);
+    }
+  };
+};
+
+// Api 4: Cập nhật thông tin người dùng
+export const capNhatThongTinNguoiDungAction = (idNguoiDung) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyNguoiDungService.capNhatThongTinNguoiDung(
+        idNguoiDung
+      );
+
+      console.log(result,"result cập nhật")
+
+      if (result.status === 200) {
+        dispatch({
+          type: CAP_NHAT_THONG_TIN_NGUOI_DUNG,
+          thongTinnguoiDungCapNhat: result.data,
+        });
+      }
+    } catch (error) {
+      console.log("error", error.response);
+    }
+  };
+};
+
+// Api 5: Xóa người dùng
+export const xoaNguoiDungAction = (idNguoiDung) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyNguoiDungService.xoaNguoiDung(idNguoiDung);
+      alert("Delete user successfully");
+      dispatch(layDanhSachNguoiDungAction());
+    } catch (error) {
+      alert("Delete user failed, please check again");
+      console.log("error", error.response);
+    }
+  };
+};
+
+// Api 31: Đăng nhập
 export const dangNhapAction = (thongTinDangNhap) => {
   return async (dispatch) => {
     try {
@@ -10,7 +115,7 @@ export const dangNhapAction = (thongTinDangNhap) => {
       if (result.status === 200) {
         await dispatch({
           type: DANG_NHAP_ACTION,
-          thongTinDangNhap: result.data.user,
+          thongTinDangNhap: result.data,
         });
 
         // Thông báo đăng nhập thành công và quay về trang chủ
@@ -25,6 +130,7 @@ export const dangNhapAction = (thongTinDangNhap) => {
   };
 };
 
+// Api 32: Đăng xuất
 export const dangKyTaiKhoanAction = (formDataDangKy) => {
   return async (dispatch) => {
     try {

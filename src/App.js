@@ -15,10 +15,13 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 // AdminTemplate
 import { AdminTemplate } from './templates/AdminTemplate/AdminTemplate';
-import UserManagement from './pages/Admin/UserManagement/UserManagement';
-import ListManagement from './pages/Admin/ListManagement/ListManagement';
-import ServiceManagement from './pages/Admin/ServiceManagement/ServiceManagement';
-
+import InfoAdmin from './pages/Admin/InfoAdmin/InfoAdmin';
+import UpdateInfoAdmin from './pages/Admin/InfoAdmin/UpdateInfoAdmin';
+import ListAccount from './pages/Admin/ListAccount/ListAccount';
+import EditAccount from './pages/Admin/ListAccount/EditAccount/EditAccount';
+import ListJobs from './pages/Admin/ListJobs/ListJobs';
+import AddNewjob from './pages/Admin/ListJobs/AddNewJob/AddNewJob';
+import AddNewAccount from './pages/Admin/ListAccount/AddNewAccount/AddNewAccount';
 
 // npx create-react-app friverr
 // npm react-router-dom@5.3.0
@@ -40,7 +43,6 @@ import ServiceManagement from './pages/Admin/ServiceManagement/ServiceManagement
 
 export const history = createBrowserHistory();
 
-
 function App() {
   return (
     <Router history={history}>
@@ -51,15 +53,20 @@ function App() {
         <HomeTemplate path="/jobdetail" exact Component={JobDetail} />
         <HomeTemplate path="/profile" exact Component={Profile} />
 
+
         <UserTemplate path="/register" exact Component={Register} />
         <UserTemplate path="/login" exact Component={Login} />
 
-        <AdminTemplate path="/admin/usermanagement" exact Component={UserManagement} />
-        <AdminTemplate path="/admin/listmanagement" exact Component={ListManagement} />
-        <AdminTemplate path="/admin/servicemanagement" exact Component={ServiceManagement} />
+
+        <AdminTemplate path="/admin/infoadmin" exact Component={InfoAdmin} />
+        <AdminTemplate path="/admin/infoadmin/updateinfoadmin" exact Component={UpdateInfoAdmin} />
+        <AdminTemplate path="/admin/listaccount" exact Component={ListAccount} />
+        <AdminTemplate path="/admin/listaccount/editaccount/:id" exact Component={EditAccount} />
+        <AdminTemplate path="/admin/listaccount/addnewaccount" exact Component={AddNewAccount} />
+        <AdminTemplate path="/admin/listjobs" exact Component={ListJobs} />
+        <AdminTemplate path="/admin/listjobs/addnewjob" exact Component={AddNewjob} />
 
         <HomeTemplate path="/" exact Component={Home} />
-
       </Switch> 
     </Router>
   );

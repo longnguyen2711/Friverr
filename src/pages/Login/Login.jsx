@@ -38,10 +38,10 @@ export default function Login(props) {
   });  //formik đã xử lý luôn e.preventDefault();
 
   // Kiểm tra xem nếu đã đăng nhập rồi mà nhập đường dẫn login thì sẽ quay về trang chủ
-  if (localStorage.getItem(USER_LOGIN)) {
-    alert("You are already logged in");
-    return <Redirect to="/" />;
-  }
+  // if (localStorage.getItem(USER_LOGIN)) {
+  //   alert("You are already logged in");
+  //   return <Redirect to="/" />;
+  // }
 
   return (
     <div
@@ -74,7 +74,6 @@ export default function Login(props) {
                   name="email"
                   id="email"
                   onChange={formik.handleChange}
-                  value={formik.values.taiKhoan}
                 />
                 <div className="text-danger mt-2">
                   {formik.errors.email ? (
@@ -100,7 +99,6 @@ export default function Login(props) {
                   name="password"
                   id="password"
                   onChange={formik.handleChange}
-                  value={formik.values.matKhau}
                 />
                 <div className="text-danger mt-2">
                   {formik.errors.password ? (
@@ -116,7 +114,7 @@ export default function Login(props) {
                   title="Click to login"
                   type="submit"
                 >
-                  Login
+                  Sign in
                 </button>
               </div>
             </div>

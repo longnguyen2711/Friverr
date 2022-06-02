@@ -1,5 +1,10 @@
-import { ACCESSTOKEN, DOMAIN, Token, TokenByClass, TOKEN_CYBERSOFT } from "../util/config";
+import { ACCESSTOKEN, DOMAIN, Token, TokenByClass, TOKEN_CYBERSOFT, USER_LOGIN } from "../util/config";
 import axios from "axios";
+
+let token = "";
+if (localStorage.getItem(USER_LOGIN)) {
+  token = JSON.parse(localStorage.getItem("Token"));
+}
 
 export class baseService {
 
@@ -8,7 +13,7 @@ export class baseService {
       url: `${DOMAIN}/${url}`,
       method: "PUT",
       data: model,
-      headers: { Authorization: "Bearer " + localStorage.getItem(Token), TokenByClass: TokenByClass, Token: Token }, //JWT
+      headers: { Authorization: "Bearer " + token, TokenByClass: TokenByClass, Token: token }, //JWT
       
     });
   };
@@ -18,7 +23,7 @@ export class baseService {
       url: `${DOMAIN}/${url}`,
       method: "POST",
       data: model,
-      headers: { Authorization: "Bearer " + localStorage.getItem(Token), TokenByClass: TokenByClass, Token: Token }, //JWT
+      headers: { Authorization: "Bearer " + token, TokenByClass: TokenByClass, Token: token }, //JWT
       
     });
   };
@@ -27,7 +32,7 @@ export class baseService {
     return axios({
       url: `${DOMAIN}/${url}`,
       method: "GET",
-      headers: { Authorization: "Bearer " + localStorage.getItem(Token), TokenByClass: TokenByClass, Token: Token }, //token yêu cầu từ backend chứng minh user đã đăng nhập rồi
+      headers: { Authorization: "Bearer " + token, TokenByClass: TokenByClass, Token: token }, //token yêu cầu từ backend chứng minh user đã đăng nhập rồi
       
     });
   };
@@ -36,7 +41,7 @@ export class baseService {
     return axios({
       url: `${DOMAIN}/${url}`,
       method: "DELETE",
-      headers: { Authorization: "Bearer " + localStorage.getItem(Token), TokenByClass: TokenByClass, Token: Token }, //token yêu cầu từ backend chứng minh user đã đăng nhập rồi
+      headers: { Authorization: "Bearer " + token, TokenByClass: TokenByClass, Token: token }, //token yêu cầu từ backend chứng minh user đã đăng nhập rồi
       
     });
   };
