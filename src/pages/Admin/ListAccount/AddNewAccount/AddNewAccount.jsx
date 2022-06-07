@@ -12,11 +12,6 @@ const AddNewAccount = (props) => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    // const action = lay""n(userLogin._id);
-    // dispatch(action);
-  }, []);
-
   const formik = useFormik({
     //Để xét dữ liệu mặc định cho formik từ props của redux phải bật thuộc tính enableReinitialize, thuộc tính này thường chỉ làm làm cho form edit, ko đụngchạm state khác
     enableReinitialize: true,
@@ -27,11 +22,10 @@ const AddNewAccount = (props) => {
       password: "",
       name: "",
       phone: "",
-      gender: "",
+      gender: true,
       birthday: "",
     },
     onSubmit: (values) => {
-      console.log(values,"values tạo người dùng mới")
       const action = taoNguoiDungMoigAction(values);
       dispatch(action);
     },
@@ -60,10 +54,10 @@ const AddNewAccount = (props) => {
       <Form
         onSubmitCapture={formik.handleSubmit}
         labelCol={{
-          span: 4,
+          span: 5,
         }}
         wrapperCol={{
-          span: 14,
+          span: 13,
         }}
         layout="horizontal"
         initialValues={{
@@ -83,26 +77,43 @@ const AddNewAccount = (props) => {
 
         <Form.Item label="Role" className="font-weight-bold mb-2">
           <Select
-            placeholder="Select gender"
+            placeholder="Select role"
             className="font-weight-normal"
             onChange={onRoleChange}
-            allowClear>
+            allowClear
+          >
             <Option value="ADMIN">Admin</Option>
             <Option value="CLIENT">Client</Option>
           </Select>{" "}
         </Form.Item>
 
         <Form.Item label="Email" className="font-weight-bold mb-2">
-          <Input name="email" onChange={formik.handleChange} />
+          <Input
+            name="email"
+            placeholder="Enter email"
+            onChange={formik.handleChange}
+          />
         </Form.Item>
         <Form.Item label="Password" className="font-weight-bold mb-2">
-          <Input name="password" onChange={formik.handleChange} />
+          <Input.Password
+            name="password"
+            placeholder="Enter password"
+            onChange={formik.handleChange}
+          />
         </Form.Item>
         <Form.Item label="Name" className="font-weight-bold mb-2">
-          <Input name="name" onChange={formik.handleChange} />
+          <Input
+            name="name"
+            placeholder="Enter name"
+            onChange={formik.handleChange}
+          />
         </Form.Item>
         <Form.Item label="Phone" className="font-weight-bold mb-2">
-          <Input name="phone" onChange={formik.handleChange} />
+          <Input
+            name="phone"
+            placeholder="Enter phone"
+            onChange={formik.handleChange}
+          />
         </Form.Item>
 
         <Form.Item label="Gender" className="font-weight-bold mb-2">
@@ -110,14 +121,15 @@ const AddNewAccount = (props) => {
             placeholder="Select gender"
             className="font-weight-normal"
             onChange={onGenderChange}
-            allowClear>
-            <Option value="true">Male</Option>
-            <Option value="false">Female</Option>
+            allowClear
+          >
+            <Option value={true}>Male</Option>
+            <Option value={false}>Female</Option>
           </Select>{" "}
         </Form.Item>
-        
+
         <Form.Item label="Birthday" className="font-weight-bold mb-4">
-        <DatePicker onChange={handleChangeDatePicker} />
+          <DatePicker onChange={handleChangeDatePicker} />
         </Form.Item>
 
         <Form.Item label=":">

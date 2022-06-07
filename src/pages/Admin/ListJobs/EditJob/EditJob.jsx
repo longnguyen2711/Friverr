@@ -12,41 +12,51 @@ import {
 } from "antd";
 import { useFormik } from "formik";
 import moment from "moment";
-import { taoCongViecMoiAction } from "../../../../redux/actions/QuanLyCongViecAction";
+import {
+  capNhatThongTinCongViecAction,
+  layThongTinChiTietCongViecAction,
+  taoCongViecMoiAction,
+} from "../../../../redux/actions/QuanLyCongViecAction";
 import TextArea from "antd/lib/input/TextArea";
 
-const AddNewJob = (props) => {
-  const [componentSize, setComponentSize] = useState("default");
+const EditJob = (props) => {
+  const { thongTinChiTietCongViec } = useSelector(
+    (state) => state.QuanLyCongViecReducer
+  );
+
+  console.log(thongTinChiTietCongViec);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const { id } = props.match.params;
+    const action = layThongTinChiTietCongViecAction(id);
+    dispatch(action);
+  }, []);
 
   // Dùng để hiển thị hình ảnh khi cập nhật file
   const [imgSrc, setImgSrc] = useState("");
-
-  const dispatch = useDispatch();
 
   const formik = useFormik({
     //Để xét dữ liệu mặc định cho formik từ props của redux phải bật thuộc tính enableReinitialize, thuộc tính này thường chỉ làm làm cho form edit, ko đụngchạm state khác
     enableReinitialize: true,
 
     initialValues: {
-      name: "",
-      rating: 1,
-      price: 1,
-      proServices: false,
-      localSellers: false,
-      onlineSellers: false,
-      deliveryTime: false,
-      image: "",  
+      name: thongTinChiTietCongViec?.name,
+      rating: thongTinChiTietCongViec?.rating,
+      price: thongTinChiTietCongViec?.price,
+      proServices: thongTinChiTietCongViec?.proServices,
+      localSellers: thongTinChiTietCongViec?.localSellers,
+      onlineSellers: thongTinChiTietCongViec?.onlineSellers,
+      deliveryTime: thongTinChiTietCongViec?.deliveryTime,
+      image: thongTinChiTietCongViec?.image,
     },
     onSubmit: (values) => {
-      // console.log(values);
-      const action = taoCongViecMoiAction(values);
+      const { id } = props.match.params;
+      const action = capNhatThongTinCongViecAction(id, values);
       dispatch(action);
     },
   });
-
-  const onFormLayoutChange = ({ size }) => {
-    setComponentSize(size);
-  };
 
   // Dùng cho nút radio
   const handleChangeSwitch = (name) => {
@@ -76,7 +86,7 @@ const AddNewJob = (props) => {
         setImgSrc(e.target.result);
       };
       // Đem dữ liệu file vào formik
-      formik.setFieldValue("hinhAnh", file);
+      formik.setFieldValue("image", file);
 
       // Set validation
       // formik.setErrors()
@@ -91,29 +101,22 @@ const AddNewJob = (props) => {
           span: 5,
         }}
         wrapperCol={{
-          span: 13,
+          span: 15,
         }}
         layout="horizontal"
         initialValues={{
-          size: componentSize,
+          size: "medium",
         }}
-        onValuesChange={onFormLayoutChange}
-        size={componentSize}
+        size="medium"
       >
-        <h3 className="mb-5">Create new job</h3>
-        <Form.Item label="Size" name="size" className="font-weight-bold">
-          <Radio.Group>
-            <Radio.Button value="small">Small</Radio.Button>
-            <Radio.Button value="default">Medium</Radio.Button>
-            <Radio.Button value="large">Large</Radio.Button>
-          </Radio.Group>
-        </Form.Item>
+        <h3 className="mb-5">Edit job</h3>
 
         <Form.Item label="Job name" className="font-weight-bold mb-2">
           <TextArea
             name="name"
             placeholder="Enter job name"
             onChange={formik.handleChange}
+            value={formik.values.name}
           />
         </Form.Item>
 
@@ -122,6 +125,7 @@ const AddNewJob = (props) => {
             onChange={(value) => {
               formik.setFieldValue("rating", value);
             }}
+            value={formik.values.rating}
             placeholder="1 to 10"
             min={1}
             max={10}
@@ -133,6 +137,7 @@ const AddNewJob = (props) => {
             onChange={(value) => {
               formik.setFieldValue("price", value);
             }}
+            value={formik.values.price}
             placeholder="From 1"
             min={0}
           />{" "}
@@ -146,6 +151,7 @@ const AddNewJob = (props) => {
           <Switch
             name="proServices"
             onChange={handleChangeSwitch("proServices")}
+            checked={formik.values.proServices}
           />
         </Form.Item>
         <Form.Item
@@ -156,6 +162,7 @@ const AddNewJob = (props) => {
           <Switch
             name="localSellers"
             onChange={handleChangeSwitch("localSellers")}
+            checked={formik.values.localSellers}
           />
         </Form.Item>
         <Form.Item
@@ -166,6 +173,7 @@ const AddNewJob = (props) => {
           <Switch
             name="onlineSellers"
             onChange={handleChangeSwitch("onlineSellers")}
+            checked={formik.values.onlineSellers}
           />
         </Form.Item>
         <Form.Item
@@ -176,6 +184,7 @@ const AddNewJob = (props) => {
           <Switch
             name="deliveryTime"
             onChange={handleChangeSwitch("deliveryTime")}
+            checked={formik.values.deliveryTime}
           />
         </Form.Item>
 
@@ -183,11 +192,11 @@ const AddNewJob = (props) => {
           label="Job image"
           className="font-weight-bold position-relative"
         >
-          <input
+          {/* <input
             type="file"
             onChange={handleChangeFile}
             accept="image/png, image/jpeg, image/jpg"
-          />
+          /> */}
           <Input name="image" onChange={formik.handleChange} placeholder="Enter link image"/> <br />
           <div
             style={{
@@ -205,8 +214,8 @@ const AddNewJob = (props) => {
         </Form.Item>
 
         <Form.Item label=":">
-          <button title="Click to create" type="submit">
-            Create
+          <button title="Click to edit" type="submit">
+            Edit
           </button>
         </Form.Item>
       </Form>
@@ -214,4 +223,4 @@ const AddNewJob = (props) => {
   );
 };
 
-export default memo(AddNewJob);
+export default memo(EditJob);

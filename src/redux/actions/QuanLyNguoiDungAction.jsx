@@ -8,12 +8,15 @@ import {
   TAO_NGUOI_DUNG_MOI,
 } from "../types";
 import { history } from "../../App";
+import { USER_LOGIN } from "../../util/config";
+import { displayLoadingAction, hideLoadingAction } from "./LoadingAction";
 
 // Api 1: Lấy danh sách người dùng
 export const layDanhSachNguoiDungAction = (name = "") => {
   return async (dispatch) => {
     try {
-      
+      dispatch(displayLoadingAction);
+
       const result = await quanLyNguoiDungService.layDanhSachNguoiDung(name);
 
       if (result.status === 200) {
@@ -21,6 +24,7 @@ export const layDanhSachNguoiDungAction = (name = "") => {
           type: LAY_DANH_SACH_NGUOI_DUNG,
           danhSachTaiKhoan: result.data,
         });
+        dispatch(hideLoadingAction);
       }
     } catch (error) {
       console.log("error", error.response);
@@ -29,26 +33,23 @@ export const layDanhSachNguoiDungAction = (name = "") => {
 };
 
 // Api 2: Tạo người dùng mới
-export const taoNguoiDungMoigAction = () => {
+export const taoNguoiDungMoigAction = (formData) => {
   return async (dispatch) => {
     try {
-      
-      const result = await quanLyNguoiDungService.taoNguoiDungMoi();
-
-      console.log(result,"result Tạo người dùng mới")
-
-      if (result.status === 200) {
+      const result = await quanLyNguoiDungService.taoNguoiDungMoi(formData);
+      if (result.status === 201) {
         dispatch({
           type: TAO_NGUOI_DUNG_MOI,
           danhSachTaiKhoan: result.data,
         });
+        alert("Add user successfully");
       }
     } catch (error) {
+      alert("Add user failed, please check again");
       console.log("error", error.response);
     }
   };
 };
-
 
 // Api 3: Lấy thông tin chi tiết của 1 người dùng
 export const layThongTinChiTietNguoiDungAction = (idNguoiDung) => {
@@ -71,22 +72,36 @@ export const layThongTinChiTietNguoiDungAction = (idNguoiDung) => {
 };
 
 // Api 4: Cập nhật thông tin người dùng
-export const capNhatThongTinNguoiDungAction = (idNguoiDung) => {
+export const capNhatThongTinNguoiDungAction = (idNguoiDung, formData) => {
   return async (dispatch) => {
     try {
       const result = await quanLyNguoiDungService.capNhatThongTinNguoiDung(
-        idNguoiDung
+        idNguoiDung,
+        formData
       );
-
-      console.log(result,"result cập nhật")
 
       if (result.status === 200) {
         dispatch({
           type: CAP_NHAT_THONG_TIN_NGUOI_DUNG,
           thongTinnguoiDungCapNhat: result.data,
         });
+        alert("Update infomation successfully");
+        dispatch(layThongTinChiTietNguoiDungAction(idNguoiDung));
+
+        // Sau khi cập nhật thành công nếu là tài khoản của admin đăng đăng nhập thì quay về infoadmin, nếu chỉnh trong danh sách thì quay về danh sách
+        if (
+          result.data._id ===
+          JSON.parse(localStorage.getItem("USER_LOGIN")).user._id
+        ) {
+          history.push("/admin/infoadmin");
+          window.location.reload();
+        } else {
+          history.push("/admin/listaccount");
+          window.location.reload();
+        }
       }
     } catch (error) {
+      alert("Update infomation failed, please check again");
       console.log("error", error.response);
     }
   };
@@ -111,7 +126,6 @@ export const dangNhapAction = (thongTinDangNhap) => {
   return async (dispatch) => {
     try {
       const result = await quanLyNguoiDungService.dangNhap(thongTinDangNhap);
-
       if (result.status === 200) {
         await dispatch({
           type: DANG_NHAP_ACTION,

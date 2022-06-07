@@ -13,10 +13,10 @@ export class QuanLyNguoiDungService extends baseService {
     return this.get(`api/users`);
   };
 
-    // Api 1: Tạo người dùng mới
-    taoNguoiDungMoi = () => {
-      return this.post(`api/users`);
-    };
+  // Api 2: Tạo người dùng mới
+  taoNguoiDungMoi = (formData) => {
+    return this.post(`api/users`, formData);
+  };
 
   // Api 3: Lấy thông tin chi tiết của 1 người dùng
   layThongTinChiTietNguoiDung = (idNguoiDung) => {
@@ -24,8 +24,8 @@ export class QuanLyNguoiDungService extends baseService {
   };
 
   // Api 4: Cập nhật thông tin người dùng
-  capNhatThongTinNguoiDung = (idNguoiDung) => {
-    return this.put(`api/users/${idNguoiDung}`);
+  capNhatThongTinNguoiDung = (idNguoiDung, formData) => {
+    return this.put(`api/users/${idNguoiDung}`, formData);
   };
 
   // Api 5: Xóa người dùng

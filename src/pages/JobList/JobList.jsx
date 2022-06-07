@@ -13,6 +13,8 @@ export default function JobList(props) {
   
   const nhap = danhSachCongViec.slice(0,120)
 
+  console.log(danhSachCongViec.length)
+
   const dispatch = useDispatch();
 
   console.log(nhap)

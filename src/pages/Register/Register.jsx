@@ -39,7 +39,7 @@ export default function Register(props) {
       password: "",
       phone: "",
       birthday: "",
-      gender: "", // Giới tính true là nam, false là nữ theo backend
+      gender: false, // Giới tính true là nam, false là nữ theo backend
     },
     validationSchema,
     validateOnChange: true,
@@ -181,8 +181,8 @@ export default function Register(props) {
                   onChange={onGenderChange}
                   allowClear
                 >
-                  <Option value="true">Male</Option>
-                  <Option value="false">Female</Option>
+                  <Option value={true}>Male</Option>
+                  <Option value={false}>Female</Option>
                 </Select>
                 <div className="text-danger mt-1">
                   {" "}

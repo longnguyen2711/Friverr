@@ -23,7 +23,11 @@ export class baseService {
       url: `${DOMAIN}/${url}`,
       method: "POST",
       data: model,
-      headers: { Authorization: "Bearer " + token, TokenByClass: TokenByClass, Token: token }, //JWT
+      headers: {
+        Authorization: + token, 
+        TokenByClass: TokenByClass,
+        token: token 
+      }, //JWT
       
     });
   };

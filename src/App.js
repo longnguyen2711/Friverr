@@ -22,6 +22,9 @@ import EditAccount from './pages/Admin/ListAccount/EditAccount/EditAccount';
 import ListJobs from './pages/Admin/ListJobs/ListJobs';
 import AddNewjob from './pages/Admin/ListJobs/AddNewJob/AddNewJob';
 import AddNewAccount from './pages/Admin/ListAccount/AddNewAccount/AddNewAccount';
+import Loading from './_Component/Loading/Loading';
+import EditJob from './pages/Admin/ListJobs/EditJob/EditJob';
+import UpdateImage from './pages/Admin/ListJobs/UpdateImage/UpdateImage';
 
 // npx create-react-app friverr
 // npm react-router-dom@5.3.0
@@ -46,6 +49,7 @@ export const history = createBrowserHistory();
 function App() {
   return (
     <Router history={history}>
+      <Loading />
       <Switch>
         <HomeTemplate path="/home" exact Component={Home} />
         <HomeTemplate path="/joblist" exact Component={JobList} />
@@ -65,7 +69,8 @@ function App() {
         <AdminTemplate path="/admin/listaccount/addnewaccount" exact Component={AddNewAccount} />
         <AdminTemplate path="/admin/listjobs" exact Component={ListJobs} />
         <AdminTemplate path="/admin/listjobs/addnewjob" exact Component={AddNewjob} />
-
+        <AdminTemplate path="/admin/listjobs/editjob/:id" exact Component={EditJob} />
+        <AdminTemplate path="/admin/listjobs/updateimage/:id" exact Component={UpdateImage} />
         <HomeTemplate path="/" exact Component={Home} />
       </Switch> 
     </Router>

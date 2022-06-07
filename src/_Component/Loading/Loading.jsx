@@ -10,12 +10,15 @@ export default function Loading(props) {
     <Fragment>
       {isLoading ? (
         <div
-          className="position-fixed top-0 left-0 w-100 h-100 flex justify-content-center align-items-center"
-          style={{ backgroundColor: "rgba(0,0,0,1)" }}
+          className="position-fixed top-0 left-0 w-100 h-100 d-flex justify-content-center align-items-center"
+          style={{ backgroundColor: "rgba(34,34,34,1)", zIndex: "1000" }}
         >
           <img
-            style={{ width: "400px", zIndex: '50' }}
-            src="https://vietnamphotographer.net/images/loading.gif"
+            style={{
+              width: "50%",
+              zIndex: "1000",
+            }}
+            src="https://genzakit.com/wp-content/uploads/2021/05/Rotate-Loading-Animation.gif"
             alt="loading-gif"
           />
         </div>

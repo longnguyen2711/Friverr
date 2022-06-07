@@ -18,7 +18,6 @@ export const HomeTemplate = (props) => {
         //props.location, props.history, props.match
         return (
           <Fragment>
-            <Header />
             <Component {...propsRoute} />
             <Footer />
           </Fragment>

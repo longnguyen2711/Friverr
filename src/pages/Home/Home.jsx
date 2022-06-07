@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import Header from "../../_Component/Header/Header";
 import Advertisement from "./Advertisement/Advertisement";
 import Carousel from "./Carousel/Carousel";
 import LogoMaker from "./LogoMaker/LogoMaker";
 import Marketplace from "./Marketplace/Marketplace";
 import MultipleSlick from "./MultipleSlick/MultipleSlick";
 import Solution from "./Solution/Solution";
+import Talent from "./Talent/Talent";
 
 export default function Home(props) {
   const [screen, setScreen] = useState({
@@ -32,14 +34,22 @@ export default function Home(props) {
     };
   }, []);
   
+  // Sticky header
+  // window.addEventListener("scroll", function () {
+  //   var header = this.document.querySelector(".header");
+  //   header.classList.toggle("sticky", this.window.scroll > 0);
+  // });
+
   return (
-    <div className="">
+    <section>
+      <Header />
       <Carousel />
       <MultipleSlick />
       <Advertisement />
       <Marketplace/>
       <Solution />
       <LogoMaker/>
-    </div>
+      <Talent/>
+    </section>
   );
 }

@@ -14,7 +14,7 @@ const UpdateInfoAdmin = (props) => {
   const { userLogin, thongTinChiTietNguoiDung } = useSelector(
     (state) => state.QuanLyNguoiDungReducer
   );
-
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,8 +37,7 @@ const UpdateInfoAdmin = (props) => {
       gender: thongTinChiTietNguoiDung?.gender,
     },
     onSubmit: (values) => {
-      // console.log(values, "values");
-      const action = capNhatThongTinNguoiDungAction(values);
+      const action = capNhatThongTinNguoiDungAction(values._id, values);
       dispatch(action);
     },
   });
@@ -62,10 +61,10 @@ const UpdateInfoAdmin = (props) => {
       <Form
         onSubmitCapture={formik.handleSubmit}
         labelCol={{
-          span: 4,
+          span: 5,
         }}
         wrapperCol={{
-          span: 14,
+          span: 13,
         }}
         layout="horizontal"
         initialValues={{
@@ -125,9 +124,9 @@ const UpdateInfoAdmin = (props) => {
           />
         </Form.Item>
         <Form.Item label="Gender" className="font-weight-bold mb-0">
-          <Select placeholder="Select gender" onChange={onGenderChange} allowClear>
-            <Option value="true">Male</Option>
-            <Option value="false">Female</Option>
+          <Select placeholder="Select gender" onChange={onGenderChange} value={formik.values.gender} allowClear>
+            <Option value={true}>Male</Option>
+            <Option value={false}>Female</Option>
           </Select>{" "}
         </Form.Item>
         <Form.Item label="Birthday" className="font-weight-bold mb-4">

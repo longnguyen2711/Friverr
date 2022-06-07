@@ -3,8 +3,8 @@ $color-text-footer-2: rgb(181, 180, 180);
 $color-text-footer-hover: #35a22c;
 #footer {
   padding: 60px 0 0 0;
-  border-top: 1px solid $color-text-footer;
-  border-bottom: 3px solid $color-text-footer;
+  border-top: 1px solid $color-text-footer-2;
+  border-bottom: 3px solid $color-text-footer-2;
   .footer-top {
     display: flex;
     flex-wrap: wrap;

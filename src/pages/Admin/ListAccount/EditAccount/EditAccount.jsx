@@ -19,20 +19,20 @@ const EditAccount = (props) => {
 
   const dispatch = useDispatch();
 
+  let { id } = props.match.params;
   useEffect(() => {
-    let { id } = props.match.params;
     console.log(id, "id");
-    const action = layThongTinChiTietNguoiDungAction(
-      "6195de95aef344001cec477b"
-    );
+    const action = layThongTinChiTietNguoiDungAction(id)
+    
     dispatch(action);
-  }, []);
+  }, [id]);
 
   const formik = useFormik({
     //Để xét dữ liệu mặc định cho formik từ props của redux phải bật thuộc tính enableReinitialize, thuộc tính này thường chỉ làm làm cho form edit, ko đụngchạm state khác
     enableReinitialize: true,
 
     initialValues: {
+      _id: thongTinChiTietNguoiDung?._id,
       role: thongTinChiTietNguoiDung?.role,
       email: thongTinChiTietNguoiDung?.email,
       password: thongTinChiTietNguoiDung?.password,
@@ -42,8 +42,7 @@ const EditAccount = (props) => {
       birthday: thongTinChiTietNguoiDung?.birthday,
     },
     onSubmit: (values) => {
-      console.log(values, "values tạo người dùng mới");
-      const action = capNhatThongTinNguoiDungAction(values);
+      const action = capNhatThongTinNguoiDungAction(values._id, values);
       dispatch(action);
     },
   });
@@ -71,10 +70,10 @@ const EditAccount = (props) => {
       <Form
         onSubmitCapture={formik.handleSubmit}
         labelCol={{
-          span: 4,
+          span: 5,
         }}
         wrapperCol={{
-          span: 14,
+          span: 13,
         }}
         layout="horizontal"
         initialValues={{
@@ -98,16 +97,15 @@ const EditAccount = (props) => {
             <div className="text-danger font-italic">Can't change Email</div>
           </div>{" "}
         </Form.Item>
-        {/* <Form.Item label="Password" className="font-weight-bold mb-2">
-          <Input
-            name="password"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-          />
-        </Form.Item> */}
+        <Form.Item label="ID" className="font-weight-bold mb-2">
+          <div className="d-flex justify-content-between font-weight-normal">
+            {formik.values._id}
+            <div className="text-danger font-italic">Can't change ID</div>
+          </div>{" "}
+        </Form.Item>
         <Form.Item label="Role" className="font-weight-bold mb-2">
           <Select
-            placeholder="Select gender"
+            placeholder="Select role"
             className="font-weight-normal"
             onChange={onRoleChange}
             value={formik.values.role}
@@ -117,6 +115,12 @@ const EditAccount = (props) => {
             <Option value="CLIENT">Client</Option>
           </Select>{" "}
         </Form.Item>
+        {/* <Form.Item label="Password" className="font-weight-bold mb-2">
+          <Input.Password
+            name="password"
+            onChange={formik.handleChange}
+          />
+        </Form.Item> */}
         <Form.Item label="Name" className="font-weight-bold mb-2">
           <Input
             name="name"
@@ -140,13 +144,17 @@ const EditAccount = (props) => {
             value={formik.values.gender}
             allowClear
           >
-            <Option value="true">Male</Option>
-            <Option value="false">Female</Option>
+            <Option value={true}>Male</Option>
+            <Option value={false}>Female</Option>
           </Select>{" "}
         </Form.Item>
 
         <Form.Item label="Birthday" className="font-weight-bold mb-4">
-          <DatePicker onChange={handleChangeDatePicker} />
+        <DatePicker
+            format={"DD/MM/YYYY"}
+            value={moment(formik.values.birthday)}
+            onChange={handleChangeDatePicker}
+          />
         </Form.Item>
 
         <Form.Item label=":">

@@ -9,11 +9,12 @@ import { ACCESSTOKEN, Token, USER_LOGIN } from "../../util/config";
 import { Redirect, Route } from "react-router";
 import { Fragment, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { history } from "../../App";
 import { Layout, Menu } from "antd";
 import _ from "lodash";
 import "./AdminTemplate.scss";
+import { layThongTinChiTietNguoiDungAction } from "../../redux/actions/QuanLyNguoiDungAction";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -21,7 +22,14 @@ const { SubMenu } = Menu;
 export const AdminTemplate = (props) => {
   const { Component, ...restProps } = props; // path, exact, Component
 
-  const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
+  const { userLogin, thongTinChiTietNguoiDung } = useSelector((state) => state.QuanLyNguoiDungReducer);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const action = layThongTinChiTietNguoiDungAction(userLogin._id);
+    dispatch(action);
+  }, []);
 
   // Chuyển hướng về đầu trang khi trở lại trang trước đó
   useEffect(() => {
@@ -65,8 +73,8 @@ export const AdminTemplate = (props) => {
             }}
             title="Go to the personal page"
           >
-            {userLogin?.name}
-            <span>{userLogin.name?.slice(0, 1)}</span>
+            {thongTinChiTietNguoiDung?.name}
+            <span>{thongTinChiTietNguoiDung.name?.slice(0, 1)}</span>
           </div>
         </div>
       </Fragment>

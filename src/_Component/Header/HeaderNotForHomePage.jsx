@@ -1,26 +1,16 @@
-import { layThongTinChiTietNguoiDungAction } from "../../redux/actions/QuanLyNguoiDungAction";
-import { useDispatch, useSelector } from "react-redux";
-import { Token, USER_LOGIN } from "../../util/config";
-import React, { useEffect, Fragment } from "react";
-import { NavLink } from "react-router-dom";
-import { history } from "../../App";
+import React, { useEffect, useState, Fragment } from "react";
 import "./Header.scss";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import _ from "lodash";
+import { Token, USER_LOGIN } from "../../util/config";
+import { history } from "../../App";
 
 export default function Header(props) {
   const { chiTietLoaiCongViecChinh } = useSelector(
     (state) => state.QuanLyCongViecReducer
   );
-  const { userLogin, thongTinChiTietNguoiDung } = useSelector(
-    (state) => state.QuanLyNguoiDungReducer
-  );
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const action = layThongTinChiTietNguoiDungAction(userLogin._id);
-    dispatch(action);
-  }, []);
+  const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
 
   // Trạng thái đăng nhập, nếu chưa đăng nhập thì hiển thị đăng nhập và đăng ký, nếu đã đăng nhập thì hiển thị đăng xuất
   const renderLogin = () => {
@@ -75,21 +65,15 @@ export default function Header(props) {
             }}
             title="Go to the personal page"
           >
-            {thongTinChiTietNguoiDung.name}
+            {userLogin.name}
           </div>
         </div>
       </Fragment>
     );
   };
 
-  // // Sticky header
-  window.addEventListener("scroll", function () {
-    var header = this.document.querySelector("#header");
-    header.classList.toggle("sticky", this.window.scrollY > 0);
-  });
-
   return (
-    <header id="header" className="header sticky">
+    <header id="header" className="header-not-for-homepage">
       <main className="header__main">
         <nav className="navbar navbar-expand-sm p-0">
           <div className="container">

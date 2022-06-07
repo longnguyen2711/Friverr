@@ -1,12 +1,15 @@
 import React, { memo, useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { layDanhSachNguoiDungAction, xoaNguoiDungAction } from "../../../redux/actions/QuanLyNguoiDungAction";
+import {
+  layDanhSachNguoiDungAction,
+  xoaNguoiDungAction,
+} from "../../../redux/actions/QuanLyNguoiDungAction";
 import { NavLink } from "react-router-dom";
 import { Redirect } from "react-router";
 import { Table, Input } from "antd";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import moment from "moment";
 import "./ListAccount.scss";
+
 
 export default function ListAccount(props) {
   const { danhSachTaiKhoan } = useSelector(
@@ -28,7 +31,7 @@ export default function ListAccount(props) {
       render: (text, object) => {
         return (
           <Fragment>
-            <img src={text} atl="..." width={"100%"} />
+            <img src={text} atl="avatar-img" width={"100%"} />
           </Fragment>
         );
       },
@@ -38,12 +41,9 @@ export default function ListAccount(props) {
     {
       title: "Name",
       dataIndex: "name",
-      value: (text, object) => {
-        return <span>{object}</span>;
-      },
       sorter: (a, b) => {
-        let nameA = a.name;
-        let nameB = b.name;
+        let nameA = a.name.toLowerCase().trim();
+        let nameB = b.name.toLowerCase().trim();
         if (nameA > nameB) {
           return 1;
         }
@@ -63,8 +63,8 @@ export default function ListAccount(props) {
         }
       },
       sorter: (a, b) => {
-        let genderA = a.gender.toLowerCase().trim();
-        let genderB = b.gender.toLowerCase().trim();
+        let genderA = a.gender.toString();
+        let genderB = b.gender.toString();
         if (genderA > genderB) {
           return 1;
         }
@@ -122,29 +122,29 @@ export default function ListAccount(props) {
         return (
           <Fragment key={index} className="flex items-center">
             <NavLink
-              to={`/admin/listaccount/editaccount/${text}}`}
-              className="ml-2 text-primary"
-              title="Edit account"              
+              to={`/admin/listaccount/editaccount/${text}`}
+              className="ml-3 text-primary"
+              title="Edit account"
             >
-              <EditOutlined />{" "}
+              <i class="text-primary fa fa-edit"></i>
             </NavLink>
 
             <span
-              className="ml-2 text-danger"
-              style={{cursor:"pointer"}}
+              className="ml-3 text-danger"
+              style={{ cursor: "pointer" }}
               title="Delete account"
               onClick={() => {
                 // Gọi action xóa
                 if (
                   window.confirm(
-                    "Are you sure you want to delete this account?"                    
+                    "Are you sure you want to delete this account?"
                   )
                 ) {
                   dispatch(xoaNguoiDungAction(object._id));
                 }
               }}
             >
-              <DeleteOutlined />{" "}
+              <i class="text-danger fa fa-trash-alt"></i>
             </span>
           </Fragment>
         );
@@ -173,7 +173,7 @@ export default function ListAccount(props) {
 
   return (
     <div id="listAccount">
-      <h2 className="mb-5">List Account</h2>
+      <h2 className="mb-5">List Accounts</h2>
       <div title="Click to add new account" className="mb-4">
         <NavLink
           to="/admin/listaccount/addnewaccount"
@@ -185,7 +185,7 @@ export default function ListAccount(props) {
 
       <Search
         className="mb-3"
-        placeholder="Enter keyword"
+        placeholder="Enter name of user"
         // Nếu bỏ enterButton sẽ hiện kính lúp
         enterButton="Search"
         size="large"
