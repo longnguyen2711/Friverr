@@ -33,8 +33,9 @@ const UpdateImage = (props) => {
     },
     onSubmit: (values) => {
       const {id} = props.match.params
-      const action = capNhatHinhAnhCongViecAction(id, values);
-      dispatch(action);
+      // const action = capNhatThongTinCongViecAction(id, values);
+      // const action = capNhatHinhAnhCongViecAction(id, values);
+      // dispatch(action);
     },
   });
 
@@ -99,7 +100,7 @@ const UpdateImage = (props) => {
             onChange={handleChangeFile}
             accept="image/png, image/jpeg, image/jpg"
           />
-          {/* <Input name="image" onChange={formik.handleChange} placeholder="Enter link image"/> <br /> */}
+          <Input name="image" onChange={formik.handleChange} placeholder="Enter link image"/> <br />
           <div
             style={{
               width: "100%",

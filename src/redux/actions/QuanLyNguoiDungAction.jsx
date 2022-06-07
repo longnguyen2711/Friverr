@@ -121,6 +121,20 @@ export const xoaNguoiDungAction = (idNguoiDung) => {
   };
 };
 
+// Api 6: Cập nhật ảnh đại diện
+export const capNhatAnhDaiDienAction = (img) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyNguoiDungService.capNhatAnhDaiDien(img);
+
+      alert("Update avatar successfully");
+    } catch (error) {
+      alert("Update avatar failed, please check again");
+      console.log("error", error.response);
+    }
+  };
+};
+
 // Api 31: Đăng nhập
 export const dangNhapAction = (thongTinDangNhap) => {
   return async (dispatch) => {

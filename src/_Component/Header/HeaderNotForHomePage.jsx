@@ -1,16 +1,25 @@
 import React, { useEffect, useState, Fragment } from "react";
 import "./Header.scss";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { Token, USER_LOGIN } from "../../util/config";
 import { history } from "../../App";
+import { layChiTietLoaiCongViecChinhAction } from "../../redux/actions/QuanLyCongViecAction";
+import { layThongTinChiTietNguoiDungAction } from "../../redux/actions/QuanLyNguoiDungAction";
 
 export default function Header(props) {
   const { chiTietLoaiCongViecChinh } = useSelector(
     (state) => state.QuanLyCongViecReducer
   );
-  const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
+  const { userLogin, thongTinChiTietNguoiDung } = useSelector((state) => state.QuanLyNguoiDungReducer);
+
+  const dispatch = useDispatch();  
+
+  useEffect(() => {
+    dispatch(layChiTietLoaiCongViecChinhAction());
+    dispatch(layThongTinChiTietNguoiDungAction(userLogin._id));
+  }, []);
 
   // Trạng thái đăng nhập, nếu chưa đăng nhập thì hiển thị đăng nhập và đăng ký, nếu đã đăng nhập thì hiển thị đăng xuất
   const renderLogin = () => {
@@ -65,7 +74,7 @@ export default function Header(props) {
             }}
             title="Go to the personal page"
           >
-            {userLogin.name}
+            {thongTinChiTietNguoiDung.name}
           </div>
         </div>
       </Fragment>

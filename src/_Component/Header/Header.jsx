@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { history } from "../../App";
 import "./Header.scss";
 import _ from "lodash";
+import { layChiTietLoaiCongViecChinhAction } from "../../redux/actions/QuanLyCongViecAction";
 
 export default function Header(props) {
   const { chiTietLoaiCongViecChinh } = useSelector(
@@ -18,8 +19,8 @@ export default function Header(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const action = layThongTinChiTietNguoiDungAction(userLogin._id);
-    dispatch(action);
+    dispatch(layChiTietLoaiCongViecChinhAction());
+    dispatch(layThongTinChiTietNguoiDungAction(userLogin._id));
   }, []);
 
   // Trạng thái đăng nhập, nếu chưa đăng nhập thì hiển thị đăng nhập và đăng ký, nếu đã đăng nhập thì hiển thị đăng xuất

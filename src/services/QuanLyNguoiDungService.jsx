@@ -33,6 +33,11 @@ export class QuanLyNguoiDungService extends baseService {
     return this.delete(`api/users/${idNguoiDung}`);
   };
 
+  // Api 6: Cập nhật ảnh đại diện
+  capNhatAnhDaiDien = (img) => {
+    return this.post(`api/users/upload-avatar`,img);
+  };
+
   // Api 31: Đăng nhập
   dangNhap = (thongTinDangNhap) => {
     return this.post(`api/auth/signin`, thongTinDangNhap);

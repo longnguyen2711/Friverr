@@ -1,21 +1,29 @@
-import { layThongTinChiTietNguoiDungAction } from "../../redux/actions/QuanLyNguoiDungAction";
+import {
+  layThongTinChiTietNguoiDungAction,
+  capNhatThongTinNguoiDungAction,
+  capNhatAnhDaiDienAction,
+} from "../../redux/actions/QuanLyNguoiDungAction";
 import HeaderNotForHomePage from "../../_Component/Header/HeaderNotForHomePage";
+import { Form, Input, Radio, Select, DatePicker } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import React, { memo, useEffect, useState } from "react";
 import { USER_LOGIN } from "../../util/config";
 import { Redirect } from "react-router-dom";
-import React, { useEffect } from "react";
+import { Option } from "antd/lib/mentions";
+import { useFormik } from "formik";
 import moment from "moment";
 import "./Profile.scss";
 
-export default function Profile(props) {
+function Profile(props) {
+  const [imgSrc, setImgSrc] = useState("");
+
   const { chiTietLoaiCongViecChinh } = useSelector(
     (state) => state.QuanLyCongViecReducer
   );
+
   const { userLogin, thongTinChiTietNguoiDung } = useSelector(
     (state) => state.QuanLyNguoiDungReducer
   );
-
-  console.log(thongTinChiTietNguoiDung);
 
   const dispatch = useDispatch();
 
@@ -24,11 +32,53 @@ export default function Profile(props) {
     dispatch(action);
   }, []);
 
+  const formik = useFormik({
+    //Để xét dữ liệu mặc định cho formik từ props của redux phải bật thuộc tính enableReinitialize, thuộc tính này thường chỉ làm làm cho form edit, ko đụngchạm state khác
+    enableReinitialize: true,
+
+    initialValues: {
+      image: "",
+    },
+    onSubmit: (values) => {
+      console.log(values);
+      // const action = capNhatAnhDaiDienAction(values);
+      // dispatch(action);
+    },
+  });
+
   // Kiểm tra trong localStorage nếu chưa đăng nhập thì chuyển về trang login
   if (!localStorage.getItem(USER_LOGIN)) {
     alert("You are not logged in !");
     return <Redirect to="/login" />;
   }
+
+  // Dùng để up dạng file
+  const handleChangeFile = (e) => {
+    // Lấy file từ e ra ([0] là chỉ lấy file đầu tiên)
+    let file = e.target.files[0];
+    // Set định dạng ảnh đầu vào
+    if (
+      file.type === "image/jpeg" ||
+      file.type === "image/jpg" ||
+      file.type === "image/png"
+    ) {
+      // Tạo đối tượng để đọc file
+      // FileReader() cú pháp của JS
+      let reader = new FileReader();
+      // Đọc file
+      reader.readAsDataURL(file);
+      // Đọc file và trả ra kết quả ở dạng base64// e.target.result là kết quả trả về sau khi đọc file
+      reader.onload = (e) => {
+        // console.log("e.target.result", e.target.result);
+        setImgSrc(e.target.result);
+      };
+      // Đem dữ liệu file vào formik
+      formik.setFieldValue("image", file);
+
+      // Set validation
+      // formik.setErrors()
+    }
+  };
 
   return (
     <section>
@@ -79,9 +129,105 @@ export default function Profile(props) {
                     <p>Phone: {thongTinChiTietNguoiDung.phone}</p>
                     <p>Email: {thongTinChiTietNguoiDung.email}</p>
                   </div>
-                  <button className="edit-info" title="Edit info">
-                    <i class="fa fa-pencil-alt"></i>
+                  <button
+                    className="edit-info"
+                    title="Edit info"
+                    type="button"
+                    data-toggle="modal"
+                    data-target="#exampleModalCenter3"
+                  >
+                    <i className="fa fa-pencil-alt"></i>
                   </button>
+
+                  <div
+                    className="modal fade"
+                    id="exampleModalCenter3"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="exampleModalCenterTitle2"
+                    aria-hidden="true"
+                  >
+                    <div
+                      className="modal-dialog modal-dialog-centered  mx-auto"
+                      role="document"
+                    >
+                      <div className="modal-content">
+                        <div className="modal-body m-0 p-0 position-relative">
+                          <button
+                            type="button"
+                            className="close"
+                            title="Close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                            style={{
+                              position: "absolute",
+                              top: "10px",
+                              right: "10px",
+                            }}
+                          >
+                            <i className="fa fa-times"></i>
+                          </button>
+                          <Form
+                            onSubmitCapture={formik.handleSubmit}
+                            labelCol={{
+                              span: 6,
+                            }}
+                            wrapperCol={{
+                              span: 15,
+                            }}
+                            layout="horizontal"
+                            initialValues={{
+                              size: "medium",
+                            }}
+                            size="medium"
+                          >
+                            <h3 className="my-4 ml-4">Change avatar</h3>
+                            <Form.Item label="">
+                              <button
+                                title="Click to change avatar"
+                                type="submit"
+                                className="btn btn-primary ml-3 mt-2"
+                              >
+                                Update
+                              </button>
+                            </Form.Item>
+
+                            <Form.Item
+                              label="Job image"
+                              className="font-weight-bold"
+                            >
+                              <input
+                                type="file"
+                                className="mb-4"
+                                onChange={handleChangeFile}
+                                accept="image/png, image/jpeg, image/jpg"
+                              />
+                              <Input
+                                name="image"
+                                onChange={formik.handleChange}
+                                placeholder="Enter link image"
+                              />{" "}
+                              <br />
+                              <div
+                                style={{
+                                  width: "100%",
+                                  height: "250px",
+                                  backgroundImage: `url(${
+                                    imgSrc ? imgSrc : formik.values.image
+                                  }`,
+                                  backgroundSize: "contain",
+                                  backgroundRepeat: "no-repeat",
+                                  backgroundPositionX: "left",
+                                  marginTop: "30px",
+                                }}
+                              ></div>
+                            </Form.Item>
+                          </Form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <hr />
                   <div className="d-flex justify-content-between align-items-center mb-2">
                     <span>
@@ -91,7 +237,7 @@ export default function Profile(props) {
                   </div>
                   <div className="d-flex justify-content-between align-items-center">
                     <span>
-                      <i class="fa fa-user"></i>Member since
+                      <i className="fa fa-user"></i>Member since
                     </span>
                     <p>May 2022</p>
                   </div>
@@ -124,7 +270,7 @@ export default function Profile(props) {
                           title="Facebook"
                           target="_blank"
                         >
-                          <i class="fa fa-plus"></i>FaceBook
+                          <i className="fa fa-plus"></i>FaceBook
                         </a>
                       </li>
                       <li>
@@ -133,7 +279,7 @@ export default function Profile(props) {
                           title="Google"
                           target="_blank"
                         >
-                          <i class="fa fa-plus"></i>Google
+                          <i className="fa fa-plus"></i>Google
                         </a>
                       </li>
                       <li>
@@ -142,7 +288,7 @@ export default function Profile(props) {
                           title="Dribble"
                           target="_blank"
                         >
-                          <i class="fa fa-plus"></i>Dribbble
+                          <i className="fa fa-plus"></i>Dribbble
                         </a>
                       </li>
                       <li>
@@ -151,7 +297,7 @@ export default function Profile(props) {
                           title="Stack Overflow"
                           target="_blank"
                         >
-                          <i class="fa fa-plus"></i>Stack Overflow
+                          <i className="fa fa-plus"></i>Stack Overflow
                         </a>
                       </li>
                       <li>
@@ -160,7 +306,7 @@ export default function Profile(props) {
                           title="GitHub"
                           target="_blank"
                         >
-                          <i class="fa fa-plus"></i>GitHub
+                          <i className="fa fa-plus"></i>GitHub
                         </a>
                       </li>
                       <li>
@@ -169,7 +315,7 @@ export default function Profile(props) {
                           title="Vimeo"
                           target="_blank"
                         >
-                          <i class="fa fa-plus"></i>Vimeo
+                          <i className="fa fa-plus"></i>Vimeo
                         </a>
                       </li>
                       <li>
@@ -178,7 +324,7 @@ export default function Profile(props) {
                           title="Twitter"
                           target="_blank"
                         >
-                          <i class="fa fa-plus"></i>Twitter
+                          <i className="fa fa-plus"></i>Twitter
                         </a>
                       </li>
                     </ul>
@@ -236,14 +382,14 @@ export default function Profile(props) {
                 </p>
                 <button
                   type="button"
-                  class="btn btn-primary"
+                  className="btn btn-primary"
                   data-toggle="modal"
                   data-target="#exampleModalCenter"
                 >
                   Learn about Fiverr Business
                 </button>
                 <div
-                  class="modal fade"
+                  className="modal fade"
                   id="exampleModalCenter"
                   tabindex="-1"
                   role="dialog"
@@ -251,19 +397,19 @@ export default function Profile(props) {
                   aria-hidden="true"
                 >
                   <div
-                    class="modal-dialog modal-dialog-centered  mx-auto"
+                    className="modal-dialog modal-dialog-centered  mx-auto"
                     role="document"
                   >
-                    <div class="modal-content">
-                      <div class="modal-body m-0 p-0 position-relative">
+                    <div className="modal-content">
+                      <div className="modal-body m-0 p-0 position-relative">
                         <button
                           type="button"
-                          class="close"
+                          className="close"
                           title="Close"
                           data-dismiss="modal"
                           aria-label="Close"
                         >
-                          <i class="fa fa-times"></i>
+                          <i className="fa fa-times"></i>
                         </button>
                         <img
                           src="./img/Profile/buying-service-modal-img.webp"
@@ -277,16 +423,16 @@ export default function Profile(props) {
                           </h1>
                           <ul>
                             <li>
-                              <i class="text-success fa fa-check"></i>Connect
-                              with Fiverr’s vetted freelancers
+                              <i className="text-success fa fa-check"></i>
+                              Connect with Fiverr’s vetted freelancers
                             </li>
                             <li>
-                              <i class="text-success fa fa-check"></i>Streamline
-                              and scale your team initiatives
+                              <i className="text-success fa fa-check"></i>
+                              Streamline and scale your team initiatives
                             </li>
 
                             <li>
-                              <i class="text-success fa fa-check"></i>Access
+                              <i className="text-success fa fa-check"></i>Access
                               priority business support and Talent Matching
                             </li>
                           </ul>
@@ -309,7 +455,7 @@ export default function Profile(props) {
                 Create a new Gig{" "}
               </button>
               <div
-                class="modal fade"
+                className="modal fade"
                 id="exampleModalCenter2"
                 tabindex="-1"
                 role="dialog"
@@ -317,19 +463,19 @@ export default function Profile(props) {
                 aria-hidden="true"
               >
                 <div
-                  class="modal-dialog modal-dialog-centered  mx-auto"
+                  className="modal-dialog modal-dialog-centered  mx-auto"
                   role="document"
                 >
-                  <div class="modal-content">
-                    <div class="modal-body m-0 p-0 position-relative">
+                  <div className="modal-content">
+                    <div className="modal-body m-0 p-0 position-relative">
                       <button
                         type="button"
-                        class="close"
+                        className="close"
                         title="Close"
                         data-dismiss="modal"
                         aria-label="Close"
                       >
-                        <i class="fa fa-times"></i>
+                        <i className="fa fa-times"></i>
                       </button>
                       <div>
                         <h1>
@@ -399,3 +545,5 @@ export default function Profile(props) {
     </section>
   );
 }
+
+export default memo(Profile);
