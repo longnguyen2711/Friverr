@@ -1,11 +1,15 @@
 import { Input } from "antd";
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { layDanhSachCongViecAction } from "../../redux/actions/QuanLyCongViecAction";
 import "./JobList.scss";
 import HeaderNotForHomePage from "../../_Component/Header/HeaderNotForHomePage";
 import { StarFilled, HeartFilled } from "@ant-design/icons";
+import { nhap } from "./asd";
+import { Pagination } from "antd";
+
+const number = 4;
 
 export default function JobList(props) {
   // Mảng Api
@@ -17,15 +21,15 @@ export default function JobList(props) {
     (job) => job.image && job.name && job.rating && job.price
   );
 
-  console.log(danhSachCongViec.length);
-  console.log(danhSachCongViec);
+  // console.log(danhSachCongViec.length);
+  // console.log(danhSachCongViec);
 
-  console.log(danhSachCongViecFilter.length);
+  // console.log(danhSachCongViecFilter.length);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(layDanhSachCongViecAction());
+    // dispatch(layDanhSachCongViecAction());
   }, []);
 
   return (
@@ -56,10 +60,14 @@ export default function JobList(props) {
             </div>
 
             <div className="joblist-list d-flex">
-              {danhSachCongViecFilter.map((item, index) => {
+              {nhap.map((item, index) => {
                 return (
                   <Fragment key={index}>
-                    <div className="joblist-item">
+                    <NavLink
+                      to={`/jobdetail/${item._id}`}
+                      title="Detail"                      
+                      className="joblist-item"
+                    >
                       <div className="card">
                         <img src={item.image} alt=".." />
                         <div className="card-body">
@@ -76,13 +84,22 @@ export default function JobList(props) {
                           </p>
                         </div>
                         <div className="card-footer">
-                          <p><HeartFilled /> STARTING AT ${item.price}</p>
+                          <p>
+                            <HeartFilled /> STARTING AT ${item.price}
+                          </p>
                         </div>
                       </div>
-                    </div>
+                    </NavLink>
                   </Fragment>
                 );
               })}
+              <Pagination
+                total={nhap.length}
+                defaultCurrent={1}
+                showSizeChanger={true}
+                showQuickJumper
+                showTotal={(total) => `Total ${total}`}
+              />
             </div>
           </div>
         </div>

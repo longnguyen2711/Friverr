@@ -54,7 +54,7 @@ function App() {
         <HomeTemplate path="/home" exact Component={Home} />
         <HomeTemplate path="/joblist" exact Component={JobList} />
         <HomeTemplate path="/jobtypes" exact Component={JobTypes} />
-        <HomeTemplate path="/jobdetail" exact Component={JobDetail} />
+        <HomeTemplate path="/jobdetail/:id" exact Component={JobDetail} />
         <HomeTemplate path="/profile" exact Component={Profile} />
 
 

@@ -53,6 +53,28 @@ function Carousel(props) {
           })}
         </Slider>
       </div>
+      <div className="carousel-search">
+        <div>
+          <h1>
+            Find the perfect <span>freelance</span> services for your business
+          </h1>
+          <div className="nav-bar-search input-group">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Find services"
+            />
+            <button className="input-group-prepend">Search</button>
+          </div>
+          <p className="d-flex flex-wrap">
+            Popular:
+            <span className="ml-2">Website Design</span>
+            <span>WordPress</span>
+            <span>Logo Design</span>
+            <span>Dropshiping</span>
+          </p>
+        </div>
+      </div>
       <div className="carousel-partner py-3 d-flex justify-content-center align-items-center">
         <h1>Trusted by:</h1>
         <div className="d-flex justify-content-center">
