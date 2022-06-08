@@ -21,7 +21,7 @@ export const layChiTietLoaiCongViecChinhAction = () => {
         });
       }
     } catch (error) {
-      console.log("error", error.response.data);
+      console.log("error", error.response);
     }
   };
 };
@@ -71,7 +71,7 @@ export const xoaCongViecAction = (idJob) => {
       dispatch(layDanhSachCongViecTheoTenCongViecAction());
     } catch (error) {
       alert("Delete job failed, please check again");
-      console.log("error", error.response);
+      console.log("error", error);
     }
   };
 };

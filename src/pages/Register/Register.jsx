@@ -9,6 +9,9 @@ import { dangKyTaiKhoanAction } from "../../redux/actions/QuanLyNguoiDungAction"
 import { Option } from "antd/lib/mentions";
 import * as yup from "yup";
 
+const listSkill = [];
+const listCertification = [];
+
 export default function Register(props) {
   const validationSchema = yup.object().shape({
     name: yup.string().required("Name is required"),
@@ -40,11 +43,14 @@ export default function Register(props) {
       phone: "",
       birthday: "",
       gender: false, // Giới tính true là nam, false là nữ theo backend
+      skill: listSkill,
+      certification: listCertification,
     },
     validationSchema,
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: (values) => {
+      // console.log(values);
       dispatch(dangKyTaiKhoanAction(values));
     },
   });
@@ -68,10 +74,13 @@ export default function Register(props) {
         <div>
           <div className="text-center">
             <NavLink to="/" title="Back to homepage">
-              <img
-                src="https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png"
-                alt="cyberlearn.vn"
-              />
+            <h1 style={{ fontSize: "60px", color: "white" }}>
+                friverr
+                <i
+                  style={{ fontSize: "12px" }}
+                  className="fa fa-circle text-success"
+                ></i>
+              </h1>
             </NavLink>
           </div>
         </div>
@@ -80,117 +89,183 @@ export default function Register(props) {
           <h2 className="text-white my-5">Register</h2>
           <div>
             <div>
-              <div className=" mb-0form-group">
+              <div className=" mb-0 form-group">
                 {" "}
-                <label htmlFor="name">Name</label>
-                <Input
-                  type="text"
-                  placeholder="Please enter your name"
-                  name="name"
-                  id="name"
-                  onChange={formik.handleChange}
-                />
+                <div className="input-group">
+                  <label htmlFor="name" className="input-group-text w-25">
+                    Name
+                  </label>
+                  <Input
+                    className="form-control"
+                    type="text"
+                    placeholder="Please enter your name"
+                    name="name"
+                    id="name"
+                    onChange={formik.handleChange}
+                  />
+                </div>
                 <div className="text-danger mt-1">
-                  {formik.errors.name ? (
-                    formik.errors.name
-                  ) : (
-                    ""
-                  )}
+                  {formik.errors.name ? formik.errors.name : ""}
                 </div>
               </div>
 
-              <div className="mt-3 mb-0 form-group">
-                <label htmlFor="email">Email</label>
-                <Input
-                  type="email"
-                  placeholder="Please enter your email"
-                  name="email"
-                  id="email"
-                  onChange={formik.handleChange}
-                />
+              <div className="mt-4   mb-0 form-group ">
+                <div className="input-group">
+                  <label htmlFor="email" className="input-group-text w-25">
+                    Email
+                  </label>
+                  <Input
+                    className="form-control"
+                    type="email"
+                    placeholder="Please enter your email"
+                    name="email"
+                    id="email"
+                    onChange={formik.handleChange}
+                  />
+                </div>
                 <div className="text-danger mt-1">
                   {" "}
-                  {formik.errors.email ? (
-                    formik.errors.email
-                  ) : (
-                    ""
-                  )}
+                  {formik.errors.email ? formik.errors.email : ""}
                 </div>
               </div>
 
-              <div className="mt-3 mb-0 form-group">
-                <label htmlFor="password">Password</label>
-                <Input.Password
-                  type="password"
-                  placeholder="Please enter your password"
-                  name="password"
-                  id="password"
-                  onChange={formik.handleChange}
-                />
+              <div className="mt-4   mb-0 form-group">
+                <div className="input-group">
+                  <label htmlFor="password" className="input-group-text w-25">
+                    Password
+                  </label>
+
+                  <Input.Password
+                    className="form-control"
+                    type="password"
+                    placeholder="Please enter your password"
+                    name="password"
+                    id="password"
+                    onChange={formik.handleChange}
+                  />
+                </div>
+
                 <div className="text-danger mt-1">
-                  {" "}
-                  {formik.errors.password ? (
-                    formik.errors.password
-                  ) : (
-                    ""
-                  )}
+                  {formik.errors.password ? formik.errors.password : ""}
                 </div>
               </div>
 
-              <div className="mt-3 mb-0 form-group">
-                <label htmlFor="phone">Phone</label>
-                <Input
-                  type="text"
-                  placeholder="Please enter your phone number"
-                  name="phone"
-                  id="phone"
-                  onChange={formik.handleChange}
-                />
+              <div className="mt-4   mb-0 form-group">
+                <div className="input-group">
+                  <label htmlFor="phone" className="input-group-text w-25">
+                    Phone
+                  </label>
+                  <Input
+                    className="form-control"
+                    type="text"
+                    placeholder="Please enter your phone number"
+                    name="phone"
+                    id="phone"
+                    onChange={formik.handleChange}
+                  />
+                </div>
                 <div className="text-danger mt-1">
-                  {" "}
-                  {formik.errors.phone ? (
-                    formik.errors.phone
-                  ) : (
-                    ""
-                  )}
+                  {formik.errors.phone ? formik.errors.phone : ""}
                 </div>
               </div>
 
-              <div className="mt-3 mb-0 form-group">
-                <div>
-                  {" "}
-                  <label>Birthday</label>
+              <div className="mt-4   mb-0 form-group">
+                <div className="input-group">
+                  <label className="input-group-text w-25">Birthday</label>
+
+                  <DatePicker
+                    onChange={handleChangeDatePicker}
+                    className="form-control"
+                  />
                 </div>
-                <DatePicker onChange={handleChangeDatePicker} />
+
                 <div className="text-danger mt-1">
                   {" "}
-                  {formik.errors.birthday ? (
-                    formik.errors.birthday
-                  ) : (
-                    ""
-                  )}
+                  {formik.errors.birthday ? formik.errors.birthday : ""}
                 </div>
               </div>
 
-              <div className="mt-3 mb-0 form-group">
-                <div>
-                  <label>Gender</label>
+              <div className="mt-4   mb-0 form-group">
+                <div className="input-group">
+                  <label className="input-group-text w-25">Gender</label>
+                  <Select
+                    className="form-control"
+                    placeholder="Select gender"
+                    onChange={onGenderChange}
+                    allowClear
+                  >
+                    <Option value={true}>Male</Option>
+                    <Option value={false}>Female</Option>
+                  </Select>
                 </div>
-                <Select
-                  placeholder="Select gender"
-                  onChange={onGenderChange}
-                  allowClear
-                >
-                  <Option value={true}>Male</Option>
-                  <Option value={false}>Female</Option>
-                </Select>
+
                 <div className="text-danger mt-1">
                   {" "}
-                  {formik.errors.gender ? (
-                    formik.errors.gender
-                  ) : (
-                    ""
-                  )}
+                  {formik.errors.gender ? formik.errors.gender : ""}
+                </div>
+              </div>
+
+              <div className=" mb-0 mt-3   form-group">        
+                <label htmlFor="skill" id="showSkillScreen">
+                  Skill
+                </label>
+                <div className="input-group">
+                  <Input
+                    className="form-control"
+                    type="text"
+                    placeholder="Add your skills"
+                    name="skill"
+                    id="skill"
+                  />
+                  <span
+                    className="input-group-text"
+                    style={{ padding: "4px 10px" }}
+                    type="button"
+                    id="addSkill"
+                    onClick={() => {
+                      listSkill.push(document.getElementById("skill").value);
+                      document.getElementById(
+                        "showSkillScreen"
+                      ).innerHTML = `Skill: ${listSkill.join(" , ")}`;
+                    }}
+                  >
+                    Add skill
+                  </span>
+                </div>
+              </div>
+
+              <div className=" mb-0 mt-3 form-group">
+                {" "} 
+                <label htmlFor="certification" id="showCertificationScreen">
+                  Certification
+                </label>
+                <div className="input-group">
+                  <Input
+                    className="form-control"
+                    type="text"
+                    placeholder="Add your skills"
+                    name="certification"
+                    id="certification"
+                  />
+                  <span
+                    className="input-group-text"
+                    style={{ padding: "4px 10px" }}
+                    type="button"
+                    id="addCertification"
+                    onClick={() => {
+                      listCertification.push(
+                        document.getElementById("certification").value
+                      );
+                      document.getElementById(
+                        "showCertificationScreen"
+                      ).innerHTML = `Certification: ${listCertification.join(
+                        " , "
+                      )}`;
+                      console.log(listCertification);
+                    }}
+                  >
+                    Add certification
+                  </span>
                 </div>
               </div>
 

@@ -22,7 +22,9 @@ const { SubMenu } = Menu;
 export const AdminTemplate = (props) => {
   const { Component, ...restProps } = props; // path, exact, Component
 
-  const { userLogin, thongTinChiTietNguoiDung } = useSelector((state) => state.QuanLyNguoiDungReducer);
+  const { userLogin, thongTinChiTietNguoiDung } = useSelector(
+    (state) => state.QuanLyNguoiDungReducer
+  );
 
   const dispatch = useDispatch();
 
@@ -40,6 +42,12 @@ export const AdminTemplate = (props) => {
   if (!localStorage.getItem(USER_LOGIN)) {
     alert("You are not logged in !");
     return <Redirect to="/login" />;
+  }
+
+  // // Kiểm tra trong localStorage nếu không phải admin thì chuyển về trang profile
+  if (userLogin.role !== "ADMIN") {
+    alert("You do not have permission to access this page !");
+    return <Redirect to="/home" />;
   }
 
   // Trạng thái đăng nhập
@@ -113,13 +121,28 @@ export const AdminTemplate = (props) => {
                       className="font-weight-bold"
                     >
                       <Menu.Item key="2" icon={<ProfileOutlined />}>
-                        <NavLink to="/admin/infoadmin" style={{fontWeight:"normal"}}>Admin info</NavLink>
+                        <NavLink
+                          to="/admin/infoadmin"
+                          style={{ fontWeight: "normal" }}
+                        >
+                          Admin info
+                        </NavLink>
                       </Menu.Item>
                       <Menu.Item key="3" icon={<AlignLeftOutlined />}>
-                        <NavLink to="/admin/listaccount" style={{fontWeight:"normal"}}>List account</NavLink>
+                        <NavLink
+                          to="/admin/listaccount"
+                          style={{ fontWeight: "normal" }}
+                        >
+                          List account
+                        </NavLink>
                       </Menu.Item>
                       <Menu.Item key="4" icon={<PlusCircleOutlined />}>
-                        <NavLink to="/admin/listaccount/addnewaccount" style={{fontWeight:"normal"}}>Add new account</NavLink>
+                        <NavLink
+                          to="/admin/listaccount/addnewaccount"
+                          style={{ fontWeight: "normal" }}
+                        >
+                          Add new account
+                        </NavLink>
                       </Menu.Item>
                     </SubMenu>
 
@@ -130,10 +153,20 @@ export const AdminTemplate = (props) => {
                       className="font-weight-bold"
                     >
                       <Menu.Item key="5" icon={<AlignLeftOutlined />}>
-                        <NavLink to="/admin/listjobs" style={{fontWeight:"normal"}}>Jobs list</NavLink>
+                        <NavLink
+                          to="/admin/listjobs"
+                          style={{ fontWeight: "normal" }}
+                        >
+                          Jobs list
+                        </NavLink>
                       </Menu.Item>
                       <Menu.Item key="6" icon={<PlusCircleOutlined />}>
-                        <NavLink to="/admin/listjobs/addnewjob" style={{fontWeight:"normal"}}>Add new job</NavLink>
+                        <NavLink
+                          to="/admin/listjobs/addnewjob"
+                          style={{ fontWeight: "normal" }}
+                        >
+                          Add new job
+                        </NavLink>
                       </Menu.Item>
                     </SubMenu>
                   </Menu>
@@ -166,7 +199,7 @@ export const AdminTemplate = (props) => {
                     </div>
                   </Content>
                   <Footer
-                    style={{ textAlign: "center"}}
+                    style={{ textAlign: "center" }}
                     className="site-layout-background"
                   >
                     {" "}

@@ -18,7 +18,7 @@ export default function Login(props) {
     password: yup
       .string()
       .required("Password is required")
-      .min(6, "Password must be at least 6 characters")
+      .min(6, "Password must be at least 6 characters"),
   });
   const dispatch = useDispatch();
 
@@ -34,13 +34,13 @@ export default function Login(props) {
       const action = dangNhapAction(values);
       dispatch(action);
     },
-  });  //formik đã xử lý luôn e.preventDefault();
+  }); //formik đã xử lý luôn e.preventDefault();
 
   // Kiểm tra xem nếu đã đăng nhập rồi mà nhập đường dẫn login thì sẽ quay về trang chủ
-  // if (localStorage.getItem(USER_LOGIN)) {
-  //   alert("You are already logged in");
-  //   return <Redirect to="/" />;
-  // }
+  if (localStorage.getItem(USER_LOGIN)) {
+    alert("You are already logged in");
+    return <Redirect to="/" />;
+  }
 
   return (
     <div
@@ -51,10 +51,13 @@ export default function Login(props) {
         <div>
           <div className="text-center">
             <NavLink to="/" title="Back to homepage">
-              <img
-                src="https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png"
-                alt="cyberlearn.vn"
-              />
+              <h1 style={{ fontSize: "60px", color: "white" }}>
+                friverr
+                <i
+                  style={{ fontSize: "12px" }}
+                  className="fa fa-circle text-success"
+                ></i>
+              </h1>
             </NavLink>
           </div>
         </div>
@@ -63,17 +66,21 @@ export default function Login(props) {
           <div>
             <div>
               <div className="form-group">
-                <div>
-                  {" "}
-                  <label htmlFor="email">Account</label>
+                <div className="input-group">
+                  <label htmlFor="email" className="input-group-text w-25">
+                    Account
+                  </label>
+
+                  <Input
+                    className="form-control"
+                    type="email"
+                    placeholder="Please enter your account"
+                    name="email"
+                    id="email"
+                    onChange={formik.handleChange}
+                  />
                 </div>
-                <Input
-                  type="email"
-                  placeholder="Please enter your account"
-                  name="email"
-                  id="email"
-                  onChange={formik.handleChange}
-                />
+
                 <div className="text-danger mt-2">
                   {formik.errors.email ? (
                     formik.errors.email
@@ -84,21 +91,24 @@ export default function Login(props) {
               </div>
 
               <div className="form-group">
-                <div className="d-flex justify-content-between mt-3">
-                  <label htmlFor="password">Password</label>
-                  <div>
-                    <a href="#" title="Click to retrieve password">
-                      Forgot password ?
-                    </a>
-                  </div>
+                <div className="d-flex justify-content-end mt-2 mb-2">
+                  <a href="#" title="Click to retrieve password">
+                    Forgot password ?
+                  </a>
                 </div>
-                <Input.Password
-                  type="password"
-                  placeholder="Please enter your password"
-                  name="password"
-                  id="password"
-                  onChange={formik.handleChange}
-                />
+                <div className="input-group">
+                  <label htmlFor="password" className="input-group-text w-25">
+                    Password
+                  </label>
+                  <Input.Password
+                    className="form-control"
+                    type="password"
+                    placeholder="Please enter your password"
+                    name="password"
+                    id="password"
+                    onChange={formik.handleChange}
+                  />
+                </div>
                 <div className="text-danger mt-2">
                   {formik.errors.password ? (
                     formik.errors.password

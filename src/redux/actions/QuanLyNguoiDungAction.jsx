@@ -153,7 +153,7 @@ export const dangNhapAction = (thongTinDangNhap) => {
       }
     } catch (error) {
       alert("Login failed, username or password is incorrect");
-      console.log("error", error.response.data);
+      console.log("error", error.response);
     }
   };
 };
@@ -179,7 +179,7 @@ export const dangKyTaiKhoanAction = (formDataDangKy) => {
       }
     } catch (error) {
       alert("Registration failed, please check again");
-      console.log("error", error.response.data);
+      console.log("error", error);
     }
   };
 };

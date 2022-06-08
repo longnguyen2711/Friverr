@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { layDanhSachCongViecAction } from "../../redux/actions/QuanLyCongViecAction";
 import "./JobList.scss";
 import HeaderNotForHomePage from "../../_Component/Header/HeaderNotForHomePage";
+import { StarFilled, HeartFilled } from "@ant-design/icons";
 
 export default function JobList(props) {
   // Mảng Api
@@ -13,11 +14,7 @@ export default function JobList(props) {
   );
 
   const danhSachCongViecFilter = danhSachCongViec.filter(
-    (job) =>
-      job.image &&
-      job.name &&
-      job.rating &&
-      job.price 
+    (job) => job.image && job.name && job.rating && job.price
   );
 
   console.log(danhSachCongViec.length);
@@ -64,13 +61,22 @@ export default function JobList(props) {
                   <Fragment key={index}>
                     <div className="joblist-item">
                       <div className="card">
-                        <img src={item.image} alt=""/>
+                        <img src={item.image} alt=".." />
                         <div className="card-body">
-                          <h1>{item.name}</h1>
-                          <p>{item.rating}</p>
+                          <div>
+                            {" "}
+                            {item.name.length > 50 ? (
+                              <h1>{item.name.slice(0, 50)}...</h1>
+                            ) : (
+                              <h1>{item.name}</h1>
+                            )}
+                          </div>
+                          <p>
+                            <StarFilled className="start" /> {item.rating}
+                          </p>
                         </div>
                         <div className="card-footer">
-                        <span>{item.price}</span>
+                          <p><HeartFilled /> STARTING AT ${item.price}</p>
                         </div>
                       </div>
                     </div>

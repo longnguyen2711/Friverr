@@ -68,6 +68,13 @@ export default function Header(props) {
           >
             Sign out
           </div>
+          <NavLink
+              className="nav-link  nav-link-join ml-4 font-weight-bold"
+              to="/admin/infoadmin"
+              title="Go to Admin page"
+            >
+              Join
+            </NavLink>
           <div
             className="nav-link text-black pl-2 ml-4 font-weight-bold"
             style={{ cursor: "pointer" }}
@@ -96,7 +103,7 @@ export default function Header(props) {
           <div className="container">
             <NavLink
               className="navbar-brand font-weight-bold"
-              to="/admin/infoadmin"
+              to="/home"
               title="fiverr"
             >
               fiverr<i className="fa fa-circle text-success"></i>
