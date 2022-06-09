@@ -11,7 +11,7 @@ export default function Talent(props) {
       }}
       className="d-flex align-items-center"
     >
-      <div style={{ width: "70%", padding: "30px" }}>
+      <div style={{ width: "70%", padding: "50px" }}>
         <h1 className="text-white mb-4" style={{ fontSize: "40px" }}>
           Find the <i>talent</i> needed to get your business <i>growing</i>.
         </h1>

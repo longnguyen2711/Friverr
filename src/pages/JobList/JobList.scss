@@ -3,7 +3,70 @@ $color-text-joblist-2: rgb(181, 180, 180);
 
 #JobList {
   .container {
-    .joblist-list {
+    padding: 40px 0 50px 0;
+
+    .joblist__reset{
+      padding-left: 20px;
+      margin-bottom: 20px;
+      button{
+        padding: 3px 20px;
+        font-weight: bold;
+      }
+    }
+
+    .joblist__filter {
+      padding-left: 20px;
+      .filter-box {
+        display: flex;
+        flex-wrap: wrap;
+        .filter-button {
+          @media screen and (max-width: 575px) {
+            .ant-form .ant-form-item .ant-form-item-label {
+              display: block;
+              width: 100%;
+            }
+            label {
+              padding-bottom: 0;
+            }
+          }
+          font-weight: bold;
+          margin-right: 30px;
+        }
+      }
+      @media screen and (max-width: 575px) {
+        .ant-form-item .ant-form-item-label {
+          padding-bottom: 0 !important;
+        }
+      }
+      @media screen and (max-width: 510px) {
+        .ant-form .ant-form-item {
+          width: 100%;
+          display: flex;
+          flex-wrap: nowrap;
+          justify-content: start;
+          margin-bottom: 10px;
+        }
+        .ant-form .ant-form-item .ant-form-item-label {
+          display: block;
+          flex: none;
+        }
+        .filter-box .filter-button label {
+          width: 100px;
+        }
+      }
+    }
+
+    .services-available {
+      font-size: 16px;
+      color: $color-text-joblist;
+      padding-left: 20px;
+      margin-bottom: 0;
+      @media screen and (max-width: 575px) {
+        margin-top: 20px;
+      }
+    }
+
+    .joblist__list {
       display: flex;
       flex-wrap: wrap;
       .joblist-item {
@@ -12,10 +75,30 @@ $color-text-joblist-2: rgb(181, 180, 180);
         .card {
           height: 300px;
           overflow: hidden;
-          img {
-            width: 100%;
+          box-shadow: 0 0 10px rgb(180, 180, 180);
+          &:hover {
+            .joblist-img {
+              img {
+                transform: scale(1.15);
+                transition: 0.5s;
+              }
+            }
+            .card-footer {
+              p {
+                .heart {
+                  color: red;
+                }
+              }
+            }
+          }
+          .joblist-img {
             height: 150px !important;
-            display: block;
+            overflow: hidden;
+            img {
+              width: 100%;
+              height: 100%;
+              display: block;
+            }
           }
           .card-body {
             padding: 15px 20px;
@@ -47,6 +130,9 @@ $color-text-joblist-2: rgb(181, 180, 180);
               display: flex;
               align-items: center;
               justify-content: space-between;
+              .heart {
+                font-size: 16px;
+              }
             }
           }
         }
