@@ -27,6 +27,8 @@ export default function JobList(props) {
     (job) => job.image && job.name && job.rating && job.price
   );
 
+  const [radio, setRadio] = useState(false);
+
   // console.log(danhSachCongViec.length);
   // console.log(danhSachCongViec);
 
@@ -45,8 +47,7 @@ export default function JobList(props) {
       <Fragment>
         <div id="JobList">
           <div className="container">
-
-          <div className="joblist__reset">
+            <div className="joblist__reset">
               <button
                 className="btn btn-success"
                 title="Click to relay list jobs"

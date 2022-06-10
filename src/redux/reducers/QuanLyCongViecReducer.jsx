@@ -2477,19 +2477,19 @@ export const QuanLyCongViecReducer = (state = stateDefault, action) => {
     }
 
     case RESET_JOB: {
-      // state.nhap1 = state.nhapReset
-      // if(state.proServices = false){
-      //   state.proServices = !state.proServices
-      // }
-      // if(state.localSellers = false){
-      //   state.localSellers = !state.localSellers
-      // }
-      // if(state.onlineSellers = false){
-      //   state.onlineSellers = !state.onlineSellers
-      // }
+      state.nhap1 = state.nhapReset
+      if(state.proServices = false){
+        state.proServices = !state.proServices
+      }
+      if(state.localSellers = false){
+        state.localSellers = !state.localSellers
+      }
+      if(state.onlineSellers = false){
+        state.onlineSellers = !state.onlineSellers
+      }
 
 
-      window.location.reload();
+      // window.location.reload();
 
     }
 
