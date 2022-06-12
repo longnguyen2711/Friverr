@@ -81,8 +81,8 @@ export const AdminTemplate = (props) => {
             }}
             title="Go to the personal page"
           >
-            {thongTinChiTietNguoiDung?.name}
-            <span>{thongTinChiTietNguoiDung.name?.slice(0, 1)}</span>
+            {userLogin?.name}
+            <span>{userLogin.name?.slice(0, 1)}</span>
           </div>
         </div>
       </Fragment>

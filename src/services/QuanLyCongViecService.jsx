@@ -35,6 +35,16 @@ export class QuanLyCongViecService extends baseService {
     return this.get(`api/jobs/${idJob}`);
   };
 
+  // Api 26: Đặt công việc
+  datCongViec = (idJob) => {
+    return this.patch(`api/jobs/booking/${idJob}`);
+  };
+
+  // Api 28: Hoàn thành công việc
+  hoanThanhCongViec = (idJob) => {
+    return this.patch(`api/jobs/done/${idJob}`);
+  };
+
   // Api 29: Lấy danh sách công việc theo tên công việc
   layDanhSachCongViecTheoTenCongViec = (jobName = "") => {
     if (jobName.toLocaleLowerCase().trim() !== "") {

@@ -32,5 +32,12 @@ export const ONLINE_SELLERS = "ONLINE_SELLERS";
 
 export const RESET_JOB = "RESET_JOB";
 
+export const DANH_SACH_BINH_LUAN = "DANH_SACH_BINH_LUAN";
+
+export const FINISH_JOB = "FINISH_JOB";
+
+
+
+
 
 

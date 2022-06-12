@@ -3,37 +3,67 @@ import {
   capNhatThongTinNguoiDungAction,
   capNhatAnhDaiDienAction,
 } from "../../redux/actions/QuanLyNguoiDungAction";
+import {
+  hoanThanhCongViecAction,
+  layDanhSachCongViecAction,
+} from "../../redux/actions/QuanLyCongViecAction";
 import HeaderNotForHomePage from "../../_Component/Header/HeaderNotForHomePage";
-import { Form, Input, Radio, Select, DatePicker } from "antd";
-import { useDispatch, useSelector } from "react-redux";
 import React, { memo, useEffect, useState } from "react";
-import { USER_LOGIN } from "../../util/config";
+import { useDispatch, useSelector } from "react-redux";
+import { StarFilled } from "@ant-design/icons";
+import { DANH_SACH_CONG_VIEC_HOAN_THANH_STORAGE, USER_LOGIN } from "../../util/config";
 import { Redirect } from "react-router-dom";
-import { Option } from "antd/lib/mentions";
+import { Form, Input } from "antd";
 import { useFormik } from "formik";
 import moment from "moment";
 import "./Profile.scss";
+import _ from "lodash";
 
 function Profile(props) {
   const [imgSrc, setImgSrc] = useState("");
 
-  const { chiTietLoaiCongViecChinh } = useSelector(
+  const { danhSachCongViec, danhSachCongViecDaHoanThanh } = useSelector(
     (state) => state.QuanLyCongViecReducer
   );
 
-  const { userLogin, thongTinChiTietNguoiDung } = useSelector(
+  const { thongTinChiTietNguoiDung } = useSelector(
     (state) => state.QuanLyNguoiDungReducer
   );
 
-  const dispatch = useDispatch();
+  // Lọc ra những công việc đã đặt
+  const arrIdJobBooked = thongTinChiTietNguoiDung.bookingJob;
+  const arrJobsBooked = [];
+  for (let idJobBooked of arrIdJobBooked) {
+    let jobBooked = danhSachCongViec.find((job) => job._id === idJobBooked);
+    if (idJobBooked) {
+      arrJobsBooked.push(jobBooked);
+    }
+  }
 
+  // Lọc ra ID những công việc đã hoàn thành
+  const arrIdJobFinish = [];
+  danhSachCongViecDaHoanThanh.map((job) => {
+    arrIdJobFinish.push(job._id);
+  });
+
+  //   Lọc ra những công việc đã đặt không chứa những công việc đã hoàn thành
+  for (let idJobFinish of arrIdJobFinish) {
+    let jobBookedFinal = arrJobsBooked.findIndex(
+      (job) => job._id === idJobFinish
+    );
+    if (jobBookedFinal !== -1) {
+      arrJobsBooked.splice(jobBookedFinal, 1);
+    }
+  }
+
+  const dispatch = useDispatch();
   useEffect(() => {
-    const action = layThongTinChiTietNguoiDungAction(userLogin._id);
-    dispatch(action);
+    // const action = layThongTinChiTietNguoiDungAction(userLogin._id);
+    // dispatch(action);
+    dispatch(layDanhSachCongViecAction());
   }, []);
 
   const formik = useFormik({
-    //Để xét dữ liệu mặc định cho formik từ props của redux phải bật thuộc tính enableReinitialize, thuộc tính này thường chỉ làm làm cho form edit, ko đụngchạm state khác
     enableReinitialize: true,
 
     initialValues: {
@@ -231,7 +261,7 @@ function Profile(props) {
                   <hr />
                   <div className="d-flex justify-content-between align-items-center mb-2">
                     <span>
-                      <i class="fa fa-map-marker-alt"></i> From
+                      <i className="fa fa-map-marker-alt"></i> From
                     </span>
                     <p>Viet Nam</p>
                   </div>
@@ -538,7 +568,121 @@ function Profile(props) {
                 </div>
               </div>
             </div>
-            <div className="history-booking"></div>
+            <div className="history-booking">
+              {arrJobsBooked?.map((jobBooked, index) => {
+                return (
+                  <div key={index} className="card">
+                    <div className="card-body position-relative">
+                      <div className="history-booking-img">
+                        <img src={jobBooked.image} alt="history-booking-img" />
+                      </div>
+                      <div className="job-info">
+                        <h1 className="title">{jobBooked.name}</h1>
+                        <h1 className="rating-price mt-2">
+                          {jobBooked.rating}{" "}
+                          <StarFilled className="text-warning ml-1 mr-5" />{" "}
+                          {jobBooked.price} $
+                        </h1>
+                        <h1 className="job-property mt-3">
+                          {jobBooked.proServices === true ? (
+                            <span className="text-success mr-3">
+                              Pro Services
+                            </span>
+                          ) : (
+                            <span></span>
+                          )}
+                          {jobBooked.localSellers === true ? (
+                            <span className="text-success mr-3">
+                              Local Sellers
+                            </span>
+                          ) : (
+                            <span></span>
+                          )}
+                          {jobBooked.onlineSellers === true ? (
+                            <span className="text-success mr-3">
+                              Online Sellers
+                            </span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </h1>
+                      </div>
+                      <div className="booking-button">
+                        <button
+                          className="btn btn-success"
+                          title="Detail job"
+                          onClick={() => {
+                            props.history.push(`/jobdetail/${jobBooked._id}`);
+                          }}
+                        >
+                          Detail job
+                        </button>
+                        <button
+                          className="btn btn-primary ml-2"
+                          title="Finish job"
+                          onClick={() => {
+                            if (window.confirm("Did you finish the job?")) {
+                              dispatch(hoanThanhCongViecAction(jobBooked._id));
+                            }
+                          }}
+                        >
+                          Finish job
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+
+              {danhSachCongViecDaHoanThanh?.map((jobBooked, index) => {
+                return (
+                  <div key={index} className="card">
+                    <div className="card-body position-relative">
+                      <div className="history-booking-img">
+                        <img src={jobBooked.image} alt="history-booking-img" />
+                      </div>
+                      <div className="job-info">
+                        <h1 className="title">{jobBooked.name}</h1>
+                        <h1 className="rating-price mt-2">
+                          {jobBooked.rating}{" "}
+                          <StarFilled className="text-warning ml-1 mr-5" />{" "}
+                          {jobBooked.price} $
+                        </h1>
+                        <h1 className="job-property mt-3">
+                          {jobBooked.proServices === true ? (
+                            <span className="text-success mr-3">
+                              Pro Services
+                            </span>
+                          ) : (
+                            <span></span>
+                          )}
+                          {jobBooked.localSellers === true ? (
+                            <span className="text-success mr-3">
+                              Local Sellers
+                            </span>
+                          ) : (
+                            <span></span>
+                          )}
+                          {jobBooked.onlineSellers === true ? (
+                            <span className="text-success mr-3">
+                              Online Sellers
+                            </span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </h1>
+                      </div>
+                      <div className="done-img">
+                        <img
+                          src="https://t3.ftcdn.net/jpg/02/88/11/58/360_F_288115814_5DZzdedkmpKpz79Djn9RZeIcY8CVuN7q.jpg"
+                          alt="done-img"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

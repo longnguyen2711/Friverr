@@ -1,43 +1,34 @@
-import { Form, Input, Switch } from "antd";
-import React, { Fragment, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { layDanhSachCongViecAction } from "../../redux/actions/QuanLyCongViecAction";
-import "./JobList.scss";
-import HeaderNotForHomePage from "../../_Component/Header/HeaderNotForHomePage";
-import { StarFilled, HeartFilled } from "@ant-design/icons";
-import { Pagination } from "antd";
-import Suggested from "../../_Component/Suggested/Suggested";
 import {
+  RESET_JOB,
+  PRO_SERVICES,
   LOCAL_SELLERS,
   ONLINE_SELLERS,
-  PRO_SERVICES,
-  RESET_JOB,
 } from "../../redux/types";
+import { layDanhSachCongViecAction } from "../../redux/actions/QuanLyCongViecAction";
+import HeaderNotForHomePage from "../../_Component/Header/HeaderNotForHomePage";
+import Suggested from "../../_Component/Suggested/Suggested";
+import React, { Fragment, useEffect, useState } from "react";
+import { StarFilled, HeartFilled } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { Form, Switch, Pagination } from "antd";
+import { NavLink } from "react-router-dom";
+import "./JobList.scss";
 
-const number = 4;
+
 
 export default function JobList(props) {
-  // Mảng Api
-  const { danhSachCongViec, nhap1 } = useSelector(
+  const { danhSachCongViec } = useSelector(
     (state) => state.QuanLyCongViecReducer
   );
 
-  const danhSachCongViecFilter = danhSachCongViec.filter(
+  const danhSachCongViecFilters = danhSachCongViec.filter(
     (job) => job.image && job.name && job.rating && job.price
   );
-
-  const [radio, setRadio] = useState(false);
-
-  // console.log(danhSachCongViec.length);
-  // console.log(danhSachCongViec);
-
-  // console.log(danhSachCongViecFilter.length);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(layDanhSachCongViecAction());
+    dispatch(layDanhSachCongViecAction());
   }, []);
 
   return (
@@ -89,11 +80,11 @@ export default function JobList(props) {
             </div>
 
             <h1 className="services-available">
-              {nhap1.length.toLocaleString()} services available
+              {danhSachCongViecFilters.length.toLocaleString()} services available
             </h1>
 
             <div className="joblist__list d-flex">
-              {nhap1.map((item, index) => {
+              {danhSachCongViecFilters.slice(0,60).map((item, index) => {
                 return (
                   <Fragment key={index}>
                     <NavLink
@@ -115,7 +106,7 @@ export default function JobList(props) {
                             )}
                           </div>
                           <p>
-                            <StarFilled className="start" /> {item.rating}
+                            <StarFilled className="start" allowHalf/> {item.rating}
                           </p>
                         </div>
                         <div className="card-footer">
@@ -129,14 +120,16 @@ export default function JobList(props) {
                   </Fragment>
                 );
               })}
+            </div>
+              <div className="d-flex justify-content-center mt-4">
               <Pagination
-                total={nhap1.length}
+                total={danhSachCongViecFilters.length}
                 defaultCurrent={1}
                 showSizeChanger={true}
                 showQuickJumper
                 showTotal={(total) => `Total ${total}`}
               />
-            </div>
+              </div>
           </div>
         </div>
       </Fragment>

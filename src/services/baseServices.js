@@ -49,6 +49,14 @@ export class baseService {
       headers: { TokenByClass: TokenByClass, Token: token }, //token yêu cầu từ backend chứng minh user đã đăng nhập rồi
     });
   };
+
+  patch = (url) => {
+    return axios({
+      url: `${DOMAIN}/${url}`,
+      method: "PATCH",
+      headers: { TokenByClass: TokenByClass, Token: token }, 
+    });
+  };
 }
 
 // Setup axios interceptor

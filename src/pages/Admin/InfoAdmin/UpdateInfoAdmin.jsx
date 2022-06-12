@@ -14,13 +14,13 @@ const UpdateInfoAdmin = (props) => {
   const { userLogin, thongTinChiTietNguoiDung } = useSelector(
     (state) => state.QuanLyNguoiDungReducer
   );
-  
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    const action = layThongTinChiTietNguoiDungAction(userLogin._id);
-    dispatch(action);
-  }, []);
+  const dispatch = useDispatch();
+  
+  // useEffect(() => {
+  //   const action = layThongTinChiTietNguoiDungAction(userLogin._id);
+  //   dispatch(action);
+  // }, []);
 
   const formik = useFormik({
     //Để xét dữ liệu mặc định cho formik từ props của redux phải bật thuộc tính enableReinitialize, thuộc tính này thường chỉ làm làm cho form edit, ko đụngchạm state khác

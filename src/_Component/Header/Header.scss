@@ -17,7 +17,7 @@ $color-text-header-on-top: white;
       border-bottom: 1px solid transparent;
       .container {
         padding: 5px 0;
-        @media screen and (max-width: 576px) {
+        @media screen and (max-width: 768px) {
           display: flex;
           flex-direction: row-reverse;
         }
@@ -29,7 +29,7 @@ $color-text-header-on-top: white;
           }
           color: $color-text-header-on-top;
           &:hover {
-            color: $color-text-header-hover;
+            color: yellow;
           }
           i {
             font-size: 8px;
@@ -74,7 +74,7 @@ $color-text-header-on-top: white;
           .navbar-nav {
             display: flex;
             align-items: center;
-            @media screen and (max-width: 576px) {
+            @media screen and (max-width: 768px) {
               align-items: start;
             }
             .nav-link {
@@ -83,7 +83,7 @@ $color-text-header-on-top: white;
               font-size: 16px;
               &:hover,
               &.active {
-                color: $color-text-header-hover !important;
+                color: yellow !important;
               }
             }
             .nav-link-join {
@@ -161,6 +161,13 @@ $color-text-header-on-top: white;
       }
     }
   }
+  #dropdownMenu{
+    .dropdown-menu{
+      .nav-link{
+        color: $color-text-header;
+      }
+    }
+  }
 }
 
 .header.sticky {
@@ -171,9 +178,10 @@ $color-text-header-on-top: white;
       border-bottom: 1px solid $color-text-header-2;
       .container {
         padding: 5px 0;
-        @media screen and (max-width: 576px) {
+        @media screen and (max-width: 768px) {
           display: flex;
           flex-direction: row-reverse;
+          text-align: left;
         }
         .navbar-brand {
           margin-right: 40px;
@@ -198,7 +206,7 @@ $color-text-header-on-top: white;
           display: flex;
           margin-top: 7px;
           justify-content: center;
-          @media screen and (max-width: 800px) {
+          @media screen and (max-width: 992px) {
             display: none;
           }
           input {
@@ -231,7 +239,7 @@ $color-text-header-on-top: white;
           .navbar-nav {
             display: flex;
             align-items: center;
-            @media screen and (max-width: 576px) {
+            @media screen and (max-width: 768px) {
               align-items: start;
             }
             .nav-link {
@@ -242,6 +250,20 @@ $color-text-header-on-top: white;
               &.active {
                 color: $color-text-header-hover !important;
               }
+            }
+            .nav-link::before {
+              content: "";
+              width: 0;
+              height: 2px;
+              background-color: #35a22c;
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              transition: all 0.5s;
+            }
+            .nav-link:hover::before,
+            .nav-link.active::before {
+              width: 100%;
             }
             .nav-link-join {
               color: $color-text-header-hover;
@@ -300,6 +322,13 @@ $color-text-header-on-top: white;
       }
     }
   }
+  #dropdownMenu{
+    .dropdown-menu{
+      .nav-link{
+        color: $color-text-header;
+      }
+    }
+  }
 }
 
 .header-not-for-homepage {
@@ -310,7 +339,7 @@ $color-text-header-on-top: white;
       border-bottom: 1px solid $color-text-header-2;
       .container {
         padding: 5px 0;
-        @media screen and (max-width: 576px) {
+        @media screen and (max-width: 768px) {
           display: flex;
           flex-direction: row-reverse;
         }
@@ -337,7 +366,7 @@ $color-text-header-on-top: white;
           display: flex;
           margin-top: 7px;
           justify-content: center;
-          @media screen and (max-width: 800px) {
+          @media screen and (max-width: 992px) {
             display: none;
           }
           input {
@@ -370,7 +399,7 @@ $color-text-header-on-top: white;
           .navbar-nav {
             display: flex;
             align-items: center;
-            @media screen and (max-width: 576px) {
+            @media screen and (max-width: 768px) {
               align-items: start;
             }
             .nav-link {
@@ -381,6 +410,20 @@ $color-text-header-on-top: white;
               &.active {
                 color: $color-text-header-hover !important;
               }
+            }
+            .nav-link::before {
+              content: "";
+              width: 0;
+              height: 2px;
+              background-color: #35a22c;
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              transition: all 0.5s;
+            }
+            .nav-link:hover::before,
+            .nav-link.active::before {
+              width: 100%;
             }
             .nav-link-join {
               color: $color-text-header-hover;

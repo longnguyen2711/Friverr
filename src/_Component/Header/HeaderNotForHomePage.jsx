@@ -12,9 +12,11 @@ export default function Header(props) {
   const { chiTietLoaiCongViecChinh } = useSelector(
     (state) => state.QuanLyCongViecReducer
   );
-  const { userLogin, thongTinChiTietNguoiDung } = useSelector((state) => state.QuanLyNguoiDungReducer);
+  const { userLogin, thongTinChiTietNguoiDung } = useSelector(
+    (state) => state.QuanLyNguoiDungReducer
+  );
 
-  const dispatch = useDispatch();  
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(layChiTietLoaiCongViecChinhAction());
@@ -27,6 +29,27 @@ export default function Header(props) {
       return (
         <Fragment>
           <div className="navbar-nav ml-auto">
+          <NavLink
+            className="nav-link pl-2 ml-4 font-weight-bold"
+            to="/home"
+            title="Home"
+          >
+            Home
+          </NavLink>
+            <NavLink
+              className="nav-link pl-2 ml-4 font-weight-bold"
+              to="/jobtypes"
+              title="Jobs type"
+            >
+              Jobs type
+            </NavLink>
+            <NavLink
+              className="nav-link pl-2 ml-4 font-weight-bold"
+              to="/joblist"
+              title="Jobs list"
+            >
+              Jobs list
+            </NavLink>
             <NavLink
               className="nav-link text-left pl-2 ml-4 font-weight-bold "
               to="/login"
@@ -48,33 +71,71 @@ export default function Header(props) {
     return (
       <Fragment>
         <div className="navbar-nav ml-auto">
-          <div
+        <NavLink
             className="nav-link pl-2 ml-4 font-weight-bold"
-            style={{ cursor: "pointer" }}
-            title="Click to sign out"
-            onClick={() => {
-              if (window.confirm("Are you sure you want to sign out?")) {
-                // Xóa trong localStorage
-                localStorage.removeItem(USER_LOGIN);
-                localStorage.removeItem(Token);
-                // Chuyển hướng về home
-                history.push("/");
-                // Reload lại trang web
-                window.location.reload();
-              }
-            }}
+            to="/home"
+            title="Home"
           >
-            Sign out
-          </div>
-          <div
-            className="nav-link text-black pl-2 ml-4 font-weight-bold"
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              history.push("/profile");
-            }}
-            title="Go to the personal page"
+            Home
+          </NavLink>
+          <NavLink
+            className="nav-link pl-2 ml-4 font-weight-bold"
+            to="/jobtypes"
+            title="Jobs type"
           >
-            {thongTinChiTietNguoiDung.name}
+            Jobs type
+          </NavLink>
+          <NavLink
+            className="nav-link pl-2 ml-4 font-weight-bold"
+            to="/joblist"
+            title="Jobs list"
+          >
+            Jobs list
+          </NavLink>
+          <div id="dropdownMenu" className="dropdown ml-4">
+            <button
+              className="dropdown-toggle nav-link font-weight-bold pl-2" style={{backgroundColor:"transparent", border:"none"}}
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {thongTinChiTietNguoiDung.name}
+            </button>
+            <div className="dropdown-menu pl-2 pr-2 w-100" aria-labelledby="dropdownMenuButton">
+              <NavLink
+                className="nav-link font-weight-bold"
+                to="/profile"
+                title="Go to the personal page"
+              >
+                Personal page
+              </NavLink>
+              <NavLink
+                className="nav-link font-weight-bold"
+                to="/admin/infoadmin"
+                title="Go to the personal page"
+              >
+                Admin page
+              </NavLink>
+              <div
+                className="nav-link font-weight-bold"
+                style={{ cursor: "pointer" }}
+                title="Click to sign out"
+                onClick={() => {
+                  if (window.confirm("Are you sure you want to sign out?")) {
+                    // Xóa trong localStorage
+                    localStorage.removeItem(USER_LOGIN);
+                    localStorage.removeItem(Token);
+                    // Chuyển hướng về home
+                    history.push("/");
+                    // Reload lại trang web
+                    window.location.reload();
+                  }
+                }}
+              >
+                Sign out
+              </div>
+            </div>
           </div>
         </div>
       </Fragment>
@@ -84,11 +145,11 @@ export default function Header(props) {
   return (
     <header id="header" className="header-not-for-homepage">
       <main className="header__main">
-        <nav className="navbar navbar-expand-sm p-0">
+        <nav className="navbar navbar-expand-md p-0">
           <div className="container">
             <NavLink
               className="navbar-brand font-weight-bold"
-              to="/admin/infoadmin"
+              to="/home"
               title="fiverr"
             >
               fiverr<i className="fa fa-circle text-success"></i>

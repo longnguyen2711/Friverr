@@ -35,7 +35,7 @@ export class QuanLyNguoiDungService extends baseService {
 
   // Api 6: Cập nhật ảnh đại diện
   capNhatAnhDaiDien = (img) => {
-    return this.post(`api/users/upload-avatar`,img);
+    return this.post(`api/users/upload-avatar`, img);
   };
 
   // Api 31: Đăng nhập
@@ -46,6 +46,16 @@ export class QuanLyNguoiDungService extends baseService {
   // Api 32: Đăng xuất
   dangKyTaiKhoan = (formDataDangKy) => {
     return this.post("api/auth/signup", formDataDangKy);
+  };
+
+  // Api 33: Tạo bình luận
+  taoBinhLuan = (comment) => {
+    return this.post(`api/comments`,comment);
+  };
+
+  // Api 34: Lấy danh sách bình luận
+  danhSachBinhLuan = (idJob) => {
+    return this.get(`api/comments/by-job/${idJob}`);
   };
 }
 

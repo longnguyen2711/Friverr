@@ -1,5 +1,5 @@
 import { Token, USER_LOGIN } from "../../util/config";
-import { DANG_KY_ACTION, DANG_NHAP_ACTION, LAY_DANH_SACH_NGUOI_DUNG, LAY_THONG_TIN_CHI_TIET_NGUOI_DUNG } from "../types";
+import { DANG_KY_ACTION, DANG_NHAP_ACTION, DANH_SACH_BINH_LUAN, LAY_DANH_SACH_NGUOI_DUNG, LAY_THONG_TIN_CHI_TIET_NGUOI_DUNG } from "../types";
 
 // Kiểm tra trong localStorage đã có thông tin đăng nhập hay chưa, nếu có rồi thì không cần đăng nhập lại
 let user = {};
@@ -19,6 +19,9 @@ const stateDefault = {
 
   // Danh sách người dùng,
   danhSachTaiKhoan: [],
+
+  // Danh sách bình luận
+  danhSachBinhLuan:[],
 
 };
 
@@ -48,6 +51,11 @@ export const QuanLyNguoiDungReducer = (state = stateDefault, action) => {
 
     case LAY_DANH_SACH_NGUOI_DUNG: {
       state.danhSachTaiKhoan = action.danhSachTaiKhoan;
+      return { ...state };
+    }
+
+    case DANH_SACH_BINH_LUAN: {
+      state.danhSachBinhLuan = action.danhSachBinhLuan;
       return { ...state };
     }
 

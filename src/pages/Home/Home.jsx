@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { layDanhSachCongViecAction } from "../../redux/actions/QuanLyCongViecAction";
 import Header from "../../_Component/Header/Header";
 import Advertisement from "./Advertisement/Advertisement";
 import Carousel from "./Carousel/Carousel";
@@ -32,6 +34,12 @@ export default function Home(props) {
       window.removeEventListener("onload");
       window.removeEventListener("onresize");
     };
+  }, []);
+
+  // Chữa cháy cho phần profile
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(layDanhSachCongViecAction());
   }, []);
   
   // Sticky header

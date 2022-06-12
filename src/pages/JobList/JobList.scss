@@ -75,7 +75,7 @@ $color-text-joblist-2: rgb(181, 180, 180);
         .card {
           height: 300px;
           overflow: hidden;
-          box-shadow: 0 0 10px rgb(180, 180, 180);
+          box-shadow: 0 0 5px rgb(180, 180, 180);
           &:hover {
             .joblist-img {
               img {

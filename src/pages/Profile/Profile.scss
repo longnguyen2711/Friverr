@@ -19,6 +19,7 @@ $color-text-profile-hover: #35a22c;
         margin-right: 0;
       }
       .info-preview {
+        box-shadow: 0 0 7px rgb(214, 214, 214);
         background-color: white;
         .card {
           .card-body {
@@ -35,22 +36,22 @@ $color-text-profile-hover: #35a22c;
               margin-top: 15px;
               color: #404145;
             }
-            .email-phone-birthday{
-              p{
+            .email-phone-birthday {
+              p {
                 text-align: left;
                 font-weight: normal;
                 color: $color-text-profile;
                 margin-bottom: 5px;
-                font-family:'Times New Roman', Times, serif;
+                font-family: "Times New Roman", Times, serif;
               }
             }
-            .edit-info{
+            .edit-info {
               position: absolute;
               top: 10px;
               right: 10px;
               border-radius: 50%;
               border: none;
-              &:hover{
+              &:hover {
                 background-color: rgb(168, 253, 254);
               }
               i {
@@ -78,6 +79,7 @@ $color-text-profile-hover: #35a22c;
       }
 
       .info-description {
+        box-shadow: 0 0 7px rgb(214, 214, 214);
         background-color: rgb(255, 255, 255);
         border-radius: 5px;
         margin-top: 30px;
@@ -114,6 +116,7 @@ $color-text-profile-hover: #35a22c;
       }
 
       .info-activity {
+        box-shadow: 0 0 7px rgb(214, 214, 214);
         background-color: white;
         border-radius: 5px;
         margin-top: 30px;
@@ -143,6 +146,7 @@ $color-text-profile-hover: #35a22c;
         margin-top: 30px;
       }
       .buying-service {
+        box-shadow: 0 0 7px rgb(214, 214, 214);
         background-color: white;
         border-radius: 4px;
         border: 1px solid $color-text-profile-2;
@@ -243,6 +247,7 @@ $color-text-profile-hover: #35a22c;
         background-color: white;
         border-radius: 4px;
         border: 1px solid $color-text-profile-2;
+        box-shadow: 0 0 7px rgb(214, 214, 214);
         padding: 20px;
         display: flex;
         justify-content: space-between;
@@ -314,12 +319,60 @@ $color-text-profile-hover: #35a22c;
         background-color: white;
         border-radius: 4px;
         border: 1px solid $color-text-profile-2;
-        padding: 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        padding: 0 20px;
         margin-top: 30px;
-        
+        box-shadow: 0 0 7px rgb(214, 214, 214);
+        .card {
+          width: 100%;
+          border: none;
+          border-bottom: 1px solid $color-text-profile-2;
+          .card-body {
+            display: flex;
+            padding: 20px 0;
+            .history-booking-img {
+              width: 20%;
+              img {
+                width: 100%;
+                border-radius: 4px;
+              }
+            }
+            .job-info {
+              margin-left: 20px;
+              .title {
+                font-size: 14px;
+              }
+              .rating-price {
+                font-size: 14px;
+                font-weight: normal;
+                display: flex;
+                align-items: center;
+              }
+              .job-property {
+                font-size: 14px;
+                font-weight: normal;
+              }
+            }
+            .booking-button {
+              position: absolute;
+              bottom: 20px;
+              right: 0;
+              display: flex;
+              button {
+                font-weight: 500;
+                font-size: 12px;
+                padding: 4px 10px;
+              }
+            }
+            .done-img {
+              position: absolute;
+              bottom: 20px;
+              right: 10px;
+              img {
+                width: 50px;
+              }
+            }
+          }
+        }
       }
     }
   }
