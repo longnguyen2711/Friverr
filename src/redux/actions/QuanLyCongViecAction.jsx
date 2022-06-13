@@ -3,6 +3,7 @@ import { displayLoadingAction, hideLoadingAction } from "./LoadingAction";
 import { history } from "../../App";
 import {
   LAY_DANH_SACH_CONG_VIEC_THEO_TEN_CONG_VIEC_ACTION,
+  LAY_THONG_TIN_CHI_TIET_LOAI_CONG_VIEC_CHINH,
   LAY_CHI_TIET_LOAI_CONG_VIEC_CHINH_ACTION,
   LAY_THONG_TIN_CHI_TIET_CONG_VIEC,
   LAY_DANH_SACH_CONG_VIEC_ACTION,
@@ -18,6 +19,23 @@ export const layChiTietLoaiCongViecChinhAction = () => {
         await dispatch({
           type: LAY_CHI_TIET_LOAI_CONG_VIEC_CHINH_ACTION,
           chiTietLoaiCongViecChinh: result.data,
+        });
+      }
+    } catch (error) {
+      console.log("error", error.response);
+    }
+  };
+};
+
+// Api 17: Lấy Thông tin chi chi tiết loại công việc chính
+export const layThongTinChiTietLoaiCongViecChinhAction = (idTypeJob) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyCongViecService.layThongTinChiTietLoaiCongViecChinh(idTypeJob);
+      if (result.status === 200) {
+        await dispatch({
+          type: LAY_THONG_TIN_CHI_TIET_LOAI_CONG_VIEC_CHINH,
+          thongTinChiTietLoaiCongViecChinh: result.data,
         });
       }
     } catch (error) {

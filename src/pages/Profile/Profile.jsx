@@ -6,6 +6,7 @@ import {
 import {
   hoanThanhCongViecAction,
   layDanhSachCongViecAction,
+  layThongTinChiTietCongViecAction,
 } from "../../redux/actions/QuanLyCongViecAction";
 import HeaderNotForHomePage from "../../_Component/Header/HeaderNotForHomePage";
 import React, { memo, useEffect, useState } from "react";
@@ -22,7 +23,7 @@ import _ from "lodash";
 function Profile(props) {
   const [imgSrc, setImgSrc] = useState("");
 
-  const { danhSachCongViec, danhSachCongViecDaHoanThanh } = useSelector(
+  const { danhSachCongViec, danhSachCongViecDaHoanThanh, thongTinChiTietCongViec } = useSelector(
     (state) => state.QuanLyCongViecReducer
   );
 

@@ -1,14 +1,11 @@
-import {
-  DANH_SACH_CONG_VIEC_HOAN_THANH_STORAGE,
-  Token,
-  USER_LOGIN,
-} from "../../util/config";
+import { DANH_SACH_CONG_VIEC_HOAN_THANH_STORAGE } from "../../util/config";
 import {
   FINISH_JOB,
   LAY_CHI_TIET_LOAI_CONG_VIEC_CHINH_ACTION,
   LAY_DANH_SACH_CONG_VIEC_ACTION,
   LAY_DANH_SACH_CONG_VIEC_THEO_TEN_CONG_VIEC_ACTION,
   LAY_THONG_TIN_CHI_TIET_CONG_VIEC,
+  LAY_THONG_TIN_CHI_TIET_LOAI_CONG_VIEC_CHINH,
   LOCAL_SELLERS,
   ONLINE_SELLERS,
   PRO_SERVICES,
@@ -25,6 +22,8 @@ if (localStorage.getItem(DANH_SACH_CONG_VIEC_HOAN_THANH_STORAGE)) {
 const stateDefault = {
   // Api 14
   chiTietLoaiCongViecChinh: [],
+  // Api 17
+  thongTinChiTietLoaiCongViecChinh: [],
   // Api 20
   danhSachCongViec: [],
   danhSachCongViecFilter: [],
@@ -124,6 +123,11 @@ export const QuanLyCongViecReducer = (state = stateDefault, action) => {
         DANH_SACH_CONG_VIEC_HOAN_THANH_STORAGE,
         JSON.stringify(state.danhSachCongViecDaHoanThanh)
       );
+      return { ...state };
+    }
+
+    case LAY_THONG_TIN_CHI_TIET_LOAI_CONG_VIEC_CHINH: {
+      state.thongTinChiTietLoaiCongViecChinh = action.thongTinChiTietLoaiCongViecChinh
       return { ...state };
     }
 

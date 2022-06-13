@@ -1,12 +1,16 @@
-import React, { useEffect, useState, Fragment } from "react";
-import "./Header.scss";
-import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import _ from "lodash";
-import { Token, USER_LOGIN } from "../../util/config";
-import { history } from "../../App";
-import { layChiTietLoaiCongViecChinhAction } from "../../redux/actions/QuanLyCongViecAction";
+import {
+  layChiTietLoaiCongViecChinhAction,
+  layThongTinChiTietLoaiCongViecChinhAction,
+} from "../../redux/actions/QuanLyCongViecAction";
 import { layThongTinChiTietNguoiDungAction } from "../../redux/actions/QuanLyNguoiDungAction";
+import { useDispatch, useSelector } from "react-redux";
+import { Token, USER_LOGIN } from "../../util/config";
+import React, { useEffect, Fragment } from "react";
+import { NavLink } from "react-router-dom";
+import { history } from "../../App";
+import "./Header.scss";
+import _ from "lodash";
+
 
 export default function Header(props) {
   const { chiTietLoaiCongViecChinh } = useSelector(
@@ -29,17 +33,24 @@ export default function Header(props) {
       return (
         <Fragment>
           <div className="navbar-nav ml-auto">
-          <NavLink
-            className="nav-link pl-2 ml-4 font-weight-bold"
-            to="/home"
-            title="Home"
-          >
-            Home
-          </NavLink>
+            <NavLink
+              className="nav-link pl-2 ml-4 font-weight-bold"
+              to="/home"
+              title="Home"
+            >
+              Home
+            </NavLink>
             <NavLink
               className="nav-link pl-2 ml-4 font-weight-bold"
               to="/jobtypes"
               title="Jobs type"
+              onClick={() => {
+                dispatch(
+                  layThongTinChiTietLoaiCongViecChinhAction(
+                    "6198768aaef344001cecfd43"
+                  )
+                );
+              }}
             >
               Jobs type
             </NavLink>
@@ -71,7 +82,7 @@ export default function Header(props) {
     return (
       <Fragment>
         <div className="navbar-nav ml-auto">
-        <NavLink
+          <NavLink
             className="nav-link pl-2 ml-4 font-weight-bold"
             to="/home"
             title="Home"
@@ -94,7 +105,8 @@ export default function Header(props) {
           </NavLink>
           <div id="dropdownMenu" className="dropdown ml-4">
             <button
-              className="dropdown-toggle nav-link font-weight-bold pl-2" style={{backgroundColor:"transparent", border:"none"}}
+              className="dropdown-toggle nav-link font-weight-bold pl-2"
+              style={{ backgroundColor: "transparent", border: "none" }}
               type="button"
               id="dropdownMenuButton"
               data-toggle="dropdown"
@@ -102,7 +114,10 @@ export default function Header(props) {
             >
               {thongTinChiTietNguoiDung.name}
             </button>
-            <div className="dropdown-menu pl-2 pr-2 w-100" aria-labelledby="dropdownMenuButton">
+            <div
+              className="dropdown-menu pl-2 pr-2 w-100"
+              aria-labelledby="dropdownMenuButton"
+            >
               <NavLink
                 className="nav-link font-weight-bold"
                 to="/profile"
@@ -188,8 +203,13 @@ export default function Header(props) {
                 <NavLink
                   key={index}
                   title={item.name}
-                  to="/"
+                  to="/jobtypes"
                   className="navlink-jobtype"
+                  onClick={() => {
+                    dispatch(
+                      layThongTinChiTietLoaiCongViecChinhAction(item._id)
+                    );
+                  }}
                 >
                   {item.name}
                 </NavLink>

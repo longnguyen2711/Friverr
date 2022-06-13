@@ -1,3 +1,7 @@
+import {
+  layChiTietLoaiCongViecChinhAction,
+  layThongTinChiTietLoaiCongViecChinhAction,
+} from "../../redux/actions/QuanLyCongViecAction";
 import { layThongTinChiTietNguoiDungAction } from "../../redux/actions/QuanLyNguoiDungAction";
 import { useDispatch, useSelector } from "react-redux";
 import { Token, USER_LOGIN } from "../../util/config";
@@ -6,7 +10,7 @@ import { NavLink } from "react-router-dom";
 import { history } from "../../App";
 import "./Header.scss";
 import _ from "lodash";
-import { layChiTietLoaiCongViecChinhAction } from "../../redux/actions/QuanLyCongViecAction";
+
 
 export default function Header(props) {
   const { chiTietLoaiCongViecChinh } = useSelector(
@@ -82,6 +86,13 @@ export default function Header(props) {
             className="nav-link pl-2 ml-4 font-weight-bold"
             to="/jobtypes"
             title="Jobs type"
+            onClick={() => {
+              dispatch(
+                layThongTinChiTietLoaiCongViecChinhAction(
+                  "6198768aaef344001cecfd43"
+                )
+              );
+            }}
           >
             Jobs type
           </NavLink>
@@ -198,8 +209,13 @@ export default function Header(props) {
                 <NavLink
                   key={index}
                   title={item.name}
-                  to="/"
+                  to="/jobtypes"
                   className="navlink-jobtype"
+                  onClick={() => {
+                    dispatch(
+                      layThongTinChiTietLoaiCongViecChinhAction(item._id)
+                    );
+                  }}
                 >
                   {item.name}
                 </NavLink>

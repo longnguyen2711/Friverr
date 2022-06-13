@@ -10,6 +10,11 @@ export class QuanLyCongViecService extends baseService {
     return this.get(`api/type-jobs`);
   };
 
+  // Api 17: Lấy thông tin chi tiết loại công việc chính
+  layThongTinChiTietLoaiCongViecChinh = (idTypeJob) => {
+    return this.get(`api/type-jobs/${idTypeJob}`);
+  };
+
   // Api 19: Tạo công việc mới
   taoCongViecMoi = (formDataCongViec) => {
     return this.post(`api/jobs`, formDataCongViec);

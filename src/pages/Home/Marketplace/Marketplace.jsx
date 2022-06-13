@@ -1,6 +1,10 @@
-import React, { memo, useEffect } from "react";
+import {
+  layChiTietLoaiCongViecChinhAction,
+  layThongTinChiTietLoaiCongViecChinhAction,
+} from "../../../redux/actions/QuanLyCongViecAction";
 import { useDispatch, useSelector } from "react-redux";
-import { layChiTietLoaiCongViecChinhAction } from "../../../redux/actions/QuanLyCongViecAction";
+import React, { memo, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import "./Marketplace.scss";
 
 function Marketplace(props) {
@@ -51,10 +55,17 @@ function Marketplace(props) {
         <div className="jobtype">
           {chiTietLoaiCongViecChinh.map((item, index) => {
             return (
-              <a key={index} title={item.name} href="#">
+              <NavLink
+                key={index}
+                title={item.name}
+                to="/jobtypes"
+                onClick={() => {
+                  dispatch(layThongTinChiTietLoaiCongViecChinhAction(item._id));
+                }}
+              >
                 <img src={arrImgLoaiCongViec[index].img} alt="ImgTypeJob" />
                 <p>{item.name}</p>
-              </a>
+              </NavLink>
             );
           })}
         </div>

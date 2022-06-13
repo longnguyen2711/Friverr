@@ -10,6 +10,10 @@ $color-text-profile-hover: #35a22c;
       justify-content: center;
       flex-wrap: wrap;
     }
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+
     .profile-info {
       padding: 0;
       width: 30%;
@@ -331,6 +335,10 @@ $color-text-profile-hover: #35a22c;
             padding: 20px 0;
             .history-booking-img {
               width: 20%;
+              min-width: 100px;
+              @media screen and (max-width: 650px) {
+                min-width: 75px;
+              }
               img {
                 width: 100%;
                 border-radius: 4px;
@@ -357,10 +365,17 @@ $color-text-profile-hover: #35a22c;
               bottom: 20px;
               right: 0;
               display: flex;
+              @media screen and (max-width: 650px) {
+                bottom: 0;
+              }
               button {
                 font-weight: 500;
                 font-size: 12px;
                 padding: 4px 10px;
+                @media screen and (max-width: 650px) {
+                  font-size: 10px;
+                  padding: 3px 8px;
+                }
               }
             }
             .done-img {
