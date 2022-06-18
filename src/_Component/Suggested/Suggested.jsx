@@ -7,13 +7,14 @@ export default function Suggested(props) {
       <div className="container">
         <h1>Suggested</h1>
         <div>
-          <span>html css</span>
-          <span>html website</span>
-          <span>psd to html</span>
-          <span>html email</span>
-          <span>html css javascript</span>
+          <span>html</span>
           <span>css</span>
-          <span>html css website</span>
+          <span>website</span>
+          <span>i will</span>
+          <span>create</span>
+          <span>email</span>
+          <span>psd to html</span>
+          <span>javascript</span>
         </div>
       </div>
     </section>

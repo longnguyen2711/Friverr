@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+
 import { layDanhSachCongViecAction } from "../../redux/actions/QuanLyCongViecAction";
-import Header from "../../_Component/Header/Header";
 import Advertisement from "./Advertisement/Advertisement";
-import Carousel from "./Carousel/Carousel";
-import LogoMaker from "./LogoMaker/LogoMaker";
-import Marketplace from "./Marketplace/Marketplace";
 import MultipleSlick from "./MultipleSlick/MultipleSlick";
+import Marketplace from "./Marketplace/Marketplace";
+import Header from "../../_Component/Header/Header";
+import React, { useEffect, useState } from "react";
+import LogoMaker from "./LogoMaker/LogoMaker";
 import Solution from "./Solution/Solution";
+import Carousel from "./Carousel/Carousel";
+import { useDispatch } from "react-redux";
 import Talent from "./Talent/Talent";
 
 export default function Home(props) {

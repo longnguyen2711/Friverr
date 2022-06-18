@@ -1,15 +1,16 @@
 import { DANH_SACH_CONG_VIEC_HOAN_THANH_STORAGE } from "../../util/config";
 import {
-  FINISH_JOB,
-  LAY_CHI_TIET_LOAI_CONG_VIEC_CHINH_ACTION,
-  LAY_DANH_SACH_CONG_VIEC_ACTION,
   LAY_DANH_SACH_CONG_VIEC_THEO_TEN_CONG_VIEC_ACTION,
-  LAY_THONG_TIN_CHI_TIET_CONG_VIEC,
   LAY_THONG_TIN_CHI_TIET_LOAI_CONG_VIEC_CHINH,
-  LOCAL_SELLERS,
+  LAY_CHI_TIET_LOAI_CONG_VIEC_CHINH_ACTION,
+  LAY_THONG_TIN_CHI_TIET_CONG_VIEC,
+  LAY_DANH_SACH_CONG_VIEC_ACTION,
   ONLINE_SELLERS,
+  LOCAL_SELLERS,
   PRO_SERVICES,
-  RESET_JOB,
+  FINISH_JOB,
+  JOB_NAME_SEARCH,
+  POPULAR_SERVICES,
 } from "../types";
 
 let DSCVHTLocalStorage = [];
@@ -34,10 +35,13 @@ const stateDefault = {
   danhSachCongViecDaHoanThanh: DSCVHTLocalStorage,
   // Api 29
   danhSachCongViecTheoTenCongViec: [],
-  // Lọc
+  danhSachCongViecTheoTenCongViecFilter: [],
+  // Filter job
   proServices: false,
   localSellers: false,
   onlineSellers: false,
+  // Search job
+  tuKhoaTimKiem: "",
 };
 
 export const QuanLyCongViecReducer = (state = stateDefault, action) => {
@@ -75,6 +79,13 @@ export const QuanLyCongViecReducer = (state = stateDefault, action) => {
           (job) => job.proServices === state.proServices
         );
         state.danhSachCongViec = state.danhSachCongViecFilter;
+
+        state.danhSachCongViecTheoTenCongViecFilter =
+          state.danhSachCongViecTheoTenCongViec.filter(
+            (job) => job.proServices === state.proServices
+          );
+        state.danhSachCongViecTheoTenCongViec =
+          state.danhSachCongViecTheoTenCongViecFilter;
       }
       return { ...state };
     }
@@ -86,6 +97,13 @@ export const QuanLyCongViecReducer = (state = stateDefault, action) => {
           (job) => job.localSellers === state.localSellers
         );
         state.danhSachCongViec = state.danhSachCongViecFilter;
+
+        state.danhSachCongViecTheoTenCongViecFilter =
+          state.danhSachCongViecTheoTenCongViec.filter(
+            (job) => job.localSellers === state.localSellers
+          );
+        state.danhSachCongViecTheoTenCongViec =
+          state.danhSachCongViecTheoTenCongViecFilter;
       }
       return { ...state };
     }
@@ -97,24 +115,15 @@ export const QuanLyCongViecReducer = (state = stateDefault, action) => {
           (job) => job.onlineSellers === state.onlineSellers
         );
         state.danhSachCongViec = state.danhSachCongViecFilter;
+
+        state.danhSachCongViecTheoTenCongViecFilter =
+          state.danhSachCongViecTheoTenCongViec.filter(
+            (job) => job.onlineSellers === state.onlineSellers
+          );
+        state.danhSachCongViecTheoTenCongViec =
+          state.danhSachCongViecTheoTenCongViecFilter;
       }
       return { ...state };
-    }
-
-    case RESET_JOB: {
-      state.danhSachCongViec = state.danhSachCongViecDefault;
-      if ((state.proServices = true)) {
-        state.proServices = !state.proServices;
-      }
-      if ((state.localSellers = true)) {
-        state.localSellers = !state.localSellers;
-      }
-      if ((state.onlineSellers = true)) {
-        state.onlineSellers = !state.onlineSellers;
-      }
-      return { ...state };
-
-      // window.location.reload();
     }
 
     case FINISH_JOB: {
@@ -127,7 +136,18 @@ export const QuanLyCongViecReducer = (state = stateDefault, action) => {
     }
 
     case LAY_THONG_TIN_CHI_TIET_LOAI_CONG_VIEC_CHINH: {
-      state.thongTinChiTietLoaiCongViecChinh = action.thongTinChiTietLoaiCongViecChinh
+      state.thongTinChiTietLoaiCongViecChinh =
+        action.thongTinChiTietLoaiCongViecChinh;
+      return { ...state };
+    }
+
+    case JOB_NAME_SEARCH: {
+      state.tuKhoaTimKiem = action.chuNguoiDungNhap;
+      return { ...state };
+    }
+
+    case POPULAR_SERVICES: {
+      state.tuKhoaTimKiem = action.congViecPhoBien;
       return { ...state };
     }
 

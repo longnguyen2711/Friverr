@@ -51,8 +51,6 @@ export const taoCongViecMoiAction = (formDataCongViec) => {
       const result = await quanLyCongViecService.taoCongViecMoi(
         formDataCongViec
       );
-      console.log(result);
-
       alert("Create job successfully");
     } catch (error) {
       alert("Create job failed, please check again");
@@ -173,7 +171,7 @@ export const layDanhSachCongViecTheoTenCongViecAction = (jobName = "") => {
     try {
       const result =
         await quanLyCongViecService.layDanhSachCongViecTheoTenCongViec(jobName);
-      if (result.status === 200) {
+        if (result.status === 200) {
         await dispatch({
           type: LAY_DANH_SACH_CONG_VIEC_THEO_TEN_CONG_VIEC_ACTION,
           danhSachCongViecTheoTenCongViec: result.data,

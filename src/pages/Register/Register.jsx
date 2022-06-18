@@ -73,8 +73,8 @@ export default function Register(props) {
       <form className="w-75 form" onSubmit={formik.handleSubmit}>
         <div>
           <div className="text-center">
-            <NavLink to="/" title="Back to homepage">
-            <h1 style={{ fontSize: "60px", color: "white" }}>
+            <NavLink to="/home" title="Back to homepage">
+              <h1 style={{ fontSize: "60px", color: "white" }}>
                 friverr
                 <i
                   style={{ fontSize: "12px" }}
@@ -205,7 +205,7 @@ export default function Register(props) {
                 </div>
               </div>
 
-              <div className=" mb-0 mt-3   form-group">        
+              <div className=" mb-0 mt-3   form-group">
                 <label htmlFor="skill" id="showSkillScreen">
                   Skill
                 </label>
@@ -223,7 +223,12 @@ export default function Register(props) {
                     type="button"
                     id="addSkill"
                     onClick={() => {
-                      listSkill.push(document.getElementById("skill").value);
+                      let skill =
+                        document.getElementById("skill").value;
+                      let find = listSkill.find((item) => item === skill);
+                      if (find === undefined) {
+                        listSkill.push(skill);
+                      }
                       document.getElementById(
                         "showSkillScreen"
                       ).innerHTML = `Skill: ${listSkill.join(" , ")}`;
@@ -235,7 +240,7 @@ export default function Register(props) {
               </div>
 
               <div className=" mb-0 mt-3 form-group">
-                {" "} 
+                {" "}
                 <label htmlFor="certification" id="showCertificationScreen">
                   Certification
                 </label>
@@ -253,15 +258,19 @@ export default function Register(props) {
                     type="button"
                     id="addCertification"
                     onClick={() => {
-                      listCertification.push(
-                        document.getElementById("certification").value
+                      let certification =
+                        document.getElementById("certification").value;
+                      let find = listCertification.find(
+                        (item) => item === certification
                       );
+                      if (find === undefined) {
+                        listCertification.push(certification);
+                      }
                       document.getElementById(
                         "showCertificationScreen"
                       ).innerHTML = `Certification: ${listCertification.join(
                         " , "
                       )}`;
-                      console.log(listCertification);
                     }}
                   >
                     Add certification

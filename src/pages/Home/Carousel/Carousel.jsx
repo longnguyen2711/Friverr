@@ -1,7 +1,11 @@
-import React, { memo, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { memo } from "react";
+import { useDispatch } from "react-redux";
 import Slider from "react-slick";
+import { Input } from "antd";
+import { history } from "../../../App";
 import "./Carousel.scss";
+import { layDanhSachCongViecTheoTenCongViecAction } from "../../../redux/actions/QuanLyCongViecAction";
+import { JOB_NAME_SEARCH } from "../../../redux/types";
 
 const contentStyle = {
   height: "700px",
@@ -32,6 +36,15 @@ function Carousel(props) {
     pauseOnHover: false,
   };
 
+  const { Search } = Input;
+
+  // Hàm tìm kiếm
+  const onSearch = (value) => {
+    history.push("/joblistsearch");
+    dispatch({type:JOB_NAME_SEARCH, chuNguoiDungNhap: value,})
+    dispatch(layDanhSachCongViecTheoTenCongViecAction(value));
+  };
+
   return (
     <section id="carousel">
       <div className="carousel-background">
@@ -59,19 +72,19 @@ function Carousel(props) {
             Find the perfect <span>freelance</span> services for your business
           </h1>
           <div className="nav-bar-search input-group">
-            <input
+            <Search
               type="text"
-              className="form-control"
               placeholder="Find services"
+              enterButton="Search"
+              onSearch={onSearch}
             />
-            <button className="input-group-prepend">Search</button>
           </div>
           <p className="d-flex flex-wrap">
             Popular:
             <span className="ml-2">Website Design</span>
             <span>WordPress</span>
             <span>Logo Design</span>
-            <span>Dropshiping</span>
+            <span>HTML</span>
           </p>
         </div>
       </div>

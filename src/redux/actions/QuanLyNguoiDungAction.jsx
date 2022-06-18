@@ -147,7 +147,7 @@ export const dangNhapAction = (thongTinDangNhap) => {
 
         // Thông báo đăng nhập thành công và quay về trang chủ
         alert("Logged in successfully");
-        history.push("/");
+        history.push("/home");
         window.location.reload();
       }
     } catch (error) {

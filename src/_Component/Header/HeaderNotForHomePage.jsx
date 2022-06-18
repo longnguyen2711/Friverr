@@ -1,16 +1,19 @@
 import {
   layChiTietLoaiCongViecChinhAction,
+  layDanhSachCongViecTheoTenCongViecAction,
   layThongTinChiTietLoaiCongViecChinhAction,
 } from "../../redux/actions/QuanLyCongViecAction";
 import { layThongTinChiTietNguoiDungAction } from "../../redux/actions/QuanLyNguoiDungAction";
 import { useDispatch, useSelector } from "react-redux";
 import { Token, USER_LOGIN } from "../../util/config";
 import React, { useEffect, Fragment } from "react";
+import Search from "antd/lib/transfer/search";
 import { NavLink } from "react-router-dom";
 import { history } from "../../App";
+import { Input } from "antd";
 import "./Header.scss";
 import _ from "lodash";
-
+import { JOB_NAME_SEARCH } from "../../redux/types";
 
 export default function Header(props) {
   const { chiTietLoaiCongViecChinh } = useSelector(
@@ -120,7 +123,7 @@ export default function Header(props) {
             >
               <NavLink
                 className="nav-link font-weight-bold"
-                to="/profile"
+                to={`/profile/${userLogin._id}`}
                 title="Go to the personal page"
               >
                 Personal page
@@ -132,6 +135,14 @@ export default function Header(props) {
               >
                 Admin page
               </NavLink>
+              <NavLink
+                className="nav-link font-weight-bold"
+                to="register"
+                title="Register new account"
+              >
+                Register
+              </NavLink>
+              <div className="dropdown-divider"></div>
               <div
                 className="nav-link font-weight-bold"
                 style={{ cursor: "pointer" }}
@@ -157,6 +168,15 @@ export default function Header(props) {
     );
   };
 
+  const { Search } = Input;
+
+  // Hàm tìm kiếm
+  const onSearch = (value) => {
+    history.push("/joblistsearch")
+    dispatch({type:JOB_NAME_SEARCH, chuNguoiDungNhap: value,})
+    dispatch(layDanhSachCongViecTheoTenCongViecAction(value));
+  };  
+
   return (
     <header id="header" className="header-not-for-homepage">
       <main className="header__main">
@@ -171,12 +191,12 @@ export default function Header(props) {
             </NavLink>
 
             <div className="nav-bar-search input-group-sm">
-              <input
+              <Search
                 type="text"
-                className="form-control"
                 placeholder="Find services"
+                enterButton="Search"
+                onSearch={onSearch}
               />
-              <button className="input-group-prepend">Search</button>
             </div>
 
             <button

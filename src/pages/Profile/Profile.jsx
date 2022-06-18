@@ -402,7 +402,7 @@ function Profile(props) {
           <div className="profile-job">
             <div className="buying-service">
               <img
-                src="./img/Profile/buying-service-img.webp"
+                src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/062c31c4c3d8177e0a989389919ffd0d-1647342235681/office-building.gif"
                 alt="buying-service-img"
               />
               <div>

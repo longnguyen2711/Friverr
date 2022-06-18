@@ -21,9 +21,13 @@ export const DANH_SACH_BINH_LUAN = "DANH_SACH_BINH_LUAN";
 
 export const TAO_NGUOI_DUNG_MOI = "TAO_NGUOI_DUNG_MOI";
 
+export const POPULAR_SERVICES = "POPULAR_SERVICES";
+
 export const DANG_NHAP_ACTION = "DANG_NHAP_ACTION";
 
 export const DISPLAY_LOADING = "DISPLAY_LOADING";
+
+export const JOB_NAME_SEARCH = "JOB_NAME_SEARCH";
 
 export const ONLINE_SELLERS = "ONLINE_SELLERS";
 
@@ -37,7 +41,10 @@ export const PRO_SERVICES = "PRO_SERVICES";
 
 export const FINISH_JOB = "FINISH_JOB";
 
-export const RESET_JOB = "RESET_JOB";
+
+
+
+
 
 
 
