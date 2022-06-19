@@ -89,13 +89,6 @@ export default function Header(props) {
             className="nav-link pl-2 ml-4 font-weight-bold"
             to="/jobtypes"
             title="Jobs type"
-            onClick={() => {
-              dispatch(
-                layThongTinChiTietLoaiCongViecChinhAction(
-                  "6198768aaef344001cecfd43"
-                )
-              );
-            }}
           >
             Jobs type
           </NavLink>
@@ -137,7 +130,7 @@ export default function Header(props) {
               </NavLink>
               <NavLink
                 className="nav-link font-weight-bold"
-                to="register"
+                to="/register"
                 title="Register new account"
               >
                 Register

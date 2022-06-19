@@ -65,7 +65,7 @@ export const AdminTemplate = (props) => {
                 localStorage.removeItem(USER_LOGIN);
                 localStorage.removeItem(Token);
                 // Chuyển hướng về home
-                history.push("/");
+                history.push("/home");
                 // Reload lại trang web
                 window.location.reload();
               }
@@ -77,7 +77,7 @@ export const AdminTemplate = (props) => {
             className="info-user nav-link text-black pl-2 ml-5 font-weight-bold"
             style={{ cursor: "pointer" }}
             onClick={() => {
-              history.push("/profile");
+              history.push("/home");
             }}
             title="Go to the personal page"
           >
@@ -102,7 +102,7 @@ export const AdminTemplate = (props) => {
               <Layout style={{ minHeight: "100vh" }}>
                 <Sider>
                   <div className="logo-homepage">
-                    <NavLink to="/" title="Back to HomePage">
+                    <NavLink to="/home" title="Back to HomePage">
                       <h1>
                         friverr
                         <i className="fa fa-circle text-success"></i>

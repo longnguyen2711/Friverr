@@ -82,7 +82,7 @@ export default function JobList(props) {
             </h1>
 
             <div className="joblist__list d-flex">
-              {danhSachCongViecFilters.slice(0, 60).map((item, index) => {
+              {danhSachCongViecFilters.slice(0, 40).map((item, index) => {
                 return (
                   <Fragment key={index}>
                     <NavLink
@@ -95,7 +95,7 @@ export default function JobList(props) {
                           <img src={item.image} alt="job-list-img" />
                         </div>
                         <div className="card-body">
-                          <div>
+                          <div className="mb-2">
                             {" "}
                             {item.name.length > 50 ? (
                               <h1>{item.name.slice(0, 50)}...</h1>

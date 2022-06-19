@@ -22,12 +22,13 @@ export class baseService {
     });
   };
 
-  post = (url, model) => {
+  post = (url, model, headers = {}) => {
     return axios({
       url: `${DOMAIN}/${url}`,
       method: "POST",
       data: model,
       headers: {
+        ...headers,
         TokenByClass: TokenByClass,
         token: token,
       }, //JWT

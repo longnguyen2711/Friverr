@@ -137,7 +137,7 @@ export default function Header(props) {
               </NavLink>
               <NavLink
                 className="nav-link font-weight-bold"
-                to="register"
+                to="/register"
                 title="Register new account"
               >
                 Register

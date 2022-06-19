@@ -72,8 +72,8 @@ function Profile(props) {
     },
     onSubmit: (values) => {
       console.log(values);
-      // const action = capNhatAnhDaiDienAction(values);
-      // dispatch(action);
+      const action = capNhatAnhDaiDienAction(values);
+      dispatch(action);
     },
   });
 
@@ -122,8 +122,8 @@ function Profile(props) {
               <div className="card">
                 <div className="card-body text-center">
                   <div className="d-flex justify-content-center">
-                    {thongTinChiTietNguoiDung.image ? (
-                      <img src={thongTinChiTietNguoiDung.image} alt="avatar" />
+                    {thongTinChiTietNguoiDung.avatar ? (
+                      <img src={thongTinChiTietNguoiDung.avatar} alt="avatar" />
                     ) : (
                       <div
                         style={{

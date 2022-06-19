@@ -59,8 +59,8 @@ export class QuanLyCongViecService extends baseService {
   };
 
   // Api 30: Cập nhật hình ảnh công việc
-  capNhatHinhAnhCongViec = (idJob, fileImg) => {
-    return this.post(`api/jobs/upload-image/${idJob}`, fileImg);
+  capNhatHinhAnhCongViec = (idJob, job) => {
+    return this.post(`api/jobs/upload-image/${idJob}`, job);
   };
 }
 

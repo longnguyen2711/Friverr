@@ -192,10 +192,10 @@ export const capNhatHinhAnhCongViecAction = (idJob, fileImg) => {
         idJob,
         fileImg
       );
-
-      console.log(result, "Cập nhật hinh anh công việc");
-
       alert("Update image successfully");
+      dispatch(layDanhSachCongViecTheoTenCongViecAction());
+      history.push("/admin/listjobs");
+      window.location.reload();
     } catch (error) {
       alert("Update image failed, please check again");
       console.log("error", error.response);

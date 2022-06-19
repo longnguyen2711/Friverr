@@ -4,7 +4,7 @@ import "./Suggested.scss";
 export default function Suggested(props) {
   return (
     <section id="suggested">
-      <div className="container">
+      <div className="my-container">
         <h1>Suggested</h1>
         <div>
           <span>html</span>

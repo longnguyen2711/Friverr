@@ -81,7 +81,14 @@ export default function JobDetail(props) {
                 <h2 className="price">{thongTinChiTietCongViec.price}$</h2>
                 <div className="img-info">
                   <div>
-                    <img src={thongTinChiTietCongViec.image} alt="job-image" />
+                    <img
+                      src={thongTinChiTietCongViec.image}
+                      alt="job-image"
+                      onError={(e) => {
+                        e.target.onError = null;
+                        e.target.src = `http://picsum.photos/1000`;
+                      }}
+                    />
                   </div>
                   <ul>
                     {thongTinChiTietCongViec.proServices === true ? (

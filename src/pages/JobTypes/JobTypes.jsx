@@ -8,6 +8,7 @@ import {
 import HeaderNotForHomePage from "../../_Component/Header/HeaderNotForHomePage";
 import "./JobTypes.scss";
 import { NavLink } from "react-router-dom";
+import Suggested from "../../_Component/Suggested/Suggested";
 
 export default function JobTypes(props) {
   const { chiTietLoaiCongViecChinh, thongTinChiTietLoaiCongViecChinh } =
@@ -19,11 +20,13 @@ export default function JobTypes(props) {
 
   useEffect(() => {
     dispatch(layChiTietLoaiCongViecChinhAction());
+    dispatch(layThongTinChiTietLoaiCongViecChinhAction("6198768aaef344001cecfd43"));
   }, []);
 
   return (
     <section>
       <HeaderNotForHomePage />
+      <Suggested />
       <div id="jobTypes">
         <div className="jobTypes__header">
           <div className="container">

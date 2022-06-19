@@ -125,7 +125,7 @@ export const capNhatAnhDaiDienAction = (img) => {
   return async (dispatch) => {
     try {
       const result = await quanLyNguoiDungService.capNhatAnhDaiDien(img);
-
+console.log(result)
       alert("Update avatar successfully");
     } catch (error) {
       alert("Update avatar failed, please check again");
@@ -133,7 +133,7 @@ export const capNhatAnhDaiDienAction = (img) => {
     }
   };
 };
-
+// cho nao capp api up
 // Api 31: Đăng nhập
 export const dangNhapAction = (thongTinDangNhap) => {
   return async (dispatch) => {
