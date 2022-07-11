@@ -1,3 +1,8 @@
+<!-- Nguyễn Hoàng Long (Làm cá nhân)
+Link github: https://github.com/longnguyen2711/Friverr/
+Link deploy: https://nhl-friverr.surge.sh/
+Tài khoản và mật khẩu demo: nhlong2711@gmail.com -->
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

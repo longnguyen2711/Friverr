@@ -82,7 +82,7 @@ export default function JobList(props) {
             </h1>
 
             <div className="joblist__list d-flex">
-              {danhSachCongViecFilters.slice(0, 40).map((item, index) => {
+              {danhSachCongViecFilters.slice(0, 20).map((item, index) => {
                 return (
                   <Fragment key={index}>
                     <NavLink
