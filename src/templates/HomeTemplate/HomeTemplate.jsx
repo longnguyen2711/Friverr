@@ -1,6 +1,5 @@
 import { Fragment, useEffect } from "react";
 import { Route } from "react-router-dom";
-import Header from "../../_Component/Header/Header";
 import Footer from "../../_Component/Footer/Footer";
 
 export const HomeTemplate = (props) => {

@@ -1,18 +1,109 @@
-import React, { memo, useEffect, Fragment } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { Table, Input } from "antd";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import "./ListJobs.scss";
 import {
   layDanhSachCongViecTheoTenCongViecAction,
   xoaCongViecAction,
 } from "../../../redux/actions/QuanLyCongViecAction";
+import React, { memo, useEffect, Fragment, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Table, Input, Button, Space } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import Highlighter from "react-highlight-words";
+import { NavLink } from "react-router-dom";
+import "./ListJobs.scss";
+
 
 export default function ListJobs(props) {
+
+  const [searchText, setSearchText] = useState("");
+
+  const [searchedColumn, setSearchedColumn] = useState("");
+
+  const searchInput = useRef(null);
+
   const { danhSachCongViecTheoTenCongViec } = useSelector(
     (state) => state.QuanLyCongViecReducer
   );
+
+  const getColumnSearchProps = (dataIndex) => ({
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+    }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          type={dataIndex === "rating" ? "number" : "text"}
+          ref={searchInput}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={(e) =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
+          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ marginBottom: 8, display: "block" }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button
+            onClick={() => handleReset(clearFilters)}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: (filtered) => (
+      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
+    ),
+    onFilter: (value, record) =>
+      record[dataIndex]
+        ? record[dataIndex]
+            .toString()
+            .toLowerCase()
+            .includes(value.toLowerCase())
+        : "",
+    onFilterDropdownVisibleChange: (visible) => {
+      if (visible) {
+        setTimeout(() => searchInput.current.select(), 100);
+      }
+    },
+    render: (text) =>
+      searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+          searchWords={[searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ""}
+        />
+      ) : (
+        text
+      ),
+  });
+
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    setSearchText({
+      searchText: selectedKeys[0],
+    });
+    setSearchedColumn({
+      searchedColumn: dataIndex,
+    });
+  };
+
+  const handleReset = (clearFilters) => {
+    clearFilters();
+    setSearchText({ searchText: "" });
+  };
 
   const dispatch = useDispatch();
 
@@ -22,6 +113,7 @@ export default function ListJobs(props) {
   }, []);
 
   const { Search } = Input;
+
   const columns = [
     {
       title: "Image",
@@ -33,7 +125,6 @@ export default function ListJobs(props) {
           </Fragment>
         );
       },
-
       width: "15%",
     },
     {
@@ -52,7 +143,6 @@ export default function ListJobs(props) {
           </Fragment>
         );
       },
-
       width: "2.5%",
     },
     {
@@ -61,15 +151,7 @@ export default function ListJobs(props) {
       value: (text, object) => {
         return <span style={{ textAlign: "justify" }}>{object}</span>;
       },
-      sorter: (a, b) => {
-        let nameA = a.name;
-        let nameB = b.name;
-        if (nameA > nameB) {
-          return 1;
-        }
-        return -1;
-      },
-      sortDirections: ["descend", "ascend"],
+      ...getColumnSearchProps("name"),
       width: "25%",
     },
     {
@@ -78,15 +160,6 @@ export default function ListJobs(props) {
       render: (text, object) => {
         return <span>{object.subType.name}</span>;
       },
-      sorter: (a, b) => {
-        let nameA = a.name;
-        let nameB = b.name;
-        if (nameA > nameB) {
-          return 1;
-        }
-        return -1;
-      },
-      sortDirections: ["descend", "ascend"],
       width: "17.5%",
     },
     {
@@ -95,15 +168,7 @@ export default function ListJobs(props) {
       render: (text, object) => {
         return <span>{text}</span>;
       },
-      sorter: (a, b) => {
-        let genderA = a.gender.toLowerCase().trim();
-        let genderB = b.gender.toLowerCase().trim();
-        if (genderA > genderB) {
-          return 1;
-        }
-        return -1;
-      },
-      sortDirections: ["descend", "ascend"],
+      ...getColumnSearchProps("rating"),
       width: "10%",
     },
     {
@@ -112,7 +177,7 @@ export default function ListJobs(props) {
       render: (text, object) => {
         return <span>{text}</span>;
       },
-      width: "10%",
+      width: "9%",
     },
     {
       title: "Pro Service",
@@ -124,7 +189,7 @@ export default function ListJobs(props) {
           </span>
         );
       },
-      width: "10%",
+      width: "11%",
     },
 
     {

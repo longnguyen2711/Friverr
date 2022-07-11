@@ -4,27 +4,28 @@ import { createBrowserHistory } from "history";
 
 // Hometemplate
 import { HomeTemplate } from './templates/HomeTemplate/HomeTemplate';
-import Home from './pages/Home/Home';
-import JobList from './pages/JobList/JobList';
-import JobTypes from './pages/JobTypes/JobTypes';
 import JobDetail from './pages/JobDetail/JobDetail';
+import JobTypes from './pages/JobTypes/JobTypes';
+import JobList from './pages/JobList/JobList';
 import Profile from './pages/Profile/Profile';
+import Home from './pages/Home/Home';
 // UserTemplate
 import { UserTemplate } from './templates/UserTemplate/UserTemplate';
-import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
+import Login from './pages/Login/Login';
 // AdminTemplate
 import { AdminTemplate } from './templates/AdminTemplate/AdminTemplate';
-import InfoAdmin from './pages/Admin/InfoAdmin/InfoAdmin';
-import UpdateInfoAdmin from './pages/Admin/InfoAdmin/UpdateInfoAdmin';
-import ListAccount from './pages/Admin/ListAccount/ListAccount';
-import EditAccount from './pages/Admin/ListAccount/EditAccount/EditAccount';
-import ListJobs from './pages/Admin/ListJobs/ListJobs';
-import AddNewjob from './pages/Admin/ListJobs/AddNewJob/AddNewJob';
 import AddNewAccount from './pages/Admin/ListAccount/AddNewAccount/AddNewAccount';
-import Loading from './_Component/Loading/Loading';
-import EditJob from './pages/Admin/ListJobs/EditJob/EditJob';
+import EditAccount from './pages/Admin/ListAccount/EditAccount/EditAccount';
 import UpdateImage from './pages/Admin/ListJobs/UpdateImage/UpdateImage';
+import UpdateInfoAdmin from './pages/Admin/InfoAdmin/UpdateInfoAdmin';
+import AddNewjob from './pages/Admin/ListJobs/AddNewJob/AddNewJob';
+import ListAccount from './pages/Admin/ListAccount/ListAccount';
+import EditJob from './pages/Admin/ListJobs/EditJob/EditJob';
+import JobListSearch from './pages/JobList/JobListSearch';
+import InfoAdmin from './pages/Admin/InfoAdmin/InfoAdmin';
+import ListJobs from './pages/Admin/ListJobs/ListJobs';
+import Loading from './_Component/Loading/Loading';
 
 // npx create-react-app friverr
 // npm react-router-dom@5.3.0
@@ -53,9 +54,10 @@ function App() {
       <Switch>
         <HomeTemplate path="/home" exact Component={Home} />
         <HomeTemplate path="/joblist" exact Component={JobList} />
+        <HomeTemplate path="/joblistsearch" exact Component={JobListSearch} />
         <HomeTemplate path="/jobtypes" exact Component={JobTypes} />
         <HomeTemplate path="/jobdetail/:id" exact Component={JobDetail} />
-        <HomeTemplate path="/profile" exact Component={Profile} />
+        <HomeTemplate path="/profile/:idUser" exact Component={Profile} />
 
 
         <UserTemplate path="/register" exact Component={Register} />

@@ -1,12 +1,19 @@
+import {
+  layChiTietLoaiCongViecChinhAction,
+  layDanhSachCongViecTheoTenCongViecAction,
+  layThongTinChiTietLoaiCongViecChinhAction,
+} from "../../redux/actions/QuanLyCongViecAction";
 import { layThongTinChiTietNguoiDungAction } from "../../redux/actions/QuanLyNguoiDungAction";
 import { useDispatch, useSelector } from "react-redux";
 import { Token, USER_LOGIN } from "../../util/config";
 import React, { useEffect, Fragment } from "react";
+import Search from "antd/lib/transfer/search";
 import { NavLink } from "react-router-dom";
 import { history } from "../../App";
+import { Input } from "antd";
 import "./Header.scss";
 import _ from "lodash";
-import { layChiTietLoaiCongViecChinhAction } from "../../redux/actions/QuanLyCongViecAction";
+import { JOB_NAME_SEARCH } from "../../redux/types";
 
 export default function Header(props) {
   const { chiTietLoaiCongViecChinh } = useSelector(
@@ -30,6 +37,27 @@ export default function Header(props) {
         <Fragment>
           <div className="navbar-nav ml-auto">
             <NavLink
+              className="nav-link pl-2 ml-4 font-weight-bold"
+              to="/home"
+              title="Home"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              className="nav-link pl-2 ml-4 font-weight-bold"
+              to="/jobtypes"
+              title="Jobs type"
+            >
+              Jobs type
+            </NavLink>
+            <NavLink
+              className="nav-link pl-2 ml-4 font-weight-bold"
+              to="/joblist"
+              title="Jobs list"
+            >
+              Jobs list
+            </NavLink>
+            <NavLink
               className="nav-link text-left pl-2 ml-4 font-weight-bold "
               to="/login"
               title="Sign in"
@@ -50,40 +78,83 @@ export default function Header(props) {
     return (
       <Fragment>
         <div className="navbar-nav ml-auto">
-          <div
-            className="nav-link pl-2 ml-4 font-weight-bold"
-            style={{ cursor: "pointer" }}
-            title="Click to sign out"
-            onClick={() => {
-              if (window.confirm("Are you sure you want to sign out?")) {
-                // Xóa trong localStorage
-                localStorage.removeItem(USER_LOGIN);
-                localStorage.removeItem(Token);
-                // Chuyển hướng về home
-                history.push("/");
-                // Reload lại trang web
-                window.location.reload();
-              }
-            }}
-          >
-            Sign out
-          </div>
           <NavLink
-              className="nav-link  nav-link-join ml-4 font-weight-bold"
-              to="/admin/infoadmin"
-              title="Go to Admin page"
-            >
-              Join
-            </NavLink>
-          <div
-            className="nav-link text-black pl-2 ml-4 font-weight-bold"
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              history.push("/profile");
-            }}
-            title="Go to the personal page"
+            className="nav-link pl-2 ml-4 font-weight-bold"
+            to="/home"
+            title="Home"
           >
-            {thongTinChiTietNguoiDung.name}
+            Home
+          </NavLink>
+          <NavLink
+            className="nav-link pl-2 ml-4 font-weight-bold"
+            to="/jobtypes"
+            title="Jobs type"
+          >
+            Jobs type
+          </NavLink>
+          <NavLink
+            className="nav-link pl-2 ml-4 font-weight-bold"
+            to="/joblist"
+            title="Jobs list"
+          >
+            Jobs list
+          </NavLink>
+          <div id="dropdownMenu" className="dropdown ml-4">
+            <button
+              className="dropdown-toggle nav-link font-weight-bold pl-2"
+              style={{ backgroundColor: "transparent", border: "none" }}
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {thongTinChiTietNguoiDung.name}
+            </button>
+            <div
+              className="dropdown-menu pl-2 pr-2 w-100"
+              aria-labelledby="dropdownMenuButton"
+            >
+              <NavLink
+                className="nav-link font-weight-bold"
+                to={`/profile/${userLogin._id}`}
+                title="Go to the personal page"
+              >
+                Personal page
+              </NavLink>
+              <NavLink
+                className="nav-link font-weight-bold"
+                to="/admin/infoadmin"
+                title="Go to the personal page"
+              >
+                Admin page
+              </NavLink>
+              <NavLink
+                className="nav-link font-weight-bold"
+                to="/register"
+                title="Register new account"
+              >
+                Register
+              </NavLink>
+              <div className="dropdown-divider"></div>
+              <div
+                className="nav-link font-weight-bold"
+                style={{ cursor: "pointer" }}
+                title="Click to sign out"
+                onClick={() => {
+                  if (window.confirm("Are you sure you want to sign out?")) {
+                    // Xóa trong localStorage
+                    localStorage.removeItem(USER_LOGIN);
+                    localStorage.removeItem(Token);
+                    // Chuyển hướng về home
+                    history.push("/");
+                    // Reload lại trang web
+                    window.location.reload();
+                  }
+                }}
+              >
+                Sign out
+              </div>
+            </div>
           </div>
         </div>
       </Fragment>
@@ -96,10 +167,19 @@ export default function Header(props) {
     header.classList.toggle("sticky", this.window.scrollY > 0);
   });
 
+  const { Search } = Input;
+
+  // Hàm tìm kiếm
+  const onSearch = (value) => {
+    history.push("/joblistsearch");
+    dispatch({type:JOB_NAME_SEARCH, chuNguoiDungNhap: value,})
+    dispatch(layDanhSachCongViecTheoTenCongViecAction(value));
+  };
+
   return (
     <header id="header" className="header sticky">
       <main className="header__main">
-        <nav className="navbar navbar-expand-sm p-0">
+        <nav className="navbar navbar-expand-md p-0">
           <div className="container">
             <NavLink
               className="navbar-brand font-weight-bold"
@@ -110,12 +190,12 @@ export default function Header(props) {
             </NavLink>
 
             <div className="nav-bar-search input-group-sm">
-              <input
+              <Search
                 type="text"
-                className="form-control"
                 placeholder="Find services"
+                enterButton="Search"
+                onSearch={onSearch}
               />
-              <button className="input-group-prepend">Search</button>
             </div>
 
             <button
@@ -142,8 +222,13 @@ export default function Header(props) {
                 <NavLink
                   key={index}
                   title={item.name}
-                  to="/"
+                  to="/jobtypes"
                   className="navlink-jobtype"
+                  onClick={() => {
+                    dispatch(
+                      layThongTinChiTietLoaiCongViecChinhAction(item._id)
+                    );
+                  }}
                 >
                   {item.name}
                 </NavLink>

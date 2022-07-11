@@ -3,6 +3,7 @@ import {
   CAP_NHAT_THONG_TIN_NGUOI_DUNG,
   DANG_KY_ACTION,
   DANG_NHAP_ACTION,
+  DANH_SACH_BINH_LUAN,
   LAY_DANH_SACH_NGUOI_DUNG,
   LAY_THONG_TIN_CHI_TIET_NGUOI_DUNG,
   TAO_NGUOI_DUNG_MOI,
@@ -58,7 +59,6 @@ export const layThongTinChiTietNguoiDungAction = (idNguoiDung) => {
       const result = await quanLyNguoiDungService.layThongTinChiTietNguoiDung(
         idNguoiDung
       );
-
       if (result.status === 200) {
         dispatch({
           type: LAY_THONG_TIN_CHI_TIET_NGUOI_DUNG,
@@ -79,7 +79,6 @@ export const capNhatThongTinNguoiDungAction = (idNguoiDung, formData) => {
         idNguoiDung,
         formData
       );
-
       if (result.status === 200) {
         dispatch({
           type: CAP_NHAT_THONG_TIN_NGUOI_DUNG,
@@ -126,7 +125,7 @@ export const capNhatAnhDaiDienAction = (img) => {
   return async (dispatch) => {
     try {
       const result = await quanLyNguoiDungService.capNhatAnhDaiDien(img);
-
+console.log(result)
       alert("Update avatar successfully");
     } catch (error) {
       alert("Update avatar failed, please check again");
@@ -134,7 +133,7 @@ export const capNhatAnhDaiDienAction = (img) => {
     }
   };
 };
-
+// cho nao capp api up
 // Api 31: Đăng nhập
 export const dangNhapAction = (thongTinDangNhap) => {
   return async (dispatch) => {
@@ -148,7 +147,7 @@ export const dangNhapAction = (thongTinDangNhap) => {
 
         // Thông báo đăng nhập thành công và quay về trang chủ
         alert("Logged in successfully");
-        history.push("/");
+        history.push("/home");
         window.location.reload();
       }
     } catch (error) {
@@ -179,6 +178,36 @@ export const dangKyTaiKhoanAction = (formDataDangKy) => {
       }
     } catch (error) {
       alert("Registration failed, please check again");
+      console.log("error", error);
+    }
+  };
+};
+
+// Api 33: Tạo bình luận
+export const taoBinhLuanAction = (comment) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyNguoiDungService.taoBinhLuan(comment);
+      window.location.reload();
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+};
+
+// Api 34: Lấy danh sách bình luận
+export const danhSachBinhLuanAction = (idJob) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyNguoiDungService.danhSachBinhLuan(idJob);
+
+      if (result.status === 200) {
+        dispatch({
+          type: DANH_SACH_BINH_LUAN,
+          danhSachBinhLuan: result.data,
+        });
+      }
+    } catch (error) {
       console.log("error", error);
     }
   };

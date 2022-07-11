@@ -1,17 +1,24 @@
-import React, { memo, useEffect, Fragment } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
   layDanhSachNguoiDungAction,
   xoaNguoiDungAction,
 } from "../../../redux/actions/QuanLyNguoiDungAction";
+import React, { memo, useEffect, Fragment, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Table, Input, Button, Space } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import Highlighter from "react-highlight-words";
 import { NavLink } from "react-router-dom";
-import { Redirect } from "react-router";
-import { Table, Input } from "antd";
 import moment from "moment";
 import "./ListAccount.scss";
 
-
 export default function ListAccount(props) {
+
+  const [searchText, setSearchText] = useState("");
+
+  const [searchedColumn, setSearchedColumn] = useState("");
+
+  const searchInput = useRef(null);
+
   const { danhSachTaiKhoan } = useSelector(
     (state) => state.QuanLyNguoiDungReducer
   );
@@ -23,7 +30,90 @@ export default function ListAccount(props) {
     dispatch(action);
   }, []);
 
+  const getColumnSearchProps = (dataIndex) => ({
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+    }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          type={dataIndex === "phone" ? "number" : "text"}
+          ref={searchInput}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={(e) =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
+          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ marginBottom: 8, display: "block" }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button
+            onClick={() => handleReset(clearFilters)}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: (filtered) => (
+      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
+    ),
+    onFilter: (value, record) =>
+      record[dataIndex]
+        ? record[dataIndex]
+            .toString()
+            .toLowerCase()
+            .includes(value.toLowerCase())
+        : "",
+    onFilterDropdownVisibleChange: (visible) => {
+      if (visible) {
+        setTimeout(() => searchInput.current.select(), 100);
+      }
+    },
+    render: (text) =>
+      searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+          searchWords={[searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ""}
+        />
+      ) : (
+        text
+      ),
+  });
+
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    setSearchText({
+      searchText: selectedKeys[0],
+    });
+    setSearchedColumn({
+      searchedColumn: dataIndex,
+    });
+  };
+
+  const handleReset = (clearFilters) => {
+    clearFilters();
+    setSearchText({ searchText: "" });
+  };
+
   const { Search } = Input;
+
   const columns = [
     {
       title: "Avatar",
@@ -41,15 +131,7 @@ export default function ListAccount(props) {
     {
       title: "Name",
       dataIndex: "name",
-      sorter: (a, b) => {
-        let nameA = a.name.toLowerCase().trim();
-        let nameB = b.name.toLowerCase().trim();
-        if (nameA > nameB) {
-          return 1;
-        }
-        return -1;
-      },
-      sortDirections: ["descend", "ascend"],
+      ...getColumnSearchProps("name"),
       width: "20%",
     },
     {
@@ -62,15 +144,6 @@ export default function ListAccount(props) {
           return <span>Female</span>;
         }
       },
-      sorter: (a, b) => {
-        let genderA = a.gender.toString();
-        let genderB = b.gender.toString();
-        if (genderA > genderB) {
-          return 1;
-        }
-        return -1;
-      },
-      sortDirections: ["descend", "ascend"],
       width: "10%",
     },
     {
@@ -79,17 +152,18 @@ export default function ListAccount(props) {
       render: (text, object) => {
         return <span>{moment(text).format("DD/MM/YYYY")}</span>;
       },
-
       width: "12.5%",
     },
     {
       title: "Phone",
       dataIndex: "phone",
+      ...getColumnSearchProps("phone"),
       width: "12.5%",
     },
     {
       title: "Email",
       dataIndex: "email",
+      ...getColumnSearchProps("email"),
       width: "15%",
     },
 
@@ -104,15 +178,7 @@ export default function ListAccount(props) {
           return <span>Admin</span>;
         }
       },
-      sorter: (a, b) => {
-        let nguoiDungA = a.maLoaiNguoiDung;
-        let nguoiDungB = b.maLoaiNguoiDung;
-        if (nguoiDungA > nguoiDungB) {
-          return 1;
-        }
-        return -1;
-      },
-      sortDirections: ["descend", "ascend"],
+      ...getColumnSearchProps("role"),
       width: "10%",
     },
     {

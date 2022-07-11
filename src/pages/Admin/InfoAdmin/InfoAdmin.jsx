@@ -11,11 +11,12 @@ import './InfoAdmin.scss'
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const action = layThongTinChiTietNguoiDungAction(userLogin._id);
-    dispatch(action);
-    props.history.push("/admin/infoadmin")
-  }, []);
+  // useEffect(() => {
+  //   const action = layThongTinChiTietNguoiDungAction(userLogin._id);
+  //   dispatch(action);
+  //   props.history.push("/admin/infoadmin")
+  // }, []);
+// console.log( thongTinChiTietNguoiDung," thongTinChiTietNguoiDung")
 
   return (
     <div id="infoAdmin">

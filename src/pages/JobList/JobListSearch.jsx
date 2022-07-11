@@ -1,8 +1,4 @@
-import {
-  PRO_SERVICES,
-  LOCAL_SELLERS,
-  ONLINE_SELLERS,
-} from "../../redux/types";
+import { PRO_SERVICES, LOCAL_SELLERS, ONLINE_SELLERS } from "../../redux/types";
 import { layDanhSachCongViecAction } from "../../redux/actions/QuanLyCongViecAction";
 import HeaderNotForHomePage from "../../_Component/Header/HeaderNotForHomePage";
 import Suggested from "../../_Component/Suggested/Suggested";
@@ -13,12 +9,12 @@ import { Form, Switch, Pagination } from "antd";
 import { NavLink } from "react-router-dom";
 import "./JobList.scss";
 
-export default function JobList(props) {
-  const { danhSachCongViec } = useSelector(
+export default function JobListSearch(props) {
+  const { danhSachCongViecTheoTenCongViec, tuKhoaTimKiem } = useSelector(
     (state) => state.QuanLyCongViecReducer
   );
 
-  const danhSachCongViecFilters = danhSachCongViec.filter(
+  const danhSachCongViecFilters = danhSachCongViecTheoTenCongViec.filter(
     (job) => job.image && job.name && job.rating && job.price
   );
 
@@ -35,12 +31,25 @@ export default function JobList(props) {
       <Fragment>
         <div id="JobList">
           <div className="container">
+            {tuKhoaTimKiem.length > 0 ? (
+              <h1
+                style={{
+                  paddingLeft: "20px",
+                  marginBottom: "30px",
+                  fontSize: "35px",
+                }}
+              >
+                Results for "{tuKhoaTimKiem}"
+              </h1>
+            ) : (
+              ""
+            )}
             <div className="joblist__reset">
               <button
                 className="btn btn-success"
                 title="Click to relay list jobs"
                 onClick={() => {
-                  window.location.reload();
+                  props.history.push("/joblist");
                 }}
               >
                 Relay
@@ -82,7 +91,7 @@ export default function JobList(props) {
             </h1>
 
             <div className="joblist__list d-flex">
-              {danhSachCongViecFilters.slice(0, 40).map((item, index) => {
+              {danhSachCongViecFilters.map((item, index) => {
                 return (
                   <Fragment key={index}>
                     <NavLink
@@ -95,7 +104,7 @@ export default function JobList(props) {
                           <img src={item.image} alt="job-list-img" />
                         </div>
                         <div className="card-body">
-                          <div className="mb-2">
+                          <div>
                             {" "}
                             {item.name.length > 50 ? (
                               <h1>{item.name.slice(0, 50)}...</h1>

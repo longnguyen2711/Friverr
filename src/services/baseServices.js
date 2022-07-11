@@ -22,12 +22,13 @@ export class baseService {
     });
   };
 
-  post = (url, model) => {
+  post = (url, model, headers = {}) => {
     return axios({
       url: `${DOMAIN}/${url}`,
       method: "POST",
       data: model,
       headers: {
+        ...headers,
         TokenByClass: TokenByClass,
         token: token,
       }, //JWT
@@ -47,6 +48,14 @@ export class baseService {
       url: `${DOMAIN}/${url}`,
       method: "DELETE",
       headers: { TokenByClass: TokenByClass, Token: token }, //token yêu cầu từ backend chứng minh user đã đăng nhập rồi
+    });
+  };
+
+  patch = (url) => {
+    return axios({
+      url: `${DOMAIN}/${url}`,
+      method: "PATCH",
+      headers: { TokenByClass: TokenByClass, Token: token }, 
     });
   };
 }

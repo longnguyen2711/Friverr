@@ -10,6 +10,11 @@ export class QuanLyCongViecService extends baseService {
     return this.get(`api/type-jobs`);
   };
 
+  // Api 17: Lấy thông tin chi tiết loại công việc chính
+  layThongTinChiTietLoaiCongViecChinh = (idTypeJob) => {
+    return this.get(`api/type-jobs/${idTypeJob}`);
+  };
+
   // Api 19: Tạo công việc mới
   taoCongViecMoi = (formDataCongViec) => {
     return this.post(`api/jobs`, formDataCongViec);
@@ -35,6 +40,16 @@ export class QuanLyCongViecService extends baseService {
     return this.get(`api/jobs/${idJob}`);
   };
 
+  // Api 26: Đặt công việc
+  datCongViec = (idJob) => {
+    return this.patch(`api/jobs/booking/${idJob}`);
+  };
+
+  // Api 28: Hoàn thành công việc
+  hoanThanhCongViec = (idJob) => {
+    return this.patch(`api/jobs/done/${idJob}`);
+  };
+
   // Api 29: Lấy danh sách công việc theo tên công việc
   layDanhSachCongViecTheoTenCongViec = (jobName = "") => {
     if (jobName.toLocaleLowerCase().trim() !== "") {
@@ -44,8 +59,8 @@ export class QuanLyCongViecService extends baseService {
   };
 
   // Api 30: Cập nhật hình ảnh công việc
-  capNhatHinhAnhCongViec = (idJob, fileImg) => {
-    return this.post(`api/jobs/upload-image/${idJob}`, fileImg);
+  capNhatHinhAnhCongViec = (idJob, job) => {
+    return this.post(`api/jobs/upload-image/${idJob}`, job);
   };
 }
 

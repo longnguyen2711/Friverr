@@ -39,7 +39,7 @@ export default function Login(props) {
   // Kiểm tra xem nếu đã đăng nhập rồi mà nhập đường dẫn login thì sẽ quay về trang chủ
   if (localStorage.getItem(USER_LOGIN)) {
     alert("You are already logged in");
-    return <Redirect to="/" />;
+    return <Redirect to="/home" />;
   }
 
   return (
@@ -50,7 +50,7 @@ export default function Login(props) {
       <form className="w-75 form" onSubmit={formik.handleSubmit}>
         <div>
           <div className="text-center">
-            <NavLink to="/" title="Back to homepage">
+            <NavLink to="/home" title="Back to homepage">
               <h1 style={{ fontSize: "60px", color: "white" }}>
                 friverr
                 <i

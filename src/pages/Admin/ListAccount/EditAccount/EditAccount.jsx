@@ -20,12 +20,11 @@ const EditAccount = (props) => {
   const dispatch = useDispatch();
 
   let { id } = props.match.params;
+
   useEffect(() => {
-    console.log(id, "id");
-    const action = layThongTinChiTietNguoiDungAction(id)
-    
-    dispatch(action);
-  }, [id]);
+    const action = layThongTinChiTietNguoiDungAction(id)    
+    dispatch(action); 
+  }, []);
 
   const formik = useFormik({
     //Để xét dữ liệu mặc định cho formik từ props của redux phải bật thuộc tính enableReinitialize, thuộc tính này thường chỉ làm làm cho form edit, ko đụngchạm state khác

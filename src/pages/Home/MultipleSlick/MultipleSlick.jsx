@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import Slider from "react-slick";
+import { layDanhSachCongViecTheoTenCongViecAction } from "../../../redux/actions/QuanLyCongViecAction";
 import styleSlick from "./MultipleSlick.module.scss";
+import { history } from "../../../App";
+import { POPULAR_SERVICES } from "../../../redux/types";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -25,6 +29,8 @@ function SamplePrevArrow(props) {
 }
 
 function MultipleSlick(props) {
+  const dispatch = useDispatch();
+
   const arrMultipleSlick = [
     {
       title: "Build your brand",
@@ -132,9 +138,24 @@ function MultipleSlick(props) {
       <Slider {...settings}>
         {arrMultipleSlick.map((item, index) => {
           return (
-            <a href="#" className="d-flex justify-content-center" key={index}>
+            <div
+              type="button"
+              className="d-flex justify-content-center"
+              style={{ cursor: "pointer" }}
+              key={index}
+              onClick={() => {
+                history.push("/joblistsearch");
+                dispatch({
+                  type: POPULAR_SERVICES,
+                  congViecPhoBien: item.service,
+                });
+                dispatch(
+                  layDanhSachCongViecTheoTenCongViecAction(item.service)
+                );
+              }}
+            >
               <div
-                className={`${styleSlick["width-item"]}`}                
+                className={`${styleSlick["width-item"]}`}
                 title={item.service}
               >
                 <div
@@ -159,7 +180,7 @@ function MultipleSlick(props) {
                   </div>
                 </div>
               </div>
-            </a>
+            </div>
           );
         })}
       </Slider>

@@ -9,3 +9,5 @@ export const Token = "Token";
 export const GROUPID = "GP01";
 
 export const USER_LOGIN = 'USER_LOGIN'
+
+export const DANH_SACH_CONG_VIEC_HOAN_THANH_STORAGE = 'DANH_SACH_CONG_VIEC_HOAN_THANH_STORAGE'
