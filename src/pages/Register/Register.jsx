@@ -283,7 +283,6 @@ export default function Register(props) {
                 <button
                   onClick={() => {
                     setValidateAfterSubmit(true);
-                    formik.handleSubmit();
                   }}
                   className="btn btn-primary w-100 font-weight-bold"
                   title="Click to register an account"

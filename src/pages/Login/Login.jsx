@@ -32,8 +32,7 @@ export default function Login(props) {
     validateOnChange: validateAfterSubmit,
     validateOnBlur: true,
     onSubmit: (values) => {
-      const action = dangNhapAction(values);
-      dispatch(action);
+      dispatch(dangNhapAction(values));
     },
   }); //formik đã xử lý luôn e.preventDefault();
 
@@ -122,7 +121,6 @@ export default function Login(props) {
                 <button
                   onClick={() => {
                     setValidateAfterSubmit(true);
-                    formik.handleSubmit();
                   }}
                   className="btn btn-primary w-100 font-weight-bold"
                   title="Click to login"

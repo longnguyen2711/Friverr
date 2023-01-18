@@ -14,6 +14,7 @@ import { Input, Rate } from "antd";
 import { useFormik } from "formik";
 import { useState } from "react";
 import "./JobDetail.scss";
+import cogoToast from "cogo-toast";
 
 export default function JobDetail(props) {
   const [like, setLike] = useState("");
@@ -200,15 +201,22 @@ export default function JobDetail(props) {
                 <button
                   title="Continue"
                   onClick={() => {
-                    if (window.confirm("Do you want to book this job?")) {
-                      if (
-                        checkBooked &&
-                        thongTinChiTietCongViec.status === false
-                      ) {
-                        alert("You have already booked this job");
-                      } else if (checkFinish) {
-                        alert("You have already booked and completed this job");
-                      } else {
+                    if (
+                      checkBooked &&
+                      thongTinChiTietCongViec.status === false
+                    ) {
+                      cogoToast.error("You have already booked this job", {
+                        position: "bottom-right",
+                      });
+                    } else if (checkFinish) {
+                      cogoToast.error(
+                        "You have already booked and completed this job",
+                        {
+                          position: "bottom-right",
+                        }
+                      );
+                    } else {
+                      if (window.confirm("Do you want to book this job?")) {
                         dispatch(datCongViecAction(id));
                         window.location.reload();
                       }

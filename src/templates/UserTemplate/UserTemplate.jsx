@@ -1,7 +1,5 @@
 import { Fragment, useEffect } from "react";
 import { Route } from "react-router-dom";
-import Slider from "react-slick";
-
 
 export const UserTemplate = (props) => {
 
