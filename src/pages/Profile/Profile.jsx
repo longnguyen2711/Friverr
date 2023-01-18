@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   layThongTinChiTietNguoiDungAction,
   capNhatThongTinNguoiDungAction,
@@ -12,8 +13,11 @@ import HeaderNotForHomePage from "../../_Component/Header/HeaderNotForHomePage";
 import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StarFilled } from "@ant-design/icons";
-import { DANH_SACH_CONG_VIEC_HOAN_THANH_STORAGE, USER_LOGIN } from "../../util/config";
-import { Redirect } from "react-router-dom";
+import {
+  DANH_SACH_CONG_VIEC_HOAN_THANH_STORAGE,
+  USER_LOGIN,
+} from "../../util/config";
+import { Redirect, useHistory } from "react-router-dom";
 import { Form, Input } from "antd";
 import { useFormik } from "formik";
 import moment from "moment";
@@ -22,8 +26,12 @@ import _ from "lodash";
 
 function Profile(props) {
   const [imgSrc, setImgSrc] = useState("");
+  const history = useHistory();
+  const userId = history?.location?.pathname.replaceAll("/profile/", "");
+  const [arrJobsBooked, setArrJobsBooked] = useState([]);
+  const [arrIdJobFinish, setArrIdJobFinish] = useState([]);
 
-  const { danhSachCongViec, danhSachCongViecDaHoanThanh, thongTinChiTietCongViec } = useSelector(
+  const { danhSachCongViec, danhSachCongViecDaHoanThanh } = useSelector(
     (state) => state.QuanLyCongViecReducer
   );
 
@@ -32,37 +40,58 @@ function Profile(props) {
   );
 
   // Lọc ra những công việc đã đặt
-  const arrIdJobBooked = thongTinChiTietNguoiDung.bookingJob;
-  const arrJobsBooked = [];
-  for (let idJobBooked of arrIdJobBooked) {
-    let jobBooked = danhSachCongViec.find((job) => job._id === idJobBooked);
-    if (idJobBooked) {
-      arrJobsBooked.push(jobBooked);
-    }
-  }
+  useEffect(() => {
+    const getJobBooked = async () => {
+      const arrIdJobBooked = thongTinChiTietNguoiDung.bookingJob;
+      const arrJobsBooked = [];
+      await arrIdJobBooked?.map((itm) => {
+        const jobBooked = danhSachCongViec.find((job) => job._id === itm);
+        if (jobBooked) {
+          arrJobsBooked.push(jobBooked);
+        }
+      });
+      setArrJobsBooked(arrJobsBooked);
+    };
+    getJobBooked();
+  }, [thongTinChiTietNguoiDung]);
 
-  // Lọc ra ID những công việc đã hoàn thành
-  const arrIdJobFinish = [];
-  danhSachCongViecDaHoanThanh.map((job) => {
-    arrIdJobFinish.push(job._id);
-  });
+  useEffect(() => {
+    const getJobFinish = async () => {
+      // Lọc ra ID những công việc đã hoàn thành
+      const newArrIdJobFinish = [];
+      await danhSachCongViecDaHoanThanh.map((job) => {
+        newArrIdJobFinish.push(job._id);
+      });
+      setArrIdJobFinish(newArrIdJobFinish);
+    };
+    getJobFinish();
+  }, [danhSachCongViecDaHoanThanh]);
 
-  //   Lọc ra những công việc đã đặt không chứa những công việc đã hoàn thành
-  for (let idJobFinish of arrIdJobFinish) {
-    let jobBookedFinal = arrJobsBooked.findIndex(
-      (job) => job._id === idJobFinish
-    );
-    if (jobBookedFinal !== -1) {
-      arrJobsBooked.splice(jobBookedFinal, 1);
-    }
-  }
+  useEffect(() => {
+    const getJobBooked = async () => {
+      const newArrJobsBooked = arrJobsBooked;
+      //   Lọc ra những công việc đã đặt không chứa những công việc đã hoàn thành
+      for (let idJobFinish of arrIdJobFinish) {
+        let jobBookedFinal = newArrJobsBooked.findIndex(
+          (job) => job._id === idJobFinish
+        );
+        if (jobBookedFinal !== -1) {
+          newArrJobsBooked.splice(jobBookedFinal, 1);
+        }
+      }
+      setArrJobsBooked(newArrJobsBooked, arrIdJobFinish);
+    };
+    getJobBooked();
+  }, [arrJobsBooked]);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    // const action = layThongTinChiTietNguoiDungAction(userLogin._id);
-    // dispatch(action);
     dispatch(layDanhSachCongViecAction());
   }, []);
+
+  useEffect(() => {
+    dispatch(layThongTinChiTietNguoiDungAction(userId));
+  }, [userId]);
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -71,7 +100,6 @@ function Profile(props) {
       image: "",
     },
     onSubmit: (values) => {
-      console.log(values);
       const action = capNhatAnhDaiDienAction(values);
       dispatch(action);
     },
@@ -442,10 +470,10 @@ function Profile(props) {
                         >
                           <i className="fa fa-times"></i>
                         </button>
-                        <img
+                        {/* <img
                           src="./img/Profile/buying-service-modal-img.webp"
                           alt="..."
-                        />
+                        /> */}
 
                         <div>
                           <h1>

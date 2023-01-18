@@ -53,7 +53,7 @@ function Marketplace(props) {
       <div className="my-container">
         <h1>Explore the marketplace</h1>
         <div className="jobtype">
-          {chiTietLoaiCongViecChinh.map((item, index) => {
+          {chiTietLoaiCongViecChinh?.slice(0, 9)?.map((item, index) => {
             return (
               <NavLink
                 key={index}

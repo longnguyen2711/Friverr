@@ -37,7 +37,6 @@ export default function Home(props) {
     };
   }, []);
 
-  // Chữa cháy cho phần profile
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(layDanhSachCongViecAction());

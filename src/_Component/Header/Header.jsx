@@ -217,7 +217,7 @@ export default function Header(props) {
         <div className="job-type">
           <div className="my-container">
             {" "}
-            {chiTietLoaiCongViecChinh.map((item, index) => {
+            {chiTietLoaiCongViecChinh?.slice(0, 18)?.map((item, index) => {
               return (
                 <NavLink
                   key={index}

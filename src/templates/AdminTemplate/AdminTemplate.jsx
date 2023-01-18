@@ -45,10 +45,10 @@ export const AdminTemplate = (props) => {
   }
 
   // // Kiểm tra trong localStorage nếu không phải admin thì chuyển về trang profile
-  if (userLogin.role !== "ADMIN") {
-    alert("You do not have permission to access this page !");
-    return <Redirect to="/home" />;
-  }
+  // if (userLogin.role !== "ADMIN") {
+  //   alert("You do not have permission to access this page !");
+  //   return <Redirect to="/home" />;
+  // }
 
   // Trạng thái đăng nhập
   const renderLogin = () => {

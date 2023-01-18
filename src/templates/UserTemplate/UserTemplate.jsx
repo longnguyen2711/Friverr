@@ -22,6 +22,7 @@ export const UserTemplate = (props) => {
             <div
               className="w-100 d-flex justify-content-center align-items-center py-md-5"
               style={{
+                minHeight: "100vh",
                 backgroundSize: "cover",
                 backgroundPosition: "bottom",
                 backgroundAttachment: "fixed",

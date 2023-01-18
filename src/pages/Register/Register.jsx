@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useFormik } from "formik";
 import { DatePicker, Input, Select } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import "./Register.scss";
 import moment from "moment";
 import { dangKyTaiKhoanAction } from "../../redux/actions/QuanLyNguoiDungAction";
@@ -13,6 +13,8 @@ const listSkill = [];
 const listCertification = [];
 
 export default function Register(props) {
+  const [validateAfterSubmit, setValidateAfterSubmit] = useState(false);
+
   const validationSchema = yup.object().shape({
     name: yup.string().required("Name is required"),
     email: yup
@@ -47,7 +49,7 @@ export default function Register(props) {
       certification: listCertification,
     },
     validationSchema,
-    validateOnChange: true,
+    validateOnChange: validateAfterSubmit,
     validateOnBlur: true,
     onSubmit: (values) => {
       // console.log(values);
@@ -223,8 +225,7 @@ export default function Register(props) {
                     type="button"
                     id="addSkill"
                     onClick={() => {
-                      let skill =
-                        document.getElementById("skill").value;
+                      let skill = document.getElementById("skill").value;
                       let find = listSkill.find((item) => item === skill);
                       if (find === undefined) {
                         listSkill.push(skill);
@@ -280,6 +281,10 @@ export default function Register(props) {
 
               <div className="my-5 text-center">
                 <button
+                  onClick={() => {
+                    setValidateAfterSubmit(true);
+                    formik.handleSubmit();
+                  }}
                   className="btn btn-primary w-100 font-weight-bold"
                   title="Click to register an account"
                   type="submit"

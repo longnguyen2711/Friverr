@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Redirect } from "react-router";
@@ -10,6 +10,7 @@ import { dangNhapAction } from "../../redux/actions/QuanLyNguoiDungAction";
 import { USER_LOGIN } from "../../util/config";
 
 export default function Login(props) {
+  const [validateAfterSubmit, setValidateAfterSubmit] = useState(false);
   const validationSchema = yup.object().shape({
     email: yup
       .string()
@@ -28,7 +29,7 @@ export default function Login(props) {
       password: "",
     },
     validationSchema,
-    validateOnChange: true,
+    validateOnChange: validateAfterSubmit,
     validateOnBlur: true,
     onSubmit: (values) => {
       const action = dangNhapAction(values);
@@ -119,6 +120,10 @@ export default function Login(props) {
               </div>
               <div className="mb-5 mt-4 text-center">
                 <button
+                  onClick={() => {
+                    setValidateAfterSubmit(true);
+                    formik.handleSubmit();
+                  }}
                   className="btn btn-primary w-100 font-weight-bold"
                   title="Click to login"
                   type="submit"
