@@ -12,14 +12,14 @@ import { USER_LOGIN } from "../../util/config";
 export default function Login(props) {
   const [validateAfterSubmit, setValidateAfterSubmit] = useState(false);
   const validationSchema = yup.object().shape({
-    email: yup
-      .string()
-      .required("Account is required")
-      .email("Must be a valid email"),
-    password: yup
-      .string()
-      .required("Password is required")
-      .min(6, "Password must be at least 6 characters"),
+    // email: yup
+    //   .string()
+    //   .required("Account is required")
+    //   .email("Must be a valid email"),
+    // password: yup
+    //   .string()
+    //   .required("Password is required")
+    //   .min(6, "Password must be at least 6 characters"),
   });
   const dispatch = useDispatch();
 
